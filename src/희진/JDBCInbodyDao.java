@@ -35,6 +35,8 @@ public class JDBCInbodyDao implements InbodyInterface {
 		}
 		return result;
 	}
+	
+	
 
 	@Override
 	public boolean deleteBybodynum(int Inbody_num) {
@@ -111,7 +113,6 @@ public class JDBCInbodyDao implements InbodyInterface {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		return inbody;
+		}		return inbody;
 	}
 }

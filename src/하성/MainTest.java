@@ -16,7 +16,7 @@ public class MainTest {
 		admin.setManager_num(3214);
 		admin.setPosition("테스터");
 		
-		JDBCTrainerDao jdbctrainerdao = new JDBCTrainerDao();
+		JDBCInbodyDao jdbctrainerdao = new JDBCInbodyDao();
 		jdbctrainerdao.insert(admin);
 		
 		List<Admin> admin1 = jdbctrainerdao.findAll();

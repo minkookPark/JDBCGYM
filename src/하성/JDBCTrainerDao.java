@@ -10,7 +10,7 @@ import java.util.List;
 import space.jdbc.member1.Customer1;
 import space.jdbc.memo.DataSource;
 
-public class JDBCTrainerDao implements TrainerInterface {
+public class JDBCTrainerDao implements InbodyInterface {
 
 	@Override
 	public boolean insert(Admin admin) {
