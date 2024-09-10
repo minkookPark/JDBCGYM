@@ -14,4 +14,5 @@ public interface Gym_MemberDao {
 	
 	boolean deleteByMember_Num(int member_num);
 	
+	
 }
