@@ -12,4 +12,6 @@ public interface ReviewDao {
     public int deleteReview(int review_num);
 
     public List<Review> searchReview(int method, String query);
+
+    public void displayTrainerReviewScore(String name);
 }
