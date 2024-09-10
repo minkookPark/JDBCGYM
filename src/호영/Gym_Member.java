@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Gym_Member {
+	
 	private int member_num;
 	private int pt_count;
 	private Timestamp reg_date;
