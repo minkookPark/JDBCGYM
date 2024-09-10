@@ -9,10 +9,9 @@ public class JDBCReviewDao implements ReviewDao {
     public List<Review> allReviewList() { // 전체 리뷰 리스트를 출력한다.
         List<Review> allList = new ArrayList<Review>();
 
-        String sql = "select a.*, b.class_detail, c.name \n" +
-                "from review a, class_list b, gym_member c \n" +
-                "where a.class_num = b.class_num \n" +
-                "and b.member_num = c.member_num";
+        String sql = "SELECT A.*, B.class_detail, C.name \n" +
+                "FROM REVIEW A JOIN CLASS_LIST B ON A.class_num = B.class_num \n" +
+                "JOIN GYM_MEMBER C ON B.member_num = C.member_num";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -45,26 +44,26 @@ public class JDBCReviewDao implements ReviewDao {
         PreparedStatement pstmt = null;
         switch (method) { // 1. 글쓴이로 검색 2. 제목으로 검색 3. 내용으로 검색
             case 1:
-                sql = "select a.*, b.class_detail, c.name \n" +
-                        "from review a, class_list b, gym_member c \n" +
-                        "where a.class_num = b.class_num \n" +
-                        "and b.member_num = c.member_num \n" +
-                        "and c.name like ?";
+                sql = "SELECT A.*, B.class_detail, C.name \n" +
+                        "FROM REVIEW A \n" +
+                        "JOIN CLASS_LIST B ON A.class_num = B.class_num \n" +
+                        "JOIN GYM_MEMBER C ON B.member_num = C.member_num \n" +
+                        "WHERE C.name like ?";
                 break;
             case 2:
-                sql = "select a.*, b.class_detail, c.name \n" +
-                        "from review a, class_list b, gym_member c \n" +
-                        "where a.class_num = b.class_num \n" +
-                        "and b.member_num = c.member_num \n" +
-                        "and a.title like ?";
+                sql = "SELECT A.*, B.class_detail, C.name \n" +
+                        "FROM REVIEW A \n" +
+                        "JOIN CLASS_LIST B ON A.class_num = B.class_num \n" +
+                        "JOIN GYM_MEMBER C ON B.member_num = C.member_num \n" +
+                        "WHERE A.title like ?";
                 break;
 
             case 3:
-                sql = "select a.*, b.class_detail, c.name \n" +
-                        "from review a, class_list b, gym_member c \n" +
-                        "where a.class_num = b.class_num \n" +
-                        "and b.member_num = c.member_num \n" +
-                        "and a.content like ?";
+                sql = "SELECT A.*, B.class_detail, C.name \n" +
+                        "FROM REVIEW A \n" +
+                        "JOIN CLASS_LIST B ON A.class_num = B.class_num \n" +
+                        "JOIN GYM_MEMBER C ON B.member_num = C.member_num \n" +
+                        "WHERE A.content like ?";
                 break;
         }
                 try {
@@ -153,6 +152,28 @@ public class JDBCReviewDao implements ReviewDao {
         }
 
         return result;
+    }
+
+    public void displayTrainerReviewScore(String name){
+        String sql = "SELECT \n" +
+                "        COUNT(A.SCORE) AS TOTAL, \n" +
+                "        AVG(A.SCORE) AS AVERAGES \n" +
+                "    FROM \n" +
+                "        REVIEW A \n" +
+                "        JOIN CLASS_LIST B ON A.CLASS_NUM = B.CLASS_NUM \n" +
+                "        JOIN GYM_TRAINER C ON B.TRAINER_NUM = C.TRAINER_NUM \n" +
+                "    WHERE\n" +
+                "        C.NAME = ?";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             pstmt.setString(1, name);
+             ResultSet rs = pstmt.executeQuery();
+             if (rs.next()){
+                 System.out.println("검색하신 " + name + " 트레이너의 평균 점수: " + rs.getDouble("AVERAGES") + "점, 총 평가인원 : " + rs.getInt("TOTAL") + "명");
+             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

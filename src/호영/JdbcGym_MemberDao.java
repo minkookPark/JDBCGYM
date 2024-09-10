@@ -128,6 +128,7 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	@Override
 	public boolean update(Gym_Member member) {
 		 boolean result = false;
+
 		 try (Connection conn = DataSource.getDataSource();
 	          PreparedStatement pStatement = conn.prepareStatement(
 	            		 "update gym_member set pt_count = ? , reg_date = ? , exp_date = ? , login_id = ?"
@@ -152,14 +153,24 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	            {
 	            	result = true;
 	            }
+
+	            if(0 < pStatement.executeUpdate())
+				{
+					result = true;
+				}
+
 	        }
 		 	
 	        catch (Exception e)
 	        {
 	            e.printStackTrace();
+
 	        }		
 		 	
 	        
+
+	        }
+
 	        return result;
 	}
 
@@ -204,7 +215,9 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	        }
 
 
+
 	        return result;
+
 	}
 	
 }

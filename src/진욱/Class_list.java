@@ -13,7 +13,6 @@ public class Class_list {
     }
 
 
-
     public Class_list(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
         this.class_num = class_num;
         this.class_detail = class_detail;
@@ -65,11 +64,11 @@ public class Class_list {
     @Override
     public String toString() {
         return "Class_list{" +
-                "class_num=" + class_num +
-                ", class_detail='" + class_detail + '\'' +
-                ", progress_time=" + progress_time +
-                ", trainer=" + trainer +
-                ", member=" + member +
+                "수업번호=" + class_num +
+                ", 과목명='" + class_detail + '\'' +
+                ", 진행시간=" + progress_time +
+                ", 트레이너=" + trainer +
+                ", 회원정보=" + member +
                 '}';
     }
 }

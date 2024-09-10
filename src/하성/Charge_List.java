@@ -1,4 +1,4 @@
-package space.jdbc.gym;
+package 하성;
 
 import java.sql.Date;
 

@@ -1,4 +1,4 @@
-package space.jdbc.gym;
+package 하성;
 
 public class Admin {
 	private long manager_num;
