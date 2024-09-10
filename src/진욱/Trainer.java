@@ -7,8 +7,14 @@ public class Trainer {
     private String gender;
     private String award;
     private int age;
+    private String name;
 
     public Trainer() {
+    }
+
+    public Trainer(int trainer_num, String name){
+        this.trainer_num = trainer_num;
+        this.name = name;
     }
 
     public Trainer(int trainer_num, String login_id, String login_pw, String gender, String award, int age) {
@@ -68,15 +74,24 @@ public class Trainer {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "Trainer{" +
-                "trainer_num=" + trainer_num +
-                ", login_id='" + login_id + '\'' +
-                ", login_pw='" + login_pw + '\'' +
-                ", gender='" + gender + '\'' +
-                ", award='" + award + '\'' +
-                ", age=" + age +
-                '}';
+        return "트레이너 정보[" +
+                "트레이너번호=" + trainer_num +
+                ", id='" + login_id + '\'' +
+                ", pw='" + login_pw + '\'' +
+                ", 성별='" + gender + '\'' +
+                ", 수상경력='" + award + '\'' +
+                ", 나이=" + age +
+                ", 이름=" + name +
+                ']';
     }
 }

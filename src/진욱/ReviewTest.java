@@ -22,8 +22,10 @@ public class ReviewTest {
         Review review2 = new Review(4, "두번째로 좋은 수업입니다.", "나름 배웠습니다", 3);
         System.out.println(reviewDao.updateReview(review2) + "행이 수정되었습니다.");
 
-        System.out.println("============ 데이터 삭제 테스트 ==============");
-        System.out.println(reviewDao.deleteReview(4) + "행이 삭제되었습니다.");
+        //System.out.println("============ 데이터 삭제 테스트 ==============");
+        //System.out.println(reviewDao.deleteReview(4) + "행이 삭제되었습니다.");
 
+        System.out.println("특정 트레이너의 평가인원과 평균평점을 확인");
+        reviewDao.displayTrainerReviewScore("박민국");
     }
 }

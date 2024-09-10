@@ -2,7 +2,7 @@ package 민국;
 
 import java.util.List;
 
-public interface TrainerInterface {
+public interface TrainerDao {
     boolean insert(Trainer trainer);
     List<Trainer> findAll();
     Trainer findByIndex(int trainerNum);
