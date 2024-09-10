@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCInbodyDao implements InbodyInterface {
+public class JDBCInbodyDao implements InbodyDao {
 
 	@Override
 	public boolean insert(Inbody inbody) {

@@ -2,7 +2,7 @@ package 희진;
 
 import java.util.List;
 
-public interface InbodyInterface {
+public interface InbodyDao {
 	
 	boolean insert(Inbody inbody); 
 	
