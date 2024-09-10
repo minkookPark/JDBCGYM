@@ -1,12 +1,10 @@
-package space.jdbc.gym;
+package 하성;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
-import space.jdbc.member1.Customer1;
-import space.jdbc.member1.CustomerDao;
-import space.jdbc.member1.JdbcCustomerDao;
+
 
 public class MainTest {
 	public static void main(String[] args) {

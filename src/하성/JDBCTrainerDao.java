@@ -1,4 +1,4 @@
-package space.jdbc.gym;
+package 하성;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import space.jdbc.member1.Customer1;
-import space.jdbc.memo.DataSource;
 
 public class JDBCTrainerDao implements TrainerInterface {
 
