@@ -87,43 +87,44 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	}
 
 	@Override
-	public Gym_Member findByMember_Num(int member_num) {
-		  Gym_Member member = null;
-
-	        try (Connection conn = DataSource.getDataSource();
-	             PreparedStatement pStatement = conn.prepareStatement("select * from gym_member where member_num = ?");	        	 
-	        	 ) {	      
+	public Gym_Member findByMember_Num(int member_num)
+	{
+		Gym_Member member = null;
+		try (Connection conn = DataSource.getDataSource();
+			 PreparedStatement pStatement = conn.prepareStatement("select * from gym_member where member_num = ?");
+			 ) {
 	        	 pStatement.setInt(1, 3333);    		
 	        	 ResultSet rs = pStatement.executeQuery();
-	            if (rs.next()) {
-	            	member = new Gym_Member();
-	            	member.setMember_num(rs.getInt("member_num"));
-	            	member.setPt_count(rs.getInt("pt_count"));
-	            	member.setReg_date(rs.getTimestamp("reg_date"));
-	            	member.setExp_date(rs.getDate("exp_date"));
-	            	member.setLogin_id(rs.getString("login_id"));
-	            	member.setLogin_pw(rs.getString("login_pw"));
-	            	member.setGender(rs.getString("gender"));
-	            	member.setAge(rs.getInt("age"));
-	            	member.setName(rs.getString("name"));
-	            	member.setCharge_num(rs.getInt("charge_num"));
-	            	member.setTrainer_num(rs.getInt("trainer_num"));
-	            }
-
-	            } catch (SQLException e) {
-	              throw new RuntimeException(e);
-	        }
-
-	        catch (Exception e)
-	        {
-	            e.printStackTrace();
-	        }
-
-	        return member;       
-			}
+				 if (rs.next()) {
+					 member = new Gym_Member();
+					 member.setMember_num(rs.getInt("member_num"));
+					 member.setPt_count(rs.getInt("pt_count"));
+					 member.setReg_date(rs.getTimestamp("reg_date"));
+					 member.setExp_date(rs.getDate("exp_date"));
+					 member.setLogin_id(rs.getString("login_id"));
+					 member.setLogin_pw(rs.getString("login_pw"));
+					 member.setGender(rs.getString("gender"));
+					 member.setAge(rs.getInt("age"));
+					 member.setName(rs.getString("name"));
+					 member.setCharge_num(rs.getInt("charge_num"));
+					 member.setTrainer_num(rs.getInt("trainer_num"));
+				 }
+		}
+		catch (SQLException e)
+		{
+			throw new RuntimeException(e);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return member;
+	}
 
 	@Override
 	public boolean update(Gym_Member member) {
+
+		boolean result = false;
 		 try (Connection conn = DataSource.getDataSource();
 	             PreparedStatement pStatement = conn.prepareStatement(
 	            		 "update gym_member set pt_count = ? , reg_date = ? , exp_date = ? , login_id = ?"
@@ -142,15 +143,16 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	            pStatement.setInt(10 , member.getCharge_num());
 	            pStatement.setString(11 , member.getName());
 
-	            pStatement.executeUpdate();
+	            if(0 < pStatement.executeUpdate())
+				{
+					result = true;
+				}
 	        }
 	        catch (Exception e)
 	        {
 	            e.printStackTrace();
 	        }
-
-
-	        return false;
+	        return result;
 	}
 
 	@Override
@@ -165,8 +167,6 @@ public class JdbcGym_MemberDao implements Gym_MemberDao{
 	        {
 	            e.printStackTrace();
 	        }
-
-
 	        return false;
 	}
 	
