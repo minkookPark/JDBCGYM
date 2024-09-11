@@ -115,4 +115,4 @@ public class JDBCInbodyDao implements InbodyDao {
 			e.printStackTrace();
 		}		return inbody;
 	}
-}
+	}
