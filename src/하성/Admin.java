@@ -1,21 +1,21 @@
 package 하성;
 
 public class Admin {
-	private long manager_num;
+	private int manager_num;
 	private String position;
 	
 	Admin(){}
 	
-	public Admin(long manager_num,String position) {
+	public Admin(int manager_num,String position) {
 		this.manager_num = manager_num;
 		this.position = position;
 	}
 
-	public long getManager_num() {
+	public int getManager_num() {
 		return manager_num;
 	}
 
-	public void setManager_num(long manager_num) {
+	public void setManager_num(int manager_num) {
 		this.manager_num = manager_num;
 	}
 
@@ -29,9 +29,10 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "admin [manager_num=" + manager_num + ", position=" + position + ", getManager_num()=" + getManager_num()
-				+ ", getPosition()=" + getPosition() + "]";
+		return "Admin [manager_num=" + manager_num + ", position=" + position + "]";
 	}
+
+
 	
 	
 }
