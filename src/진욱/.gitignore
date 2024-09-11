@@ -7,3 +7,6 @@
 /ReviewDao.class
 /ReviewTest.class
 /Trainer.class
+/Class_listDao.class
+/Class_listTest.class
+/JDBCClass_listDao.class
