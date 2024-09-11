@@ -3,3 +3,6 @@
 /MainTest.class
 /TrainerInterface.class
 /DataSource.class
+/InbodyInterface.class
+/JDBCInbodyDao.class
+/InbodyDao.class
