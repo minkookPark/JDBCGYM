@@ -1,5 +1,9 @@
 package 진욱;
 
+import 민국.Trainer;
+import 호영.Gym_Member;
+
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +15,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
                 "    FROM CLASS_LIST A\n" +
                 "    JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
-                "    JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM";
+                "    JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM ORDER BY A.CLASS_NUM";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -24,7 +28,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
                 int member_num = rs.getInt("member_num");
                 String trainer_name = rs.getString("trainer_name");
                 String member_name = rs.getString("member_name");
-                allList.add(new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Member(member_num, member_name)));
+                allList.add(new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name)));
             }
 
         } catch (SQLException e) {
@@ -33,6 +37,37 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
 
 
         return allList;
+    }
+
+    public Gym_Lesson getALesson(int lessonNumber){ // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
+        Gym_Lesson lesson = null;
+        String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
+                "       FROM CLASS_LIST A\n" +
+                "       JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
+                "       JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM\n" +
+                "       WHERE CLASS_NUM = ?";
+
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, lessonNumber);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()){
+                    int class_num = rs.getInt("class_num");
+                    String class_detail = rs.getString("class_detail");
+                    Timestamp prog_time = rs.getTimestamp("prog_time");
+                    int trainer_num = rs.getInt("trainer_num");
+                    int member_num = rs.getInt("member_num");
+                    String trainer_name = rs.getString("trainer_name");
+                    String member_name = rs.getString("member_name");
+                    lesson = new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name));
+                }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return lesson;
     }
 
     @Override

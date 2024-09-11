@@ -7,5 +7,5 @@ public interface Gym_LessonDao {
     public int insertClass(Gym_Lesson classList);
     public int updateClass (Gym_Lesson classList);
     public int deleteClass (int class_num);
-
+    public Gym_Lesson getALesson (int class_num);
 }
