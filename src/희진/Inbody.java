@@ -3,7 +3,7 @@ package 희진;
 import java.sql.Timestamp;
 
 public class Inbody {
-	
+	// 인바디 DTO 클래스
 	private int inbody_Num;
 	private Timestamp m_date;
 	private double weight;
