@@ -2,18 +2,18 @@ package 진욱;
 
 import java.sql.Timestamp;
 
-public class Class_list {
+public class _Class {
     private int class_num;
     private String class_detail;
     private Timestamp progress_time;
     private Trainer trainer;
     private Member member;
 
-    public Class_list() {
+    public _Class() {
     }
 
 
-    public Class_list(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
+    public _Class(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
         this.class_num = class_num;
         this.class_detail = class_detail;
         this.progress_time = progress_time;
