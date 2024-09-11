@@ -15,10 +15,8 @@ public class DataSource {
 	public static Connection getDataSource() {
 		Connection connection = null;
 
-//PreparedStatement pStatement = null; 대신 작성
-		
 		try {
-// 데이터 소스: class~ password);
+
 			Class.forName(DRIVER);
 			connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 		} catch(SQLException e) {
