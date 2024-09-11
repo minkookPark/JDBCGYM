@@ -2,18 +2,18 @@ package 진욱;
 
 import java.sql.Timestamp;
 
-public class _Class {
+public class Gym_Lesson {
     private int class_num;
     private String class_detail;
     private Timestamp progress_time;
     private Trainer trainer;
     private Member member;
 
-    public _Class() {
+    public Gym_Lesson() {
     }
 
 
-    public _Class(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
+    public Gym_Lesson(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
         this.class_num = class_num;
         this.class_detail = class_detail;
         this.progress_time = progress_time;
@@ -63,13 +63,13 @@ public class _Class {
 
     @Override
     public String toString() {
-        return "Class_list{" +
+        return "수업정보[" +
                 "수업번호=" + class_num +
                 ", 과목명='" + class_detail + '\'' +
                 ", 진행시간=" + progress_time +
                 ", 트레이너=" + trainer +
                 ", 회원정보=" + member +
-                '}';
+                ']';
     }
 }
 

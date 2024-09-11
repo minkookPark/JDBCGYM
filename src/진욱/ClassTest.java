@@ -2,18 +2,18 @@ package 진욱;
 
 public class ClassTest {
     public static void main(String[] args) {
-        ClassDao cDao = new JDBCClassDao();
-        for (_Class c: cDao.findAll()){
+        Gym_LessonDao cDao = new JDBCGymLessonDao();
+        for (Gym_Lesson c: cDao.findAll()){
             System.out.println(c);
         }
 
-        _Class insertClass = new _Class();
+        Gym_Lesson insertClass = new Gym_Lesson();
         insertClass.setClass_detail("하반신 집중단련 프로그램");
         insertClass.setMember(new Member(5, "최민식"));
         insertClass.setTrainer(new Trainer(3, "박민국"));
         System.out.println(cDao.insertClass(insertClass) + "건 입력이 완료되었습니다. 입력정보:" + insertClass);
 
-        _Class updateClass = insertClass;
+        Gym_Lesson updateClass = insertClass;
         updateClass.setClass_detail("하반신 초집중단련 프로그램");
         updateClass.setMember(new Member(4, "박소연"));
         updateClass.setTrainer(new Trainer(4, "박호영"));

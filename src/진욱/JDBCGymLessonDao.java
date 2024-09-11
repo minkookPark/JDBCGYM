@@ -1,17 +1,13 @@
 package 진욱;
 
-import oracle.jdbc.proxy.annotation.Pre;
-
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCClassDao implements ClassDao {
-
+public class JDBCGymLessonDao implements Gym_LessonDao {
     @Override
-    public List<_Class> findAll() {
-        List<_Class> allList = new ArrayList<>();
+    public List<Gym_Lesson> findAll() {
+        List<Gym_Lesson> allList = new ArrayList<>();
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
                 "    FROM CLASS_LIST A\n" +
                 "    JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
@@ -28,7 +24,7 @@ public class JDBCClassDao implements ClassDao {
                 int member_num = rs.getInt("member_num");
                 String trainer_name = rs.getString("trainer_name");
                 String member_name = rs.getString("member_name");
-                allList.add(new _Class(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Member(member_num, member_name)));
+                allList.add(new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Member(member_num, member_name)));
             }
 
         } catch (SQLException e) {
@@ -40,7 +36,7 @@ public class JDBCClassDao implements ClassDao {
     }
 
     @Override
-    public int insertClass(_Class classList) {
+    public int insertClass(Gym_Lesson classList) {
         int result = 0;
         String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
                 "VALUES (?, SYSTIMESTAMP, ?, ?)";
@@ -58,7 +54,7 @@ public class JDBCClassDao implements ClassDao {
     }
 
     @Override
-    public int updateClass(_Class classList) { // 수업 내용의 상세 / 회원 / 트레이너 정보를 변경 가능.
+    public int updateClass(Gym_Lesson classList) { // 수업 내용의 상세 / 회원 / 트레이너 정보를 변경 가능.
         int result = 0;
         String sql = "update class_list set class_detail = ?,\n" +
                 "    trainer_num = (select trainer_num from gym_trainer where name = ?),\n" +
