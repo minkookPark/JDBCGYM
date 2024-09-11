@@ -70,7 +70,7 @@ public class Gym_Lesson {
                 "수업번호=" + class_num +
                 ", 과목명='" + class_detail + '\'' +
                 ", 첫 수업시간=" + progress_time +
-                ", 트레이너=" + trainer.getName() +
+                //", 트레이너=" + trainer.getName() +
                 ", 회원정보=" + member.getName() +
                 ']';
     }
