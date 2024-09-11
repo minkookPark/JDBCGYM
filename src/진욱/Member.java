@@ -12,13 +12,19 @@ public class Member {
     private String login_pw;
     private String gender;
     private int age;
-    private int my_trainer;
+    private int trainer_num;
     private int charge_num;
+    private String name;
 
     public Member() {
     }
 
-    public Member(int member_num, int pt_count, Timestamp reg_date, Date exp_date, String login_id, String login_pw, String gender, int age, int my_trainer, int charge_num) {
+    public Member(int member_num, String name){
+        this.member_num = member_num;
+        this.name = name;
+    }
+
+    public Member(int member_num, int pt_count, Timestamp reg_date, Date exp_date, String login_id, String login_pw, String gender, int age, int trainer_num, int charge_num) {
         this.member_num = member_num;
         this.pt_count = pt_count;
         this.reg_date = reg_date;
@@ -27,7 +33,7 @@ public class Member {
         this.login_pw = login_pw;
         this.gender = gender;
         this.age = age;
-        this.my_trainer = my_trainer;
+        this.trainer_num = trainer_num;
         this.charge_num = charge_num;
     }
 
@@ -95,12 +101,12 @@ public class Member {
         this.age = age;
     }
 
-    public int getMy_trainer() {
-        return my_trainer;
+    public int getTrainer_num() {
+        return trainer_num;
     }
 
-    public void setMy_trainer(int my_trainer) {
-        this.my_trainer = my_trainer;
+    public void setMy_trainer(int trainer_num) {
+        this.trainer_num = trainer_num;
     }
 
     public int getCharge_num() {
@@ -111,19 +117,28 @@ public class Member {
         this.charge_num = charge_num;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
-                "member_num=" + member_num +
-                ", pt_count=" + pt_count +
-                ", reg_date=" + reg_date +
-                ", exp_date=" + exp_date +
-                ", login_id='" + login_id + '\'' +
-                ", login_pw='" + login_pw + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", my_trainer=" + my_trainer +
-                ", charge_num=" + charge_num +
+                "회원번호=" + member_num +
+                ", pt횟수=" + pt_count +
+                ", 등록일=" + reg_date +
+                ", 만료일=" + exp_date +
+                ", id='" + login_id + '\'' +
+                ", pw='" + login_pw + '\'' +
+                ", 성별='" + gender + '\'' +
+                ", 나이=" + age +
+                ", 트레이너번호=" + trainer_num +
+                ", 요금제번호=" + charge_num +
+                ", 회원명 =" + name +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JDBCTrainerDao implements TrainerInterface{
+public class JDBCTrainerDao implements TrainerDao {
     @Override
     public boolean insert(Trainer trainer) {
         boolean result = false;
