@@ -28,7 +28,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
                 int member_num = rs.getInt("member_num");
                 String trainer_name = rs.getString("trainer_name");
                 String member_name = rs.getString("member_name");
-                //allList.add(new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name)));
+                allList.add(new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name)));
             }
 
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
                     int member_num = rs.getInt("member_num");
                     String trainer_name = rs.getString("trainer_name");
                     String member_name = rs.getString("member_name");
-                    //lesson = new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name));
+                    lesson = new Gym_Lesson(class_num, class_detail, prog_time, new Trainer(trainer_num, trainer_name), new Gym_Member(member_num, member_name));
                 }
 
         } catch (SQLException e) {
@@ -98,7 +98,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, classList.getClass_detail());
-            //pstmt.setString(2, classList.getTrainer().getName());
+            pstmt.setString(2, classList.getTrainer().getName());
             pstmt.setString(3, classList.getMember().getName());
             pstmt.setInt(4, classList.getMember().getMember_num());
             result = pstmt.executeUpdate();

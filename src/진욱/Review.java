@@ -99,7 +99,7 @@ public class Review {
 
     @Override
     public String toString() {
-        return review_num + "\t" + name + "\t★" + score + "\t" + title + "\t" + write_date + "\n" +
+        return review_num + "\t" + name + "\t★" + score + "\t" + title + "\t" + (write_date == null? "1년 전 이상": write_date) + "\n" +
                 "(과목) " + class_detail + "\n(내용) " + content;
     }
 }

@@ -1,13 +1,17 @@
 package 진욱;
 
 import 호영.Gym_Member;
+import 호영.Gym_MemberDao;
+import 호영.JdbcGym_MemberDao;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ReviewMain {
 
     ReviewDao reviewDao = new JDBCReviewDao();
     Gym_LessonDao gDao = new JDBCGymLessonDao();
+    Gym_MemberDao mDao = new JdbcGym_MemberDao();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -15,7 +19,7 @@ public class ReviewMain {
         System.out.println("리뷰 메뉴에서 원하는 기능을 선택해주세요.");
         boolean loop = true;
         while (loop){
-            System.out.println("1. 리뷰 전체 출력 / 2. 리뷰 작성 / 3.　리뷰 수정 (본인만 가능) / 4. 리뷰 삭제 / 5. 초기 화면으로");
+            System.out.println("1. 리뷰 전체 출력 / 2. 리뷰 작성 / 3.　리뷰 수정 (본인만 가능) / 4. 리뷰 삭제 (본인만 가능) / 5. 초기 화면으로");
             String select = scanner.nextLine();
 
             switch (select){
@@ -28,11 +32,11 @@ public class ReviewMain {
                     break;
 
                 case "3":
-                    updateReview();
+                    updateReview(mDao.findByMember_Num(3), 1); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
                     break;
 
                 case "4":
-                    deleteReview();
+                    updateReview(mDao.findByMember_Num(3), 2); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
                     break;
 
                 case "5":
@@ -60,11 +64,11 @@ public class ReviewMain {
 
     public void writeReview(){
         System.out.println("리뷰 작성을 선택하셨습니다.");
-        System.out.println("우선 리뷰를 작성할 수업의 번호를 선택해주세요.");
         for (Gym_Lesson g: gDao.findAll()){
             System.out.println(g);
         }
 
+        System.out.println("리뷰를 작성할 수업의 번호를 선택해주세요.");
         String numberStr = scanner.nextLine();
         int number = Integer.parseInt(numberStr);
         Gym_Lesson toReviewLesson = gDao.getALesson(number);
@@ -80,14 +84,21 @@ public class ReviewMain {
         System.out.println("리뷰 작성이 완료되었습니다!");
     }
 
-    public void updateReview(Gym_Member member){
-        System.out.println("리뷰 수정을 선택하셨습니다. 작성한 리뷰를 불러옵니다.");
-        
-        // 로그인 대조 로직을 실행.
+    public void updateReview(Gym_Member member, int method){
 
+        System.out.println("리뷰 수정을 선택하셨습니다. 회원님이 작성한 리뷰 리스트를 불러옵니다.");
+        List<Review> userReview = reviewDao.searchReview(1, member.getName());
+
+        if (method == 1) {
+            System.out.println("변경할 리뷰의 번호를 입력해주세요.");
+        } else if (method == 2) {
+            deleteView(member);
+        } else {
+            System.out.println("잘못된 입력입니다. 초기 화면으로 돌아갑니다.");
+        }
     }
 
-    public void deleteView(){
+    public void deleteView(Gym_Member member){
 
     }
 }

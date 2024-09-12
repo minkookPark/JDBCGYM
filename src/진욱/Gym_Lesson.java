@@ -69,9 +69,9 @@ public class Gym_Lesson {
         return "수업정보[" +
                 "수업번호=" + class_num +
                 ", 과목명='" + class_detail + '\'' +
-                ", 첫 수업시간=" + progress_time +
+                ", 첫 수업시간=" + (progress_time == null? "6개월 전": progress_time) +
                 //", 트레이너=" + trainer.getName() +
-                ", 회원정보=" + member.getName() +
+                ", 수강생정보=" + member.getName() +
                 ']';
     }
 }
