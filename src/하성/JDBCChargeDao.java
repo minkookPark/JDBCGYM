@@ -115,7 +115,7 @@ public class JDBCChargeDao implements ChargeDao {
 				PreparedStatement pStatement
 					= connection.prepareStatement("DELETE FROM CHARGE WHERE CHARGE_NUM = ?")){
 			
-			pStatement.setLong(1, num);
+			pStatement.setInt(1, num);
 			
 			int rows = pStatement.executeUpdate();
 			
