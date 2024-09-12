@@ -7,7 +7,8 @@ public class Trainer {
     private LoginData logindata = null;
 
     public Trainer() {
-
+        logindata = new LoginData();
+        logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
     }
 
     public Trainer(int trainer_num, String name) {
@@ -15,10 +16,14 @@ public class Trainer {
 
         this.trainer_num = trainer_num;
         logindata.setName(name);
+        logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
     }
+
+
 
     public Trainer(String login_Id, String login_Pw) {
         logindata = new LoginData(login_Id, login_Pw);
+        logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
     }
 
     public Trainer(String login_Id, String login_Pw, String gender, String award, int age) {
@@ -28,6 +33,7 @@ public class Trainer {
         logindata.setLogin_pw(login_Pw);
         logindata.setGender(gender);
         logindata.setAge(age);
+        logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
 
         this.award = award;
     }
@@ -39,6 +45,7 @@ public class Trainer {
         logindata.setLogin_pw(login_Pw);
         logindata.setGender(gender);
         logindata.setAge(age);
+        logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
 
         this.award = award;
         this.trainer_num = trainer_num;

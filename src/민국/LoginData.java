@@ -1,13 +1,35 @@
 package 민국;
 
 public class LoginData {
+
+    public enum MEMBERTYPE
+    {
+        DEFAULT,
+        TRAINER,
+        MEMBER,
+        MANAGER
+    }
+
     private String name;
     private String login_id;
     private String login_pw;
     private String gender;
     private int age;
 
+    private MEMBERTYPE memberType = MEMBERTYPE.DEFAULT;
+
     public LoginData() {
+
+    }
+
+    public LoginData(LoginData loginData)
+    {
+        this.name = loginData.getName();
+        this.login_id = loginData.getLogin_id();
+        this.login_pw = loginData.getLogin_pw();
+
+        this.gender = loginData.getGender();
+        this.age = loginData.getAge();
     }
 
     public LoginData(String login_id, String login_pw) {
@@ -19,6 +41,7 @@ public class LoginData {
         this.name = name;
         this.login_id = login_id;
         this.login_pw = login_pw;
+
     }
 
     public LoginData(String name, String login_pw, String gender, int age) {
@@ -77,6 +100,13 @@ public class LoginData {
         this.age = age;
     }
 
+    public MEMBERTYPE getMemberType() {
+        return memberType;
+    }
+
+    public void setMemberType(MEMBERTYPE memberType) {
+        this.memberType = memberType;
+    }
 
 
 }
