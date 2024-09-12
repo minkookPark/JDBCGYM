@@ -18,7 +18,7 @@ public class JDBCAdminDao implements AdminDao {
 					= connection.prepareStatement("INSERT INTO ADMIN (MANAGER_NUM,POSITION)"
 							+ " VALUES (?, ?)")) {
 			
-			pStatement.setLong(1, admin.getManager_num());
+			pStatement.setInt(1, admin.getManager_num());
 			pStatement.setString(2, admin.getPosition());
 			
 			int rows = pStatement.executeUpdate();
@@ -89,7 +89,7 @@ public class JDBCAdminDao implements AdminDao {
 			PreparedStatement pStatement
 			= conn.prepareStatement("UPDATE ADMIN SET MANAGER_NUM = ? , POSITION = ? WHERE  = ?")){
 		
-			pStatement.setLong(1, admin.getManager_num());
+			pStatement.setInt(1, admin.getManager_num());
 			pStatement.setString(2, admin.getPosition());
 			
 			int affectedRows = pStatement.executeUpdate();
@@ -112,7 +112,7 @@ public class JDBCAdminDao implements AdminDao {
 				PreparedStatement pStatement
 					= connection.prepareStatement("DELETE FROM ADMIN WHERE MANAGER_NUM = ?")){
 			
-			pStatement.setLong(1, manager_num);
+			pStatement.setInt(1, manager_num);
 			
 			int rows = pStatement.executeUpdate();
 			
