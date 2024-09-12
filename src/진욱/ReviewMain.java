@@ -1,5 +1,7 @@
 package 진욱;
 
+import 호영.Gym_Member;
+
 import java.util.Scanner;
 
 public class ReviewMain {
@@ -30,6 +32,7 @@ public class ReviewMain {
                     break;
 
                 case "4":
+                    deleteReview();
                     break;
 
                 case "5":
@@ -77,8 +80,14 @@ public class ReviewMain {
         System.out.println("리뷰 작성이 완료되었습니다!");
     }
 
-    public void updateReview(){
+    public void updateReview(Gym_Member member){
+        System.out.println("리뷰 수정을 선택하셨습니다. 작성한 리뷰를 불러옵니다.");
+        
         // 로그인 대조 로직을 실행.
+
+    }
+
+    public void deleteView(){
 
     }
 }
