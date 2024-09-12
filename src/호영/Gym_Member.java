@@ -1,6 +1,7 @@
 package 호영;
 
 import java.sql.Date;
+import 민국.LoginData;
 import java.sql.Timestamp;
 
 public class Gym_Member {
@@ -10,22 +11,20 @@ public class Gym_Member {
 	private int pt_count;
 	private Timestamp reg_date;
 	private Date exp_date;
-	private String login_id;
-	private String login_pw;
-	private String gender;
-	private int age;
 	private String name;
 	private int trainer_num;
-	private int charge_num;
+	private int charge_num;	
+	private LoginData loginData;
 	
-	public Gym_Member() {}
 	
-	
+	public Gym_Member() {}	
 
 	public Gym_Member(int member_num, String name) {
 		super();
 		this.member_num = member_num;
 		this.name = name;
+		
+		loginData = new LoginData();
 	}
 
 
@@ -34,11 +33,8 @@ public class Gym_Member {
 			int trainer_num, int charge_num) {
 		super();
 		this.member_num = member_num;
-		this.pt_count = pt_count;
-		this.login_id = login_id;
-		this.login_pw = login_pw;
-		this.gender = gender;
-		this.age = age;
+		this.pt_count = pt_count;	
+		loginData = new LoginData(login_id, login_pw, gender, age);				
 		this.name = name;
 		this.trainer_num = trainer_num;
 		this.charge_num = charge_num;
@@ -51,10 +47,7 @@ public class Gym_Member {
 		this.pt_count = pt_count;
 		this.reg_date = reg_date;
 		this.exp_date = exp_date;
-		this.login_id = login_id;
-		this.login_pw = login_pw;
-		this.gender = gender;
-		this.age = age;
+		loginData = new LoginData(login_id, login_pw, gender, age);	
 		this.name = name;
 		this.trainer_num = trainer_num;
 		this.charge_num = charge_num;
@@ -92,36 +85,40 @@ public class Gym_Member {
 		this.exp_date = exp_date;
 	}
 
+	public LoginData getLoginData() {
+		return loginData;
+	}
+	
 	public String getLogin_id() {
-		return login_id;
+		return loginData.getLogin_id();
 	}
 
 	public void setLogin_id(String login_id) {
-		this.login_id = login_id;
+		this.loginData.setLogin_id(login_id);
 	}
 
 	public String getLogin_pw() {
-		return login_pw;
+		return loginData.getLogin_pw();
 	}
 
 	public void setLogin_pw(String login_pw) {
-		this.login_pw = login_pw;
+		this.loginData.setLogin_pw(login_pw);
 	}
 
 	public String getGender() {
-		return gender;
+		return loginData.getGender();
 	}
 
 	public void setGender(String gender) {
-		this.gender = gender;
+		this.loginData.setGender(gender);
 	}
 
 	public int getAge() {
-		return age;
+		return loginData.getAge();
 	}
 
 	public void setAge(int age) {
-		this.age = age;
+		this.loginData.setAge(age);
 	}
 
 	public String getName() {
@@ -151,7 +148,7 @@ public class Gym_Member {
 	@Override
 	public String toString() {
 		return "Member [member_num=" + member_num + ", pt_count=" + pt_count + ", reg_date=" + reg_date + ", exp_date="
-				+ exp_date + ", login_id=" + login_id + ", login_pw=" + login_pw + ", gender=" + gender + ", age=" + age
+				+ exp_date + ", login_id=" + loginData.getLogin_id() + ", login_pw=" + loginData.getLogin_pw() + ", gender=" +loginData.getGender() + ", age=" + loginData.getAge()
 				+ ", name=" + name + ", trainer_num=" + trainer_num + ", charge_num=" + charge_num + "]";
 	}
 	

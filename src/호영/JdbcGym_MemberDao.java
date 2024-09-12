@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DataSource.DataSource;
+
 public class JdbcGym_MemberDao implements Gym_MemberDao {
 
     @Override

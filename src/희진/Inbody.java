@@ -14,6 +14,7 @@ public class Inbody {
 	private int body_score;
 	private int member_num;
 	
+	
 	Inbody(){}
 
 	public Inbody(Timestamp m_date, double weight, double height, double fat, double muscle, int body_age,
