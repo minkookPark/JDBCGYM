@@ -1,5 +1,8 @@
 package 진욱;
 
+import DataSource.DataSource;
+
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,8 +114,8 @@ public class JDBCReviewDao implements ReviewDao {
     @Override
     public int insertReview(Review review) {
         int result = 0;
-        String sql = "INSERT INTO REVIEW (SCORE, TITLE, CONTENT, CLASS_NUM) \n" +
-                "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO REVIEW (SCORE, TITLE, CONTENT, CLASS_NUM, WRITE_DATE) \n" +
+                "VALUES (?, ?, ?, ?, SYSTIMESTAMP)";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -170,6 +173,26 @@ public class JDBCReviewDao implements ReviewDao {
         }
 
         return result;
+    }
+
+    @Override
+    public Review getReview(int review_num) {
+        Review oneReview = null;
+        String sql = "SELECT * FROM REVIEW WHERE REVIEW_NUM = ?";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, review_num);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                oneReview = new Review(rs.getInt("review_num"), rs.getInt("score"),
+                        rs.getString("title"), rs.getString("content"), rs.getTimestamp("write_date"), rs.getInt("class_num"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return oneReview;
     }
 
     public void displayTrainerReviewScore(String name){
