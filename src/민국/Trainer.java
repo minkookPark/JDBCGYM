@@ -52,7 +52,7 @@ public class Trainer {
         this.trainer_num = trainer_num;
     }
 
-    public void setLoin_Id(String login_Id) {
+    public void setLogin_Id(String login_Id) {
         this.logindata.setLogin_id(login_Id);
     }
 
