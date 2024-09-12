@@ -33,6 +33,15 @@ public class Review {
         this.class_num = class_num;
     }
 
+    public Review(int reviewNum, int score, String title, String content, Timestamp writeDate, int classNum) {
+        this.review_num = reviewNum;
+        this.title = title;
+        this.content = content;
+        this.write_date = writeDate;
+        this.class_num = classNum;
+    }
+
+
     public int getClass_num() {
         return class_num;
     }
@@ -100,6 +109,6 @@ public class Review {
     @Override
     public String toString() {
         return review_num + "\t" + name + "\t★" + score + "\t" + title + "\t" + (write_date == null? "1년 전 이상": write_date) + "\n" +
-                "(과목) " + class_detail + "\n(내용) " + content;
+                "(과목) " + class_detail + "\n(내용) " + content + "\n";
     }
 }

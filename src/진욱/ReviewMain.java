@@ -1,11 +1,11 @@
 package 진욱;
 
+import Gym.Logic.Common.Input;
 import 호영.Gym_Member;
 import 호영.Gym_MemberDao;
 import 호영.JdbcGym_MemberDao;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ReviewMain {
 
@@ -13,14 +13,12 @@ public class ReviewMain {
     Gym_LessonDao gDao = new JDBCGymLessonDao();
     Gym_MemberDao mDao = new JdbcGym_MemberDao();
 
-    Scanner scanner = new Scanner(System.in);
-
-    public void execute(){
+    public void reviewExecute(){
         System.out.println("리뷰 메뉴에서 원하는 기능을 선택해주세요.");
         boolean loop = true;
         while (loop){
             System.out.println("1. 리뷰 전체 출력 / 2. 리뷰 작성 / 3.　리뷰 수정 (본인만 가능) / 4. 리뷰 삭제 (본인만 가능) / 5. 초기 화면으로");
-            String select = scanner.nextLine();
+            String select = Input.stringScan();
 
             switch (select){
                 case "1":
@@ -60,6 +58,8 @@ public class ReviewMain {
         for (Review r: reviewDao.allReviewList()){
             System.out.println(r);
         }
+
+        System.out.println("========================================\n");
     }
 
     public void writeReview(){
@@ -69,17 +69,16 @@ public class ReviewMain {
         }
 
         System.out.println("리뷰를 작성할 수업의 번호를 선택해주세요.");
-        String numberStr = scanner.nextLine();
-        int number = Integer.parseInt(numberStr);
+        int number = Input.intScan();
         Gym_Lesson toReviewLesson = gDao.getALesson(number);
 
         System.out.println("수업 평점을 선택해주세요! (1~5점 사이 정수입력)");
-        int score = Integer.parseInt(scanner.nextLine());
+        int score = Input.intScan();
         System.out.println("리뷰 제목을 입력해주세요.");
-        String title = scanner.nextLine();
+        String title = Input.stringScan();
         System.out.println("리뷰 내용을 입력해주세요.");
-        String content = scanner.nextLine();
-        Review toWriteReview = new Review(score, title, content, toReviewLesson.getClass_num());
+        String content = Input.stringScan();
+        Review toWriteReview = new Review(score, title, content, number);
         reviewDao.insertReview(toWriteReview);
         System.out.println("리뷰 작성이 완료되었습니다!");
     }
@@ -91,14 +90,33 @@ public class ReviewMain {
 
         if (method == 1) {
             System.out.println("변경할 리뷰의 번호를 입력해주세요.");
+            int number = Input.intScan();
+            System.out.println("변경할 평점을 입력해주세요. 현재 평점: " + reviewDao.getReview(number).getScore());
+            int score = Input.intScan();
+            System.out.println("수정할 제목을 작성해주세요. 아무것도 입력하지 않으면 기존 제목이 반영됩니다.");
+            String title = Input.stringScan();
+            if (title.isEmpty())
+                title = reviewDao.getReview(number).getTitle();
+            System.out.println("수정할 내용을 작성해주세요. 아무것도 입력하지 않으면 기존 내용이 반영됩니다.");
+            String content = Input.stringScan();
+            if (content.isEmpty())
+                content = reviewDao.getReview(number).getContent();
+
+            reviewDao.updateReview(new Review(score, title, content, number));
+            System.out.println("수정이 완료되었습니다!!");
+
         } else if (method == 2) {
-            deleteView(member);
+            deleteView();
         } else {
             System.out.println("잘못된 입력입니다. 초기 화면으로 돌아갑니다.");
         }
     }
 
-    public void deleteView(Gym_Member member){
+    public void deleteView(){
+        System.out.println("삭제할 리뷰의 번호를 입력해주세요..");
+        int number = Input.intScan();
+        reviewDao.deleteReview(number);
+        System.out.println("리뷰 삭제가 완료되었습니다!");
 
     }
 }
