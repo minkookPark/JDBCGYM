@@ -2,35 +2,47 @@ package 민국;
 
 public class Trainer {
     private int trainer_num;
-    private String login_Id;
-    private String login_Pw;
-    private String gender;
     private String award;
-    private int age;
+
+    private LoginData logindata = null;
+
 
     public Trainer() {
+
+    }
+
+    public Trainer(int trainer_num, String name) {
+        logindata = new LoginData();
+
+        this.trainer_num = trainer_num;
+        logindata.setName(name);
     }
 
     public Trainer(String login_Id, String login_Pw) {
-        this.login_Id = login_Id;
-        this.login_Pw = login_Pw;
+        logindata = new LoginData(login_Id, login_Pw);
     }
 
     public Trainer(String login_Id, String login_Pw, String gender, String award, int age) {
-        this.login_Id = login_Id;
-        this.login_Pw = login_Pw;
-        this.gender = gender;
+        logindata = new LoginData();
+
+        logindata.setLogin_id(login_Id);
+        logindata.setLogin_pw(login_Pw);
+        logindata.setGender(gender);
+        logindata.setAge(age);
+
         this.award = award;
-        this.age = age;
     }
 
     public Trainer(int trainer_num, String login_Id, String login_Pw, String gender, String award, int age) {
-        this.trainer_num = trainer_num;
-        this.login_Id = login_Id;
-        this.login_Pw = login_Pw;
-        this.gender = gender;
+        logindata = new LoginData();
+
+        logindata.setLogin_id(login_Id);
+        logindata.setLogin_pw(login_Pw);
+        logindata.setGender(gender);
+        logindata.setAge(age);
+
         this.award = award;
-        this.age = age;
+        this.trainer_num = trainer_num;
     }
 
     public int getTrainer_num() {
@@ -42,27 +54,23 @@ public class Trainer {
     }
 
     public String getLogin_Id() {
-        return login_Id;
-    }
-
-    public void setLogin_Id(String login_Id) {
-        this.login_Id = login_Id;
+        return logindata.getLogin_id();
     }
 
     public String getLogin_Pw() {
-        return login_Pw;
+        return logindata.getLogin_pw();
     }
 
     public void setLogin_Pw(String login_Pw) {
-        this.login_Pw = login_Pw;
+        this.logindata.setLogin_pw(login_Pw);
     }
 
     public String getGender() {
-        return gender;
+        return logindata.getGender();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.logindata.setGender(gender);
     }
 
     public String getAward() {
@@ -74,22 +82,32 @@ public class Trainer {
     }
 
     public int getAge() {
-        return age;
+        return logindata.getAge();
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.logindata.setAge(age);
+    }
+
+    public void setName(String name)
+    {
+        this.logindata.setName(name);
+    }
+
+    public String getName()
+    {
+        return this.logindata.getName();
     }
 
     @Override
     public String toString() {
         return "Trainer{" +
                 "trainer_num=" + trainer_num +
-                ", login_Id='" + login_Id + '\'' +
-                ", login_Pw='" + login_Pw + '\'' +
-                ", gender='" + gender + '\'' +
+                ", login_Id='" + logindata.getLogin_id() + '\'' +
+                ", login_Pw='" + logindata.getLogin_pw() + '\'' +
+                ", gender='" + logindata.getGender() + '\'' +
                 ", award='" + award + '\'' +
-                ", age=" + age +
+                ", age=" + logindata.getAge() +
                 '}';
     }
 }
