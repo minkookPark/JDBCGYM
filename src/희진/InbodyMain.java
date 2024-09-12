@@ -40,7 +40,7 @@ public class InbodyMain {
             break;
          default:
             System.out.println("올바른 선택이 아닙니다.");
-      } 
+      }
    }
 }
       private static void insertInbody() {

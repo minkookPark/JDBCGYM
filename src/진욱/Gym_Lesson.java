@@ -1,5 +1,8 @@
 package 진욱;
 
+import 민국.Trainer;
+import 호영.Gym_Member;
+
 import java.sql.Timestamp;
 
 public class Gym_Lesson {
@@ -7,13 +10,13 @@ public class Gym_Lesson {
     private String class_detail;
     private Timestamp progress_time;
     private Trainer trainer;
-    private Member member;
+    private Gym_Member member;
 
     public Gym_Lesson() {
     }
 
 
-    public Gym_Lesson(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Member member) {
+    public Gym_Lesson(int class_num, String class_detail, Timestamp progress_time, Trainer trainer, Gym_Member member) {
         this.class_num = class_num;
         this.class_detail = class_detail;
         this.progress_time = progress_time;
@@ -53,11 +56,11 @@ public class Gym_Lesson {
         this.trainer = trainer;
     }
 
-    public Member getMember() {
+    public Gym_Member getMember() {
         return member;
     }
 
-    public void setMember(Member member) {
+    public void setMember(Gym_Member member) {
         this.member = member;
     }
 
@@ -66,9 +69,9 @@ public class Gym_Lesson {
         return "수업정보[" +
                 "수업번호=" + class_num +
                 ", 과목명='" + class_detail + '\'' +
-                ", 진행시간=" + progress_time +
-                ", 트레이너=" + trainer +
-                ", 회원정보=" + member +
+                ", 첫 수업시간=" + progress_time +
+                //", 트레이너=" + trainer.getName() +
+                ", 회원정보=" + member.getName() +
                 ']';
     }
 }

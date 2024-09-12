@@ -5,6 +5,8 @@ import java.util.List;
 public interface ReviewDao {
     public List<Review> allReviewList();
 
+    public int allReviewCount();
+
     public int insertReview(Review review);
 
     public int updateReview(Review review);

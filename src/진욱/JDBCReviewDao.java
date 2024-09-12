@@ -37,6 +37,24 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
+    public int allReviewCount() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) count FROM REVIEW";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("count");
+                }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return count;
+    }
+
+    @Override
     public List<Review> searchReview(int method, String query) { // 검색 방법에 따라 다른 검색 결과를 출력한다.
         List<Review> searchList = new ArrayList<Review>();
         String sql = "";

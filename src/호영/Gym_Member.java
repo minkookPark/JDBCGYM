@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Gym_Member {
+
 	
 	private int member_num;
 	private int pt_count;
@@ -18,6 +19,16 @@ public class Gym_Member {
 	private int charge_num;
 	
 	public Gym_Member() {}
+	
+	
+
+	public Gym_Member(int member_num, String name) {
+		super();
+		this.member_num = member_num;
+		this.name = name;
+	}
+
+
 
 	public Gym_Member(int member_num, int pt_count, String login_id, String login_pw, String gender, int age, String name,
 			int trainer_num, int charge_num) {
