@@ -6,7 +6,6 @@ public class Trainer {
 
     private LoginData logindata = null;
 
-
     public Trainer() {
 
     }
@@ -51,6 +50,10 @@ public class Trainer {
 
     public void setTrainer_num(int trainer_num) {
         this.trainer_num = trainer_num;
+    }
+
+    public void setLoin_Id(String login_Id) {
+        this.logindata.setLogin_id(login_Id);
     }
 
     public String getLogin_Id() {
