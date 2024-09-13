@@ -8,7 +8,7 @@ public class InbodyMain {
    public void inbodyExecute() {
 	   System.out.println("메뉴를 선택해주세요");
 	  boolean loop = true;
-	  while (loop) {
+	  while (loop) { 
          System.out.println("1.인바디 정보 입력");
          System.out.println("2.인바디 정보 검색");
          System.out.println("3.인바디 정보 전체검색");

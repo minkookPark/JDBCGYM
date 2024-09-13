@@ -14,7 +14,6 @@ public class InbodyMethod {
 	static void insertInbody() {
 		Inbody inbody = new Inbody();
 		System.out.println("인바디 정보를 입력해주세요.");
-
 		
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		inbody.setM_date(currentTimestamp);
@@ -71,7 +70,7 @@ public class InbodyMethod {
 						+ inbody2.getMuscle() + "Body_age :" 
 						+ inbody2.getBody_age() + "Body_score :"
 						+ inbody2.getBody_score() + "Member_num :" 
-						+ inbody2.getMember_num());
+						+ inbody2.getMember_num() + "Member_num :");
 			System.out.println("해당 회원의 인바디 정보를 검색하였습니다.");
 		} else {
 			System.out.println("인바디 정보를 검색하지 못하였습니다.");
