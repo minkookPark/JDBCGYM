@@ -18,8 +18,8 @@ public class JDBCTrainerDao implements TrainerDao {
         //try 문이 끝나면 자동으로 close 된다.
         try(Connection conn = DataSource.getDataSource();
             PreparedStatement pStatement = conn.prepareStatement(
-                    "insert into GYM_TRAINER(LOGIN_ID, LOGIN_PW, GENDER, AWARD, AGE) " +
-                            "values (?, ?, ?, ?, ?)"))
+                    "insert into GYM_TRAINER(LOGIN_ID, LOGIN_PW, GENDER, AWARD, AGE, NAME) " +
+                            "values (?, ?, ?, ?, ?,?)"))
         {
             //id 중복 검사
             if(findById(trainer.getLogin_Id()))
@@ -33,6 +33,7 @@ public class JDBCTrainerDao implements TrainerDao {
             pStatement.setString(3,trainer.getGender());
             pStatement.setString(4,trainer.getAward());
             pStatement.setInt(5,trainer.getAge());
+            pStatement.setString(6, trainer.getName());
 
             int rows = pStatement.executeUpdate();
 
@@ -74,6 +75,7 @@ public class JDBCTrainerDao implements TrainerDao {
                 t.setGender(rs.getString("GENDER"));
                 t.setAward(rs.getString("AWARD"));
                 t.setAge(rs.getInt("AGE"));
+                t.setName(rs.getString("NAME"));
 
                 tLst.add(t);
             }
@@ -111,6 +113,7 @@ public class JDBCTrainerDao implements TrainerDao {
                 t.setGender(rs.getString("GENDER"));
                 t.setAward(rs.getString("AWARD"));
                 t.setAge(rs.getInt("AGE"));
+                t.setName(rs.getString("NAME"));
             }
         }
         catch (Exception e)
@@ -228,9 +231,18 @@ public class JDBCTrainerDao implements TrainerDao {
             {
                 String resultPw = rs.getString("LOGIN_PW");
 
-                if(resultPw == login_pw) {
+                if(resultPw.equals(login_pw)) {
                     isSuccess = true;
                     LoginData curLoginUser = new LoginData();
+
+                    curLoginUser.setLogin_id(rs.getString("LOGIN_ID"));
+                    curLoginUser.setLogin_pw(rs.getString("LOGIN_PW"));
+                    curLoginUser.setMemberType(LoginData.MEMBERTYPE.TRAINER);
+
+                    curLoginUser.setName(rs.getString("NAME"));
+                    curLoginUser.setAge(rs.getInt("AGE"));
+
+
                     LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
 
                     System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());

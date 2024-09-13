@@ -23,6 +23,19 @@ public class Input {
         return result;
     }
 
+    public static int intScan(int min, int max)
+    {
+        String s = scan.nextLine();
+        int result = Integer.parseInt(s);
+
+        if(result > max || result < min)
+        {
+            System.out.println(min + "~" + max + " 사이의 정수값을 입력해주세요");
+            return 0;
+        }
+        return result;
+    }
+
     public static double doubleScan()
     {
         String s = scan.nextLine();

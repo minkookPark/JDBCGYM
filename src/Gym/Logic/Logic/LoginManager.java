@@ -3,6 +3,9 @@ package Gym.Logic.Logic;
 import Gym.Logic.Common.Input;
 import 민국.JDBCTrainerDao;
 import 민국.LoginData;
+import 민국.Trainer;
+import 하성.Admin;
+import 호영.Gym_Member;
 
 public class LoginManager {
     private static LoginManager instance = null;
@@ -20,12 +23,45 @@ public class LoginManager {
 
 
     private LoginData currentLoginUser;
+    private Trainer tr;
+    private Gym_Member gm;
+    private Admin admin;
+
     private boolean isLogin = false;
 
     public void init()
     {
         currentLoginUser = new LoginData();
         isLogin = false;
+    }
+
+
+    public void selectLogin()
+    {
+        ShowManager.getInstance().showLoginMenu();
+
+        int selectNum = Input.intScan(1,3);
+        if (selectNum != 0)
+        {
+            switch(selectNum)
+            {
+                case 1:
+                {
+                    tryMemberLogin();
+                    break;
+                }
+                case 2:
+                {
+                    tryTrainerLogin();
+                    break;
+                }
+                case 3:
+                {
+                    tryManagerLogin();
+                    break;
+                }
+            }
+        }
     }
 
     public void tryMemberLogin()
@@ -43,12 +79,21 @@ public class LoginManager {
         System.out.println("비밀번호를 입력 해주세요");
         String pw = Input.stringScan();
 
+
+        //이 부분 trainer 객체로 바꿔야 함.
         LoginData login = new LoginData(id,pw, LoginData.MEMBERTYPE.TRAINER);
+        //Trainer curLoginTrainer = new Trainier();
+        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
+
         
         if(tryLogin(login))
         {
             System.out.println("로그인 성공");
-        }else
+            //tr = curLoginTrainer;
+            isLogin = true;
+
+        }
+        else
         {
             System.out.println("로그인 실패");
         }
