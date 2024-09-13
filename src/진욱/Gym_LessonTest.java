@@ -27,13 +27,13 @@ public class Gym_LessonTest {
         System.out.println(gDao.insertLesson(new Gym_Lesson(11, "하체와상체모두단련하는프로그램", toInsertTrainer, toInsertMember)) + "행 삽입되었습니다.");
         System.out.println("==================================");
 
-        System.out.println("======== 수강정보 수정============");
+        System.out.println("======== 수강정보 수정=============");
         System.out.println(gDao.updateLesson(new Gym_Lesson(11,"사실하체만단련하는프로그램", toInsertTrainer, toInsertMember)) + "행 수정됨.");
         System.out.println("==================================");
 
-        System.out.println("======== 수강정보 삭제============");
+        System.out.println("======== 수강정보 삭제=============");
         System.out.println(gDao.deleteLesson(11));
-        System.out.println("=================================");
+        System.out.println("==================================");
 
     }
 }

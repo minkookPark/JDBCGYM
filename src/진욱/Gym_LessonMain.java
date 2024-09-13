@@ -1,9 +1,13 @@
 package 진욱;
 
 import Gym.Logic.Common.Input;
+import 민국.JDBCTrainerDao;
+import 민국.Trainer;
+import 민국.TrainerDao;
 
 public class Gym_LessonMain {
     Gym_LessonDao gDao = new JDBCGym_LessonDao();
+    TrainerDao tDao = new JDBCTrainerDao();
 
     public void lessonExecute(){
         System.out.println("수업 메뉴에서 원하는 기능을 선택해주세요.");
@@ -54,7 +58,12 @@ public class Gym_LessonMain {
         }
         System.out.println("수정을 원하는 수강정보의 번호를 입력해주세요.");
         int number = Input.intScan();
+        System.out.println("수강 과목명을 입력해주세요. ex) 다이어트 집중 수업");
+        String class_detail = Input.stringScan();
+        System.out.println("담당 트레이너가 누구인지 선택해주세요. (트레이너 목록 출력)");
+        for (Trainer t : tDao.findAll()){
+            System.out.println(t);
+        }
 
     }
-
 }
