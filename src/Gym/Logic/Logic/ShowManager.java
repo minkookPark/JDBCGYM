@@ -90,7 +90,35 @@ public class ShowManager {
 
     }
 
+    public void showReviewMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                1. Display All Review List            =");
+        System.out.println("=                2. Write A Review                     =");
+        System.out.println("=                3. Modify A Review                    =");
+        System.out.println("=------------------------------------------------------=");
+        System.out.println("=                                                      =");
+        System.out.println("=                4. Delete A Review                    =");
+        System.out.println("=                9. Back To Main                       =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
 
+    public void showLessonMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                1. Display All Lesson List            =");
+        System.out.println("=                2. Display Trainer's Lesson           =");
+        System.out.println("=                3. Modify A Lesson's Info             =");
+        System.out.println("=------------------------------------------------------=");
+        System.out.println("=                                                      =");
+        System.out.println("=                4. Delete A Lesson Info               =");
+        System.out.println("=                9. Back To Main                       =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
 
 
 }

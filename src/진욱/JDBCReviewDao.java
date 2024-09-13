@@ -1,6 +1,7 @@
 package 진욱;
 
 import DataSource.DataSource;
+import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -171,6 +172,20 @@ public class JDBCReviewDao implements ReviewDao {
             throw new RuntimeException(e);
         }
 
+        return result;
+    }
+
+    public int deleteReviewByClassNumber(int class_num){
+        int result = 0;
+        String sql = "DELETE FROM REVIEW WHERE CLASS_NUM = ?";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, class_num);
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return result;
     }
 

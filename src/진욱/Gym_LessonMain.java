@@ -2,6 +2,7 @@ package 진욱;
 
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.ShowManager;
 import 민국.Trainer;
 import 민국.TrainerDao;
 import 호영.Gym_Member;
@@ -11,12 +12,13 @@ public class Gym_LessonMain {
     Gym_LessonDao glDao = DAOManager.getInstance().getlDao();
     Gym_MemberDao gmDao = DAOManager.getInstance().getmDao();
     TrainerDao tDao = DAOManager.getInstance().gettDao();
+    ReviewDao rDao = DAOManager.getInstance().getrDao();
 
     public void lessonExecute(){
         System.out.println("수업 메뉴에서 원하는 기능을 선택해주세요.");
         boolean loop = true;
         while (loop){
-            System.out.println("1. 전체 수업 출력 / 2. 특정 트레이너의 수업 출력 / 3.　수업 내용 수정 / 4. 수업 내용 삭제 / 5. 초기 화면으로");
+            ShowManager.getInstance().showLessonMenu();
             int select = Input.intScan();
             switch (select){
                 case 1:
@@ -36,7 +38,7 @@ public class Gym_LessonMain {
                 case 4:
                     deleteLesson();
                     break;
-                case 5:
+                case 9:
                     System.out.println("초기 화면으로 돌아갑니다.");
                     loop = false;
                     break;
@@ -49,6 +51,10 @@ public class Gym_LessonMain {
 
     public void findTrainerLesson() {
         System.out.println("수강정보 검색을 원하는 트레이너명을 입력하세요.");
+        System.out.println("==============트레이너 목록==============");
+        for (Trainer t: tDao.findAll()){
+            System.out.println(t);
+        }
         int number = Input.intScan();
         System.out.println(glDao.findByTrainer(number).get(0).getTrainer().getName() + "트레이너에 대한 수강 정보는 아래와 같습니다.");
         for (Gym_Lesson gl2 : glDao.findByTrainer(number)){
@@ -84,7 +90,14 @@ public class Gym_LessonMain {
     }
 
     public void deleteLesson(){
-
+        for (Gym_Lesson gl3: glDao.findAll()){
+            System.out.println(gl3);
+        }
+        System.out.println("삭제하고자 하는 강의의 번호를 입력해주세요. (삭제 시 관련 리뷰도 함께 삭제됩니다.");
+        int number = Input.intScan();
+        int reviewDeleteResult = rDao.deleteReviewByClassNumber(number);
+        int classDeleteResult = glDao.deleteLesson(number);
+        System.out.println("해당 강의 정보 및 그 리뷰가 삭제되었습니다.");
     }
 
 }

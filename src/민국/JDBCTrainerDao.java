@@ -74,7 +74,6 @@ public class JDBCTrainerDao implements TrainerDao {
                 t.setGender(rs.getString("GENDER"));
                 t.setAward(rs.getString("AWARD"));
                 t.setAge(rs.getInt("AGE"));
-
                 tLst.add(t);
             }
 
