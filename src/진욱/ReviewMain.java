@@ -1,43 +1,43 @@
 package 진욱;
 
 import Gym.Logic.Common.Input;
+import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.ShowManager;
 import 호영.Gym_Member;
 import 호영.Gym_MemberDao;
-import 호영.JdbcGym_MemberDao;
 
 import java.util.List;
 
 public class ReviewMain {
 
-    ReviewDao reviewDao = new JDBCReviewDao();
-    Gym_LessonDao gDao = new JDBCGymLessonDao();
-    Gym_MemberDao mDao = new JdbcGym_MemberDao();
+    ReviewDao reviewDao = DAOManager.getInstance().getrDao();
+    Gym_LessonDao gDao = DAOManager.getInstance().getlDao();
+    Gym_MemberDao mDao = DAOManager.getInstance().getmDao();
 
     public void reviewExecute(){
         System.out.println("리뷰 메뉴에서 원하는 기능을 선택해주세요.");
         boolean loop = true;
         while (loop){
-            System.out.println("1. 리뷰 전체 출력 / 2. 리뷰 작성 / 3.　리뷰 수정 (본인만 가능) / 4. 리뷰 삭제 (본인만 가능) / 5. 초기 화면으로");
-            String select = Input.stringScan();
-
+            ShowManager.getInstance().showReviewMenu();
+            int select = Input.intScan();
             switch (select){
-                case "1":
+                case 1:
                     showAllReview();
                     break;
 
-                case "2":
+                case 2:
                     writeReview();
                     break;
 
-                case "3":
+                case 3:
                     updateReview(mDao.findByMember_Num(3), 1); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
                     break;
 
-                case "4":
+                case 4:
                     updateReview(mDao.findByMember_Num(3), 2); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
                     break;
 
-                case "5":
+                case 9:
                     System.out.println("리뷰 관련 메뉴 출력을 종료합니다.");
                     loop = false;
                     break;
