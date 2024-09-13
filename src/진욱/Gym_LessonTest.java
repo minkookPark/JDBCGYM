@@ -1,11 +1,13 @@
 package 진욱;
 
+import Gym.Logic.Logic.DAOManager;
 import 민국.Trainer;
 import 호영.Gym_Member;
 
 public class Gym_LessonTest {
     public static void main(String[] args) {
-        Gym_LessonDao gDao = new JDBCGym_LessonDao();
+        Gym_LessonDao gDao = DAOManager.getInstance().getlDao();
+
         System.out.println("============ 전체출력 =============");
         for (Gym_Lesson g1 : gDao.findAll()){
             System.out.println(g1);

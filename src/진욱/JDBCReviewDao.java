@@ -2,7 +2,6 @@ package 진욱;
 
 import DataSource.DataSource;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

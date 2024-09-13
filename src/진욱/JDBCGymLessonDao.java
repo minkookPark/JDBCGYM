@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import DataSource.DataSource;
 
-public class JDBCGym_LessonDao implements Gym_LessonDao {
+public class JDBCGymLessonDao implements Gym_LessonDao {
     @Override
     public List<Gym_Lesson> findAll() {
         List<Gym_Lesson> allList = new ArrayList<>();

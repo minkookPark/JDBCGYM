@@ -1,17 +1,17 @@
 package 진욱;
 
 import Gym.Logic.Common.Input;
+import Gym.Logic.Logic.DAOManager;
 import 호영.Gym_Member;
 import 호영.Gym_MemberDao;
-import 호영.JdbcGym_MemberDao;
 
 import java.util.List;
 
 public class ReviewMain {
 
-    ReviewDao reviewDao = new JDBCReviewDao();
-    Gym_LessonDao gDao = new JDBCGym_LessonDao();
-    Gym_MemberDao mDao = new JdbcGym_MemberDao();
+    ReviewDao reviewDao = DAOManager.getInstance().getrDao();
+    Gym_LessonDao gDao = DAOManager.getInstance().getlDao();
+    Gym_MemberDao mDao = DAOManager.getInstance().getmDao();
 
     public void reviewExecute(){
         System.out.println("리뷰 메뉴에서 원하는 기능을 선택해주세요.");
