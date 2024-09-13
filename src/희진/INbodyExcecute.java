@@ -6,5 +6,4 @@ public class INbodyExcecute {
 		InbodyMain m = new InbodyMain();
 		m.inbodyExecute();
 	}
-
 }
