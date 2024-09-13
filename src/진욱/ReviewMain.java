@@ -10,7 +10,7 @@ import java.util.List;
 public class ReviewMain {
 
     ReviewDao reviewDao = new JDBCReviewDao();
-    Gym_LessonDao gDao = new JDBCGymLessonDao();
+    Gym_LessonDao gDao = new JDBCGym_LessonDao();
     Gym_MemberDao mDao = new JdbcGym_MemberDao();
 
     public void reviewExecute(){

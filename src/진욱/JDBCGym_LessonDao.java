@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import DataSource.DataSource;
 
-public class JDBCGymLessonDao implements Gym_LessonDao {
+public class JDBCGym_LessonDao implements Gym_LessonDao {
     @Override
     public List<Gym_Lesson> findAll() {
         List<Gym_Lesson> allList = new ArrayList<>();
@@ -39,18 +39,18 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return allList;
     }
 
-    public List<Gym_Lesson> findByTrainer(String name){
+    public List<Gym_Lesson> findByTrainer(int number){
         List<Gym_Lesson> trainerLesson = new ArrayList<Gym_Lesson>();
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
                 "                FROM CLASS_LIST A\n" +
                 "                JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
                 "                JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM \n" +
-                "                WHERE B.NAME = ?\n" +
+                "                WHERE B.TRAINER_NUM = ?\n" +
                 "                ORDER BY A.CLASS_NUM";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
+            pstmt.setInt(1, number);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 int class_num = rs.getInt("class_num");
@@ -102,36 +102,37 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     }
 
     @Override
-    public int insertClass(Gym_Lesson classList) {
+    public int insertLesson(Gym_Lesson classList) {
         int result = 0;
-        String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
-                "VALUES (?, SYSTIMESTAMP, ?, ?)";
+        String sql = "INSERT INTO CLASS_LIST (CLASS_NUM, CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
+                "VALUES (?, ?, SYSTIMESTAMP, ?, ?)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, classList.getClass_detail());
-                pstmt.setInt(2, classList.getTrainer().getTrainer_num());
-                pstmt.setInt(3, classList.getMember().getMember_num());
+                pstmt.setInt(1, classList.getClass_num());
+                pstmt.setString(2, classList.getClass_detail());
+                pstmt.setInt(3, classList.getTrainer().getTrainer_num());
+                pstmt.setInt(4, classList.getMember().getMember_num());
                 result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e);
         }
         return result;
     }
 
     @Override
-    public int updateClass(Gym_Lesson classList) { // 수업 내용의 상세 / 회원 / 트레이너 정보를 변경 가능.
+    public int updateLesson(Gym_Lesson classList) { // 수업 내용의 상세 / 회원 / 트레이너 정보를 변경 가능.
         int result = 0;
         String sql = "update class_list set class_detail = ?,\n" +
-                "    trainer_num = (select trainer_num from gym_trainer where name = ?),\n" +
-                "    member_num = (select member_num from gym_member where name = ?)    \n" +
-                "    where member_num = ?";
+                "    trainer_num = ?,\n" +
+                "    member_num = ?  \n" +
+                "    where class_num = ?";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, classList.getClass_detail());
-            pstmt.setString(2, classList.getTrainer().getName());
-            pstmt.setString(3, classList.getMember().getName());
-            pstmt.setInt(4, classList.getMember().getMember_num());
+            pstmt.setInt(2, classList.getTrainer().getTrainer_num());
+            pstmt.setInt(3, classList.getMember().getMember_num());
+            pstmt.setInt(4, classList.getClass_num());
             result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -140,7 +141,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return result;
     }
 
-    public int deleteClass(int class_num){
+    public int deleteLesson(int class_num){
         int result = 0;
         String sql = "DELETE FROM CLASS_LIST WHERE CLASS_NUM = ?";
 
