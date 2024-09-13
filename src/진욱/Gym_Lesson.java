@@ -12,6 +12,7 @@ public class Gym_Lesson {
     private Trainer trainer;
     private Gym_Member member;
 
+
     public Gym_Lesson() {
     }
 
@@ -20,6 +21,20 @@ public class Gym_Lesson {
         this.class_num = class_num;
         this.class_detail = class_detail;
         this.progress_time = progress_time;
+        this.trainer = trainer;
+        this.member = member;
+    }
+
+    public Gym_Lesson(String lesson_detail, Trainer trainer, Gym_Member member) {
+        this.class_detail = lesson_detail;
+        this.trainer = trainer;
+        this.member = member;
+
+    }
+
+    public Gym_Lesson(int class_num, String class_detail, Trainer trainer, Gym_Member member) {
+        this.class_num = class_num;
+        this.class_detail = class_detail;
         this.trainer = trainer;
         this.member = member;
     }
@@ -64,10 +79,12 @@ public class Gym_Lesson {
         this.member = member;
     }
 
+
+
     @Override
     public String toString() {
-        return "수업정보[" +
-                "수업번호=" + class_num +
+        return "수강정보[" +
+                "수강번호=" + class_num +
                 ", 과목명='" + class_detail + '\'' +
                 ", 첫 수업시간=" + (progress_time == null? "6개월 전": progress_time) +
                 ", 트레이너=" + trainer.getName() +
