@@ -1,6 +1,7 @@
 package 민국;
 
 import DataSource.DataSource;
+import Gym.Logic.Logic.LoginManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -189,31 +190,63 @@ public class JDBCTrainerDao implements TrainerDao {
     public boolean deleteById(int id) {
         boolean isSuecces = false;
         try (Connection conn = DataSource.getDataSource();
-             PreparedStatement pStatement = conn.prepareStatement("delete from GYM_TRAINER where TRAINER_NUM = ?"))
-        {
-            if (findByIndex(id) == null)
-            {
+             PreparedStatement pStatement = conn.prepareStatement("delete from GYM_TRAINER where TRAINER_NUM = ?")) {
+            if (findByIndex(id) == null) {
                 System.out.println("해당 index 의 트레이너가 존재하지 않습니다.");
                 return false;
             }
 
-            pStatement.setInt(1,id);
+            pStatement.setInt(1, id);
             int delectCount = pStatement.executeUpdate();
 
             if (delectCount > 0)
                 isSuecces = true;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("삭제에 실패하였습니다.");
             e.printStackTrace();
             return false;
         }
-        if(isSuecces) {
+        if (isSuecces) {
             System.out.println("성공적으로 삭제하였습니다.");
-        }
-        else
+        } else
             System.out.println("데이터가 존재하지 않습니다.");
         return isSuecces;
     }
+
+    public boolean tryLogin(String login_id, String login_pw)
+    {
+        boolean isSuccess = false;
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?"))
+        {
+            pStatement.setString(1,login_id);
+            ResultSet rs = pStatement.executeQuery();
+
+            //해당 id 가 있는 트레이너가 존재하는 경우 (아이디 안 틀린 경우)
+            if (rs.next())
+            {
+                String resultPw = rs.getString("LOGIN_PW");
+
+                if(resultPw == login_pw) {
+                    isSuccess = true;
+                    LoginData curLoginUser = new LoginData();
+                    LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
+
+                    System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
+                }
+                else
+                {
+                    System.out.println("비밀번호가 틀립니다.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return isSuccess;
+    }
+
 }

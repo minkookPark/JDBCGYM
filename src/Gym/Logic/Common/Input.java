@@ -17,11 +17,22 @@ public class Input {
 
         if(result > 9999 || result < -9999)
         {
-            System.out.println("몽키스패너 각 아님? ");
-
+            System.out.println("-9999~9999 사이 값을 입력해주세요");
             return 0;
         }
+        return result;
+    }
 
+    public static double doubleScan()
+    {
+        String s = scan.nextLine();
+        double result = Double.parseDouble(s);
+
+        if(result > 9999 || result < -9999)
+        {
+            System.out.println("-9999~9999 사이 값을 입력해주세요");
+            return 0;
+        }
         return result;
     }
 }
