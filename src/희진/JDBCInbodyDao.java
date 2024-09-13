@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import DataSource.DataSource;
 
 public class JDBCInbodyDao implements InbodyDao {
 	
@@ -28,8 +29,11 @@ public class JDBCInbodyDao implements InbodyDao {
 			pStatement.setInt(7, inbody.getBody_score());
 			pStatement.setInt(8, inbody.getMember_num());
 
-			pStatement.executeUpdate();
-
+			 int rowsAffected = pStatement.executeUpdate();
+			
+			if (rowsAffected > 0) {
+	            result = true; // Indicate that insertion was successful
+	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -80,8 +84,7 @@ public class JDBCInbodyDao implements InbodyDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		return inbodys;
+		}		return inbodys;
 	}
 
 	public Inbody findBybodynum(int Inbody_num) {
