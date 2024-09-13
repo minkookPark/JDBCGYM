@@ -74,24 +74,22 @@ public class LoginManager {
 
     public void tryTrainerLogin()
     {
+        ShowManager.getInstance().showTrainerLogin();
+
         System.out.println("아이디를 입력 해주세요");
         String id = Input.stringScan();
         System.out.println("비밀번호를 입력 해주세요");
         String pw = Input.stringScan();
 
-
         //이 부분 trainer 객체로 바꿔야 함.
         LoginData login = new LoginData(id,pw, LoginData.MEMBERTYPE.TRAINER);
-        //Trainer curLoginTrainer = new Trainier();
-        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
+        Trainer curLoginTrainer = DAOManager.getInstance().gettDao().findByLoginData(id);
 
-        
         if(tryLogin(login))
         {
             System.out.println("로그인 성공");
-            //tr = curLoginTrainer;
+            tr = curLoginTrainer;
             isLogin = true;
-
         }
         else
         {
@@ -112,9 +110,7 @@ public class LoginManager {
     public boolean tryLogin(LoginData loginData)
     {
         boolean result = false;
-
         JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
-
         if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
         {
             System.out.println("로그인 성공");
