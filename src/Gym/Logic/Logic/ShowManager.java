@@ -119,6 +119,4 @@ public class ShowManager {
         System.out.println("=                                                      =");
         System.out.println("========================================================");
     }
-
-
 }
