@@ -118,6 +118,7 @@ public class Trainer {
                 ", gender='" + logindata.getGender() + '\'' +
                 ", award='" + award + '\'' +
                 ", age=" + logindata.getAge() +
+                ", name=" + logindata.getName() +
                 '}';
     }
 }
