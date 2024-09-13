@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JDBCInbodyDao implements InbodyDao {
-	//실제 구현 클래스
+	
 	@Override
 	public boolean insert(Inbody inbody) {
 		boolean result = false;
@@ -36,8 +36,6 @@ public class JDBCInbodyDao implements InbodyDao {
 		return result;
 	}
 	
-	
-
 	@Override
 	public boolean deleteBybodynum(int Inbody_num) {
 
