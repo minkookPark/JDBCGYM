@@ -147,8 +147,38 @@ public class JDBCTrainerDao implements TrainerDao {
         return false;
     }
 
+    //트레이너 id 로 검색하여 트레이너 객체를 반환하는 메서드
+    public Trainer findByLoginData(String login_id) {
+        Trainer t = null;
 
-//테스트 완료
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?")) {
+            pStatement.setString(1, login_id);
+            ResultSet rs = pStatement.executeQuery();
+
+            if (rs.next())
+            {
+                t = new Trainer();
+                t.setTrainer_num(rs.getInt("TRAINER_NUM"));
+                t.setLogin_Id(rs.getString("LOGIN_ID"));
+                t.setLogin_Pw(rs.getString("LOGIN_PW"));
+                t.setGender(rs.getString("GENDER"));
+                t.setAward(rs.getString("AWARD"));
+                t.setAge(rs.getInt("AGE"));
+                t.setName(rs.getString("NAME"));
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+
+
+    //테스트 완료
     @Override
     public boolean update(Trainer trainer) {
 
@@ -216,6 +246,7 @@ public class JDBCTrainerDao implements TrainerDao {
         return isSuecces;
     }
 
+    //테스트 완료
     public boolean tryLogin(String login_id, String login_pw)
     {
         boolean isSuccess = false;
