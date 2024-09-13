@@ -1,8 +1,12 @@
 package 진욱;
 
+import Gym.Logic.Logic.DAOManager;
+
 public class ReviewTest {
     public static void main(String[] args) {
-        ReviewDao reviewDao = new JDBCReviewDao();
+
+        ReviewDao reviewDao = DAOManager.getInstance().getrDao();
+
         System.out.println("============ 전체출력 =============");
         for (Review r: reviewDao.allReviewList()){
             System.out.println(r);
