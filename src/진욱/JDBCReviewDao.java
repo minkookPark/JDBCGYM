@@ -1,7 +1,6 @@
 package 진욱;
 
 import DataSource.DataSource;
-import oracle.jdbc.proxy.annotation.Pre;
 
 import java.sql.*;
 import java.util.ArrayList;
