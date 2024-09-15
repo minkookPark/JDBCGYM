@@ -37,6 +37,11 @@ public class LoginData {
         this.login_pw = login_pw;
     }
 
+    public LoginData(MEMBERTYPE memberType)
+    {
+        this.memberType = memberType;
+    }
+
     public LoginData(String login_id, String login_pw, MEMBERTYPE memberType) {
         this.login_id = login_id;
         this.login_pw = login_pw;
@@ -114,5 +119,9 @@ public class LoginData {
         this.memberType = memberType;
     }
 
+    public LoginData getLoginData()
+    {
+        return this;
+    }
 
 }
