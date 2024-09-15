@@ -66,6 +66,7 @@ public class ShowManager {
         System.out.println("=                8. Log out                            =");
         System.out.println("=                9. With Out                           =");
         System.out.println("========================================================");
+        numberInputform();
     }
 
 
@@ -83,6 +84,7 @@ public class ShowManager {
         System.out.println("=                8. Log out                            =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
+        numberInputform();
     }
 
     public void showChargeList()
@@ -103,6 +105,7 @@ public class ShowManager {
         System.out.println("=                9. Back To Main                       =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
+        numberInputform();
     }
 
     public void showLessonMenu()
@@ -118,5 +121,15 @@ public class ShowManager {
         System.out.println("=                9. Back To Main                       =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
+        numberInputform();
+    }
+
+    private void nameInputform()
+    {
+        System.out.println("이름을 입력 해주세요 : ");
+    }
+    private void numberInputform()
+    {
+        System.out.println("메뉴 번호를 입력 해주세요 : ");
     }
 }

@@ -9,5 +9,5 @@ public interface TrainerDao {
     boolean findById(String login_id);
     boolean update(Trainer trainer);
     boolean deleteById(int id);
-
+    boolean tryLogin(String login_id, String login_pw);
 }

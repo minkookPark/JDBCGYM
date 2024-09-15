@@ -67,7 +67,6 @@ public class JDBCTrainerDao implements TrainerDao {
         {
             while (rs.next())
             {
-
                 Trainer t = new Trainer();
                 t.setTrainer_num(rs.getInt("TRAINER_NUM"));
                 t.setLogin_Id(rs.getString("LOGIN_ID"));
@@ -167,7 +166,6 @@ public class JDBCTrainerDao implements TrainerDao {
                 t.setAge(rs.getInt("AGE"));
                 t.setName(rs.getString("NAME"));
             }
-
         }
         catch (Exception e)
         {
@@ -247,6 +245,7 @@ public class JDBCTrainerDao implements TrainerDao {
     }
 
     //테스트 완료
+    @Override
     public boolean tryLogin(String login_id, String login_pw)
     {
         boolean isSuccess = false;
