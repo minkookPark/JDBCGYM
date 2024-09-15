@@ -6,10 +6,9 @@ import 민국.LoginData;
 public class LoginTestMain {
     public static void main(String[] args) {
 
-        String select = Input.stringScan();
-
-
         ShowManager.getInstance().showMainScreen();
+
+        String select = Input.stringScan();
 
         switch(select)
         {
@@ -20,10 +19,13 @@ public class LoginTestMain {
             }
             case "2":
             {
+                //호영이가 만들어야 함.
+                LoginManager.getInstance().tryMemberLogin();
                 break;
             }
             case "3":
             {
+                LoginManager.getInstance().tryJoin();
                 break;
             }
         }

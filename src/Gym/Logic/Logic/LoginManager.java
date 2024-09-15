@@ -7,6 +7,7 @@ import 민국.Trainer;
 import 하성.Admin;
 import 호영.Gym_Member;
 
+
 public class LoginManager {
     private static LoginManager instance = null;
 
@@ -21,11 +22,10 @@ public class LoginManager {
         return instance;
     }
 
-
     private LoginData currentLoginUser;
-    private Trainer tr;
-    private Gym_Member gm;
-    private Admin admin;
+    private Trainer tr = null;
+    private Gym_Member gm = null;
+    private Admin admin = null;
 
     private boolean isLogin = false;
 
@@ -99,7 +99,10 @@ public class LoginManager {
 
     public void tryManagerLogin()
     {
-
+        gm = DAOManager.getInstance().getmDao().findByMember_Num(1);
+        isLogin = true;
+        //임시로 넣어놓음,
+        currentLoginUser = new LoginData(gm.getLogin_id(),gm.getLogin_pw(),LoginData.MEMBERTYPE.MEMBER);
     }
 
     public void tryLogin(LoginData.MEMBERTYPE type, String login_Id, String login_pw)
@@ -153,5 +156,50 @@ public class LoginManager {
 
         init();
     }
+
+    public void tryJoin()
+    {
+        //회원 가입 - 트레이너와 멤버 구분 해서 가입하게 해야 함.
+    }
+
+    public Trainer getCurrentTrainer()
+    {
+        if (tr != null)
+        {
+            return tr;
+        }
+        else {
+
+            System.out.println("트레이너 로그인 상태가 아닙니다.");
+            return null;
+        }
+    }
+
+    public Gym_Member getCurrentMember()
+    {
+        if(gm != null)
+        {
+            return gm;
+        }
+        else
+        {
+            System.out.println("멤버 로그인 상태가 아닙니다.");
+            return null;
+        }
+    }
+
+    public Admin getCurrentAdmin()
+    {
+        if(admin != null)
+        {
+            return admin;
+        }
+        else
+        {
+            System.out.println("관리자 로그인 상태가 아닙니다.");
+            return null;
+        }
+    }
+
 
 }
