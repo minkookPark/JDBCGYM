@@ -188,6 +188,8 @@ public class LoginManager {
         }
     }
 
+    //int a=0;
+
     public Admin getCurrentAdmin()
     {
         if(admin != null)
