@@ -2,6 +2,7 @@ package 진욱;
 
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 import 호영.Gym_Member;
 import 호영.Gym_MemberDao;
@@ -30,11 +31,11 @@ public class ReviewMain {
                     break;
 
                 case 3:
-                    updateReview(mDao.findByMember_Num(3), 1); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
+                    updateReview(1);
                     break;
 
                 case 4:
-                    updateReview(mDao.findByMember_Num(3), 2); // 이후 로그인한 사람의 번호를 가져오는 방법으로 수정한다.
+                    updateReview(2);
                     break;
 
                 case 9:
@@ -83,12 +84,12 @@ public class ReviewMain {
         System.out.println("리뷰 작성이 완료되었습니다!");
     }
 
-    public void updateReview(Gym_Member member, int method){
+    public void updateReview(int method){
 
         System.out.println("리뷰 수정을 선택하셨습니다. 회원님이 작성한 리뷰 리스트를 불러옵니다.");
-        List<Review> userReview = reviewDao.searchReview(1, member.getName());
+        List<Review> userReview = reviewDao.searchReview(4, LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
 
-        if (method == 1) {
+        if (method == 1) { // 1인 경우는 수정, 2인 경우는 삭제함.
             System.out.println("변경할 리뷰의 번호를 입력해주세요.");
             int number = Input.intScan();
             System.out.println("변경할 평점을 입력해주세요. 현재 평점: " + reviewDao.getReview(number).getScore());
@@ -106,17 +107,19 @@ public class ReviewMain {
             System.out.println("수정이 완료되었습니다!!");
 
         } else if (method == 2) {
-            deleteView();
+            deleteReview();
         } else {
             System.out.println("잘못된 입력입니다. 초기 화면으로 돌아갑니다.");
         }
     }
 
-    public void deleteView(){
-        System.out.println("삭제할 리뷰의 번호를 입력해주세요..");
+    public void deleteReview(){
+        System.out.println("삭제할 리뷰의 번호를 입력해주세요.");
         int number = Input.intScan();
-        reviewDao.deleteReview(number);
-        System.out.println("리뷰 삭제가 완료되었습니다!");
-
+        if (reviewDao.deleteReview(number) == 1) {
+            System.out.println("리뷰 삭제가 완료되었습니다!");
+        } else {
+            System.out.println("리뷰 삭제가 실패하였습니다. 다시 시도해 주세요.");
+        }
     }
 }

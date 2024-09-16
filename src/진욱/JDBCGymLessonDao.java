@@ -70,6 +70,28 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return trainerLesson;
     }
 
+    @Override
+    public List<Gym_Lesson> findByMember_loginId(String login_id) {
+        List<Gym_Lesson> membersLessonList = new ArrayList<>();
+        String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name, C.login_id member_id\n" +
+                "                FROM CLASS_LIST A\n" +
+                "                JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
+                "                JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM   \n" +
+                "                WHERE C.LOGIN_ID = ? \n" +
+                "                ORDER BY A.CLASS_NUM;";
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, login_id);
+            ResultSet rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return membersLessonList;
+    }
+
     public Gym_Lesson getALesson(int lessonNumber){ // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
         Gym_Lesson lesson = null;
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +

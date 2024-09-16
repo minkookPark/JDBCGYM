@@ -11,6 +11,7 @@ public class Review {
     private int class_num;
     private String class_detail;
     private String name;
+    private String login_id;
 
     public Review() {
     }
@@ -24,6 +25,18 @@ public class Review {
         this.class_num = class_num;
         this.class_detail = class_detail;
         this.name = name;
+    }
+
+    public Review(int review_num, int score, String title, String content, Timestamp write_date, int class_num, String class_detail, String name, String login_id) {
+        this.review_num = review_num;
+        this.score = score;
+        this.title = title;
+        this.content = content;
+        this.write_date = write_date;
+        this.class_num = class_num;
+        this.class_detail = class_detail;
+        this.name = name;
+        this.login_id = login_id;
     }
 
     public Review(int score, String title, String content, int class_num) {
@@ -40,6 +53,9 @@ public class Review {
         this.write_date = writeDate;
         this.class_num = classNum;
     }
+
+
+
 
 
     public int getClass_num() {
