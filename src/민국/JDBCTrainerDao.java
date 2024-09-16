@@ -2,6 +2,7 @@ package 민국;
 
 import DataSource.DataSource;
 import Gym.Logic.Logic.LoginManager;
+import Gym.Logic.Logic.ShowManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,12 +57,38 @@ public class JDBCTrainerDao implements TrainerDao {
         return result;
     }
 
-
-    public boolean insertLoginData(LoginData loginData)
-    {
+    //트레이너가 최초 가입 시 LoginData 만 받는다.
+    public boolean insertTrianerJoin(LoginData loginData) {
         boolean result = false;
 
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement(
+                     "insert into GYM_TRAINER(LOGIN_ID, LOGIN_PW, GENDER, AGE, NAME) " +
+                             "values (?, ?, ?, ?, ?)"))
+        {
+            //아이디 중복검사, false 가 반환 되면 중복되는 id가 없다는 뜻.
+            if(checkOverlabId(loginData.getLogin_id()))
+            {
+                pStatement.setString(1, loginData.getLogin_id());
+                pStatement.setString(2, loginData.getLogin_pw());
+                pStatement.setString(3, loginData.getGender());
+                pStatement.setInt(4, loginData.getAge());
+                pStatement.setString(5, loginData.getName());
 
+                int rows = pStatement.executeUpdate();
+
+                result = true;
+            }
+            else
+            {
+                ShowManager.getInstance().idOverlabError();
+                result = false;
+            }
+        }
+        catch
+        (Exception e) {
+            e.printStackTrace();
+        }
 
 
         return result;
@@ -155,6 +182,28 @@ public class JDBCTrainerDao implements TrainerDao {
         }
         return false;
     }
+
+    //아이디 중복검사 mk2 이름 헷갈려서 만듦
+    public boolean checkOverlabId(String login_id)
+    {
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?"))
+        {
+            pStatement.setString(1,login_id);
+            ResultSet rs = pStatement.executeQuery();
+            if (rs.next())
+            {
+                System.out.println("해당 ID를 가진 트레이너가 이미 존재합니다.");
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 
     //트레이너 id 로 검색하여 트레이너 객체를 반환하는 메서드
     public Trainer findByLoginData(String login_id) {

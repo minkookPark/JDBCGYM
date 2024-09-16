@@ -70,6 +70,15 @@ public class LoginData {
         this.age = age;
     }
 
+    public LoginData(String name, String login_id, String login_pw, String gender, int age, MEMBERTYPE memberType) {
+        this.name = name;
+        this.login_id = login_id;
+        this.login_pw = login_pw;
+        this.gender = gender;
+        this.age = age;
+        this.memberType = memberType;
+    }
+
     public String getName() {
         return name;
     }
