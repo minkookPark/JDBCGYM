@@ -56,6 +56,16 @@ public class JDBCTrainerDao implements TrainerDao {
         return result;
     }
 
+
+    public boolean insertLoginData(LoginData loginData)
+    {
+        boolean result = false;
+
+
+
+
+        return result;
+    }
     
     //테스트 완료
     @Override
@@ -166,6 +176,11 @@ public class JDBCTrainerDao implements TrainerDao {
                 t.setAge(rs.getInt("AGE"));
                 t.setName(rs.getString("NAME"));
             }
+            else
+            {
+                System.out.println("해당 ID의 트레이너가 존재하지 않습니다.");
+                t = null;
+            }
         }
         catch (Exception e)
         {
@@ -257,7 +272,7 @@ public class JDBCTrainerDao implements TrainerDao {
             ResultSet rs = pStatement.executeQuery();
 
             //해당 id 가 있는 트레이너가 존재하는 경우 (아이디 안 틀린 경우)
-            if (rs.next())
+            if(rs.next())
             {
                 String resultPw = rs.getString("LOGIN_PW");
 
@@ -267,19 +282,19 @@ public class JDBCTrainerDao implements TrainerDao {
 
                     curLoginUser.setLogin_id(rs.getString("LOGIN_ID"));
                     curLoginUser.setLogin_pw(rs.getString("LOGIN_PW"));
-                    curLoginUser.setMemberType(LoginData.MEMBERTYPE.TRAINER);
-
                     curLoginUser.setName(rs.getString("NAME"));
                     curLoginUser.setAge(rs.getInt("AGE"));
-
+                    curLoginUser.setMemberType(LoginData.MEMBERTYPE.TRAINER);
 
                     LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
 
                     System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
+                    isSuccess = true;
                 }
                 else
                 {
                     System.out.println("비밀번호가 틀립니다.");
+
                 }
             }
         }
@@ -290,5 +305,41 @@ public class JDBCTrainerDao implements TrainerDao {
 
         return isSuccess;
     }
+
+    public boolean tryJoin(LoginData loginData)
+    {
+        boolean result = false;
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?")) {
+            pStatement.setString(1, loginData.getLogin_id());
+            ResultSet rs = pStatement.executeQuery();
+
+            //해당 id 가 있는 트레이너가 존재하는 경우 (아이디 안 틀린 경우)
+            //가입 하는 부분이기 때문에 실패를 반환 해야함.
+            if (rs.next()) {
+                System.out.println("이미 존재하는 회원 입니다.");
+            }
+            else {
+                //이 부분에서 insert 문을 사용하여 새로운 트레이너를 추가.
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return result;
+    }
+
+
+    //update 기능을 이용하여 트레이너의 정보를 추가 기입 가능하도록 해야함.
+    public boolean updateName(String award)
+    {
+        return false;
+    }
+
+    //Login Data Update?
+
 
 }

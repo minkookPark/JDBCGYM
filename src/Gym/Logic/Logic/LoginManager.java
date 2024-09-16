@@ -32,6 +32,9 @@ public class LoginManager {
     public void init()
     {
         currentLoginUser = new LoginData();
+        tr = null;
+        gm = null;
+        admin = null;
         isLogin = false;
     }
 
