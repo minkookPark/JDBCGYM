@@ -5,10 +5,11 @@ import Gym.Logic.Logic.ShowManager;
 
 public class Gym
 {
+    boolean loop = true;
+
+
     public void run()
     {
-        boolean loop = true;
-
         while(loop)
         {
             mainPage();
@@ -23,21 +24,45 @@ public class Gym
         int selectNum = Input.intScan(1,3);
 
         int loginResult = 0;
+        //System.out.println(loginResult);
         switch (selectNum)
         {
             case 1:
             {
-                //selectLoginPage();
+                loginResult = LoginManager.getInstance().selectLogin();
 
-                LoginManager.getInstance().selectLogin();
+                switch(loginResult)
+                {
+                    case 1:
+                    {
+                        //멤버 로그인 성공시
+                        break;
+                    }
+
+                    case 2:
+                    {
+                        //트레이너 로그인 성공시
+                        trainerMainPage();
+                        break;
+                    }
+
+                    case 3:
+                    {
+                        break;
+                    }
+                }
+
                 break;
             }
             case 2:
             {
+
+                //openCharge List
                 break;
             }
             case 3:
             {
+                //Join
                 selectJoinPage();
                 break;
             }
@@ -51,6 +76,8 @@ public class Gym
         ShowManager.getInstance().showJoinMenu();
 
         int selectNum = Input.intScan(1,3);
+
+        int joinResult = 0;
 
         switch(selectNum)
         {
@@ -115,11 +142,11 @@ public class Gym
 //        }
 //    }
 
-    private void trainerLoginPage()
-    {
-        ShowManager.getInstance().showTrainerLogin();
-        LoginManager.getInstance().tryTrainerLogin();
-    }
+//    private void trainerLoginPage()
+//    {
+//        ShowManager.getInstance().showTrainerLogin();
+//        LoginManager.getInstance().tryTrainerLogin();
+//    }
 
     private void memberLoginPage()
     {
@@ -139,6 +166,26 @@ public class Gym
 
     }
 
+
+    //Page that arrives upon successful login of Trainer
+    private void trainerMainPage()
+    {
+        System.out.println("트레이너 로그인 성공");
+
+        String a = Input.stringScan();
+    }
+
+    //Page that arrives upon successful login of Member
+    private void memberMainPage()
+    {
+
+    }
+
+    //Page that arrives upon successful login of Admin
+    private void adminMainPage()
+    {
+
+    }
 
 
 
