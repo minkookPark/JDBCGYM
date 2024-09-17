@@ -32,6 +32,9 @@ public class LoginManager {
     public void init()
     {
         currentLoginUser = new LoginData();
+        tr = null;
+        gm = null;
+        admin = null;
         isLogin = false;
     }
 
@@ -157,10 +160,7 @@ public class LoginManager {
         init();
     }
 
-    public void tryJoin()
-    {
-        //회원 가입 - 트레이너와 멤버 구분 해서 가입하게 해야 함.
-    }
+
 
     public Trainer getCurrentTrainer()
     {
@@ -187,6 +187,8 @@ public class LoginManager {
             return null;
         }
     }
+
+    //int a=0;
 
     public Admin getCurrentAdmin()
     {

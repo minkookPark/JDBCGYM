@@ -5,7 +5,7 @@ import Gym.Logic.Logic.LoginManager;
 public class gymMain {
     public static void main(String[] args)
     {
-
+        //Gym.run();
 
         //LoginManager.getInstance().tryLogin();
     }
