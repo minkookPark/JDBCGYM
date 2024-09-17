@@ -93,7 +93,43 @@ public class JDBCTrainerDao implements TrainerDao {
 
         return result;
     }
-    
+
+
+    //트레이너의 대표 수상 경력을 추가 및 변경
+    //변경에 성공하면 true 를 반환함
+    public boolean updateAward(int trainerNum, String award)
+    {
+        boolean result = false;
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement =
+                     conn.prepareStatement("update GYM_TRAINER set " +
+                             "AWARD = ? where TRAINER_NUM = ?"))
+        {
+            pStatement.setString(1,award);
+            pStatement.setInt(2,trainerNum);
+
+            int rows = pStatement.executeUpdate();
+            if (rows > 0)
+            {
+                ShowManager.getInstance().successUpdate();
+                result = true;
+            }
+            else
+            {
+                ShowManager.getInstance().failedUpdate();
+                result = false;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ShowManager.getInstance().failedUpdate();
+            result = false;
+        }
+        return result;
+    }
+
     //테스트 완료
     @Override
     public List<Trainer> findAll() {
@@ -204,7 +240,6 @@ public class JDBCTrainerDao implements TrainerDao {
         return true;
     }
 
-
     //트레이너 id 로 검색하여 트레이너 객체를 반환하는 메서드
     public Trainer findByLoginData(String login_id) {
         Trainer t = null;
@@ -238,11 +273,10 @@ public class JDBCTrainerDao implements TrainerDao {
         return t;
     }
 
-
-
     //테스트 완료
     @Override
     public boolean update(Trainer trainer) {
+        boolean result = false;
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pStatement =
@@ -267,17 +301,17 @@ public class JDBCTrainerDao implements TrainerDao {
             if(affectedrows > 0)
             {
                 System.out.println("변경 성공!");
-                return true;
+                result = true;
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
             System.out.println("변경 실패!");
-            return false;
+            result = false;
         }
 
-        return false;
+        return result;
     }
 
     //테스트 완료
@@ -355,6 +389,7 @@ public class JDBCTrainerDao implements TrainerDao {
         return isSuccess;
     }
 
+
     public boolean tryJoin(LoginData loginData)
     {
         boolean result = false;
@@ -371,6 +406,7 @@ public class JDBCTrainerDao implements TrainerDao {
             }
             else {
                 //이 부분에서 insert 문을 사용하여 새로운 트레이너를 추가.
+                //insertTrianerJoin();
             }
 
         } catch (Exception e) {

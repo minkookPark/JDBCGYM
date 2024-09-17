@@ -166,4 +166,24 @@ public class ShowManager {
     {
         System.out.println("비밀번호 가 올바르지 않습니다.");
     }
+    
+    public void successJoin()
+    {
+        System.out.println("가입 성공");
+    }
+    
+    public void failedJoin()
+    {
+        System.out.println("가입 실패");
+    }
+    
+    public void successUpdate()
+    {
+        System.out.println("변경 성공");
+    }
+    public void failedUpdate()
+    {
+        System.out.println("변경 실패");
+        
+    }
 }

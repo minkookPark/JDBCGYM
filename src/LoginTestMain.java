@@ -25,7 +25,7 @@ public class LoginTestMain {
             }
             case "3":
             {
-                LoginManager.getInstance().tryJoin();
+                //LoginManager.getInstance().tryJoin();
                 break;
             }
         }
