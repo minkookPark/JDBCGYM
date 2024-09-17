@@ -12,8 +12,6 @@ public class Gym
         while(loop)
         {
             mainPage();
-
-
         }
     }
 

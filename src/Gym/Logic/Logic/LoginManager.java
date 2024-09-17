@@ -87,11 +87,10 @@ public class LoginManager {
         String memberPw = Input.stringScan();
 
         LoginData memberLogin = new LoginData(memberId, memberPw, LoginData.MEMBERTYPE.MEMBER);
-        Gym_Member currentLoginMember = DAOManager.getInstance().getmDao().findByLoginData(memberId);
+        Gym_Member currentLoginMember = DAOManager.getInstance().getmDao().findByLoginData(memberLogin);
         //currentLoginMember.
         if (tryMemberTypeLogin(memberLogin))
         {
-            System.out.println("회원 로그인 성공");
             gm = currentLoginMember;
             isLogin = true;
             // 로그인 후, 멤버 화면에서 원하는 기능을 선택한다.

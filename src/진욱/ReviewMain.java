@@ -4,10 +4,6 @@ import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
 import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
-import 호영.Gym_Member;
-import 호영.Gym_MemberDao;
-
-import java.util.List;
 
 public class ReviewMain {
 
