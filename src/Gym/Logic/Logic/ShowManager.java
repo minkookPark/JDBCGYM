@@ -129,7 +129,7 @@ public class ShowManager {
         System.out.println("========================================================");
         System.out.println("=                                                      =");
         System.out.println("=                1. Join Member                        =");
-        System.out.println("=                2. Modify Member Info                 =");
+        System.out.println("=                2. Modify Trainer / PT Info           =");
         System.out.println("=                3. Withdrawal Member                  =");
         System.out.println("=------------------------------------------------------=");
         System.out.println("=                                                      =");

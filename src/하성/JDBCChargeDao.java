@@ -1,5 +1,7 @@
 package 하성;
 
+import DataSource.DataSource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +16,7 @@ public class JDBCChargeDao implements ChargeDao {
 		boolean result = false;
 		
 		try(Connection connection = DataSource.getDataSource();
-				PreparedStatement pStatement 
+			PreparedStatement pStatement
 					= connection.prepareStatement("INSERT INTO CHARGE (CHARGE_NUM,PERIOD_DATE,PT_COUNT)"
 							+ " VALUES (?, ?, ?)")) {
 			
