@@ -17,7 +17,7 @@ public class TestMain {
 //		Trainer updateTest = new Trainer(2,"asdf","1q2w3e","여자","짱큰대회",33);
 //		tDao.update(updateTest);
 		//tDao.deleteById(1);
-
+		
 	}
 
 }

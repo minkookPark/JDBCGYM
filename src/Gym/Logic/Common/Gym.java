@@ -1,4 +1,4 @@
-package Gym.Logic.Logic;
+package Gym.Logic.Common;
 
 public class Gym
 {
