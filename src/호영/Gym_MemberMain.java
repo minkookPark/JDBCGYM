@@ -3,6 +3,7 @@ package 호영;
 import Gym.Logic.Common.Gym;
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 import 민국.Trainer;
 import 진욱.ReviewMain;
@@ -20,20 +21,19 @@ public class Gym_MemberMain {
             int choice = Input.intScan();
             switch (choice) {
                 case 1:
-                    insertMember();
-                    break;
-                case 2:
                     updateMember();
                     break;
-                case 3:
+                case 2:
                     deleteMember();
                     break;
-                case 4:
+                case 3:
                     findAll();
                     break;
-                case 5:
+                case 4:
                     ReviewMain rm = new ReviewMain();
                     rm.reviewExecute();
+                    break;
+                case 5:
                     break;
                 case 9:
                     System.out.println("프로그램을 종료합니다.");

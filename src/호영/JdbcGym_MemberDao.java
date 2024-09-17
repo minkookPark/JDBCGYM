@@ -1,6 +1,7 @@
 package 호영;
 
 
+import Gym.Logic.Logic.LoginManager;
 import 민국.LoginData;
 import DataSource.DataSource;
 
@@ -114,11 +115,11 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
     }
 
     // 로그인을 위해, member의 login_id를 통해 객체를 반환하는 메소드를 추가한다.
-    public Gym_Member findByLoginData(String login_id) {
+    public Gym_Member findByLoginData(LoginData memberLogin) {
         Gym_Member gm = null;
         try (Connection conn = DataSource.getDataSource();
             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_MEMBER where LOGIN_ID = ?")) {
-            pStatement.setString(1, login_id);
+            pStatement.setString(1, memberLogin.getLogin_id());
             ResultSet rs = pStatement.executeQuery();
 
             if (rs.next())
@@ -244,8 +245,7 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
 
                     LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
 
-                    System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
-                    isSuccess = true;
+                    System.out.println("로그인 성공, 현재 유저 : " + curLoginUser.getName() + "님 (" +curLoginUser.getLogin_id() + ")");
                 }
                 else
                 {

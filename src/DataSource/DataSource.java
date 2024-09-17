@@ -5,11 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataSource {
-
-    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USERNAME = "gymprj";
-    private static final String PASSWORD = "a1234";
+    // 집에서 mysql로 구동하기 위해 임시로 만든 DataSource 클래스임. 병합 시에는 반드시 원래대로 돌려놓을 것.
+    public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    public static final String URL = "jdbc:mysql://localhost:3306/jangdb?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true";
+    public static final String USERNAME = "root";
+    public static final String PASSWORD = "12345";
 
     public static Connection getDataSource() {
 

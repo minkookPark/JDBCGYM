@@ -1,4 +1,5 @@
 import Gym.Logic.Common.Input;
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 
 public class LoginTestMain {

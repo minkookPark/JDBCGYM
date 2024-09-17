@@ -2,6 +2,7 @@ package 진욱;
 
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 
 public class ReviewMain {
