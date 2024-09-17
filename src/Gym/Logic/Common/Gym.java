@@ -1,5 +1,6 @@
 package Gym.Logic.Common;
 
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 
 public class Gym
@@ -23,11 +24,14 @@ public class Gym
 
         int selectNum = Input.intScan(1,3);
 
+        int loginResult = 0;
         switch (selectNum)
         {
             case 1:
             {
-                selectLoginPage();
+                //selectLoginPage();
+
+                LoginManager.getInstance().selectLogin();
                 break;
             }
             case 2:
@@ -88,34 +92,35 @@ public class Gym
 
     //로그인 ------------------------------------------------
 
-    private void selectLoginPage()
-    {
-        ShowManager.getInstance().showLoginMenu();
-        int selectNum = Input.intScan(1,3);
-
-        switch(selectNum)
-        {
-            case 1:
-            {
-                memberLoginPage();
-                break;
-            }
-            case 2:
-            {
-                trainerLoginPage();
-                break;
-            }
-            case 3:
-            {
-                adminLoginPage();
-                break;
-            }
-        }
-    }
+//    private void selectLoginPage()
+//    {
+//        ShowManager.getInstance().showLoginMenu();
+//        int selectNum = Input.intScan(1,3);
+//
+//        switch(selectNum)
+//        {
+//            case 1:
+//            {
+//                memberLoginPage();
+//                break;
+//            }
+//            case 2:
+//            {
+//                trainerLoginPage();
+//                break;
+//            }
+//            case 3:
+//            {
+//                adminLoginPage();
+//                break;
+//            }
+//        }
+//    }
 
     private void trainerLoginPage()
     {
         ShowManager.getInstance().showTrainerLogin();
+        LoginManager.getInstance().tryTrainerLogin();
     }
 
     private void memberLoginPage()
@@ -127,6 +132,8 @@ public class Gym
     {
         ShowManager.getInstance().showAdminLogin();
     }
+
+
 
     //Charge View
     private void displayChargePage()
