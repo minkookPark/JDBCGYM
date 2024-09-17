@@ -1,28 +1,19 @@
 package 호영;
 
+import Gym.Logic.Common.Input;
+import Gym.Logic.Logic.ShowManager;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-
-		private static JdbcGym_MemberDao mDao = new JdbcGym_MemberDao();
-		private static Scanner scanner = new Scanner(System.in);
-
-    	public static void main(String[] args) {
-        while (true) {
-            System.out.println("메뉴를 선택하세요:");
-            System.out.println("1. 회원 추가");
-            System.out.println("2. 회원 정보 수정");
-            System.out.println("3. 회원 삭제");
-            System.out.println("4. 전체 회원목록 열람");
-            System.out.println("5. 종료");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (choice) {
+public class Gym_MemberMain {
+    	public void execute() {
+            while (true) {
+                ShowManager.getInstance().showMemberMenu();
+                int choice = Input.intScan();
+                switch (choice) {
                 case 1:
                     insertMember();
                     break;
@@ -40,38 +31,35 @@ public class Main {
                     return;
                 default:
                     System.out.println("올바른 선택이 아닙니다.");
+                    break;
             }
         }
     }
 
-    
-
-		private static void insertMember() {
+		private void insertMember() {
         Gym_Member member = new Gym_Member();
-
         System.out.println("회원 정보를 입력하세요:");
 
         System.out.print("PT 횟수: ");
-        member.setPt_count(scanner.nextInt());
-        scanner.nextLine();  
+        member.setPt_count(Input.intScan());
 
-        System.out.print("등록일 (yyyy-MM-dd HH:mm:ss): ");
-        member.setReg_date(Timestamp.valueOf(scanner.nextLine()));
+        System.out.print("등록일은 (yyyy-MM-dd HH:mm:ss) 형식으로 입력: ");
+        member.setReg_date(Timestamp.valueOf(Input.stringScan()));
 
-        System.out.print("만료일 (yyyy-MM-dd): ");
-        member.setExp_date(Date.valueOf(scanner.nextLine()));
+        System.out.print("만료일 (yyyy-MM-dd) 형식으로 입력: ");
+        member.setExp_date(Date.valueOf(Input.stringScan()));
 
         System.out.print("로그인 ID: ");
-        member.setLogin_id(scanner.nextLine());
+        member.setLogin_id(Input.stringScan());
 
         System.out.print("로그인 비밀번호: ");
-        member.setLogin_pw(scanner.nextLine());
+        member.setLogin_pw(Input.stringScan());
 
         System.out.print("성별: ");
-        member.setGender(scanner.nextLine());
+        member.setGender(Input.stringScan());
 
         System.out.print("나이: ");
-        member.setAge(scanner.nextInt());
+        member.setAge();
         scanner.nextLine();  
 
         System.out.print("이름: ");
@@ -91,13 +79,13 @@ public class Main {
             System.out.println("회원 추가에 실패하였습니다.");
         }
     }	
-		//안녕
+
 		static JdbcGym_MemberDao dao = new JdbcGym_MemberDao();
-		private static void findAll() {
+		private void findAll() {
 		List<Gym_Member> mList = dao.findAll();
 		for (Gym_Member gym_Member : mList) {
 			System.out.println(gym_Member);
-			scanner.nextLine();
+
 		}
 		
 	}
