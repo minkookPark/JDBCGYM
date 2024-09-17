@@ -21,6 +21,7 @@ public class ShowManager {
         System.out.println("=                3. Join                               =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
+        numberInputform();
     }
 
     public void showLoginMenu()
@@ -32,7 +33,57 @@ public class ShowManager {
         System.out.println("=                3. Manager Login                      =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
+        numberInputform();
     }
+
+    public void showJoinMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                1. Member Join                        =");
+        System.out.println("=                2. Trainer Join                       =");
+        System.out.println("=                3. Manager Join                       =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+        numberInputform();
+    }
+
+
+    //Join
+    ////////////////////////////////////////////////////
+
+    public void showMemberJoin(){
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("=                Member Join                           =");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
+
+    public void showTrainerJoin(){
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("=                Trainer Join                          =");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
+
+    public void showAdminJoin(){
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("=                Admin Join                            =");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
+
+    //Login
+    //////////////////////////////////////////////////
 
     public void showMemberLogin(){
         System.out.println("========================================================");
@@ -54,6 +105,19 @@ public class ShowManager {
         System.out.println("========================================================");
     }
 
+    public void showAdminLogin(){
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("=                Admin Login                           =");
+        System.out.println("=                                                      =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+    }
+
+    ///////////////////////////////////////////////////
+
+    //Trainer First Menu
     public void showTrainerMenu()
     {
         System.out.println("========================================================");
@@ -69,7 +133,7 @@ public class ShowManager {
         numberInputform();
     }
 
-
+    //Member First Menu
     public void showManagerMenu()
     {
         System.out.println("========================================================");
@@ -87,11 +151,14 @@ public class ShowManager {
         numberInputform();
     }
 
+
+    //Display Charge
     public void showChargeList()
     {
 
     }
 
+    //Review Menu
     public void showReviewMenu()
     {
         System.out.println("========================================================");
@@ -108,6 +175,7 @@ public class ShowManager {
         numberInputform();
     }
 
+    //Lesson Menu
     public void showLessonMenu()
     {
         System.out.println("========================================================");
@@ -124,13 +192,11 @@ public class ShowManager {
         numberInputform();
     }
 
+    //InputField
     private void numberInputform()
     {
         System.out.println("메뉴 번호를 입력 해주세요 : ");
     }
-    
-    
-    //이름 성별 나이 아이디 비밀번호
 
     public void nameInputform()
     {
