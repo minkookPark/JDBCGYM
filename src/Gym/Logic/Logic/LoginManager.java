@@ -55,7 +55,8 @@ public class LoginManager {
             {
                 case 1:
                 {
-                    tryMemberLogin();
+                    if(tryMemberLogin())
+                        result = 1;
                     break;
                 }
                 case 2:
@@ -78,8 +79,10 @@ public class LoginManager {
         return result;
     }
 
-    public void tryMemberLogin()
+    public boolean tryMemberLogin()
     {
+        boolean result = false;
+
         ShowManager.getInstance().showMemberLogin();
         System.out.println("아이디를 입력 해주세요");
         String memberId = Input.stringScan();
@@ -96,12 +99,16 @@ public class LoginManager {
             // 로그인 후, 멤버 화면에서 원하는 기능을 선택한다.
             Gym_MemberMain gMain = new Gym_MemberMain();
             gMain.execute();
+            result = true;
         }
         else
         {
             System.out.println("회원 로그인 실패");
+
             // 로그인이 실패했다면, 아무것도 하지 않고, 처음 화면으로 돌아간다.
         }
+
+        return result;
 
     }
 
