@@ -1,6 +1,11 @@
 package 호영;
 
+
+import Gym.Logic.Logic.LoginManager;
+import 민국.LoginData;
+import 민국.Trainer;
 import DataSource.DataSource;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,6 +115,42 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
         return member;
     }
 
+    // 로그인을 위해, member의 login_id를 통해 객체를 반환하는 메소드를 추가한다.
+    public Gym_Member findByLoginData(String login_id) {
+        Gym_Member gm = null;
+        try (Connection conn = DataSource.getDataSource();
+            PreparedStatement pStatement = conn.prepareStatement("select * from GYM_MEMBER where LOGIN_ID = ?")) {
+            pStatement.setString(1, login_id);
+            ResultSet rs = pStatement.executeQuery();
+
+            if (rs.next())
+            {
+                gm = new Gym_Member();
+                gm.setMember_num(rs.getInt("MEMBER_NUM"));
+                gm.setPt_count(rs.getInt("PT_COUNT"));
+                gm.setReg_date(rs.getTimestamp("REG_DATE"));
+                gm.setExp_date(rs.getDate("EXP_DATE"));
+                gm.setLogin_id(rs.getString("LOGIN_ID"));
+                gm.setLogin_pw(rs.getString("LOGIN_PW"));
+                gm.setGender(rs.getString("GENDER"));
+                gm.setAge(rs.getInt("AGE"));
+                gm.setName(rs.getString("NAME"));
+                gm.setTrainer_num(rs.getInt("TRAINER_NUM"));
+                gm.setCharge_num(rs.getInt("CHARGE_NUM"));
+            }
+            else
+            {
+                System.out.println("해당 ID의 회원이 존재하지 않습니다.");
+                gm = null;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return gm;
+    }
+
     @Override
     public boolean update(Gym_Member member) {
         boolean result = false;
@@ -176,4 +217,50 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
 
         return result;
     }
+
+    public boolean tryLogin(String login_id, String login_pw)
+    {
+        boolean isSuccess = false;
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_MEMBER where LOGIN_ID = ?"))
+        {
+            pStatement.setString(1,login_id);
+            ResultSet rs = pStatement.executeQuery();
+
+            //해당 id 가 있는 회원이 존재하는 경우, 다음으로 비밀번호가 동일한지를 체크한다. 동일하면, LoginData 객체를 만들어 로그인 처리.
+            if(rs.next())
+            {
+                String resultPw = rs.getString("LOGIN_PW");
+
+                if(resultPw.equals(login_pw))
+                {
+                    isSuccess = true;
+                    LoginData curLoginUser = new LoginData();
+
+                    curLoginUser.setLogin_id(rs.getString("LOGIN_ID"));
+                    curLoginUser.setLogin_pw(rs.getString("LOGIN_PW"));
+                    curLoginUser.setName(rs.getString("NAME"));
+                    curLoginUser.setAge(rs.getInt("AGE"));
+                    curLoginUser.setMemberType(LoginData.MEMBERTYPE.MEMBER);
+
+                    LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
+
+                    System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
+                    isSuccess = true;
+                }
+                else
+                {
+                    System.out.println("비밀번호가 틀립니다.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return isSuccess;
+    }
+
 }

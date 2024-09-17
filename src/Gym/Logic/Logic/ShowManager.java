@@ -192,6 +192,25 @@ public class ShowManager {
         numberInputform();
     }
 
+
+    public void showMemberMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                1. Join Member                        =");
+        System.out.println("=                2. Modify Trainer / PT Info           =");
+        System.out.println("=                3. Withdrawal Member                  =");
+        System.out.println("=------------------------------------------------------=");
+        System.out.println("=                                                      =");
+        System.out.println("=                4. Display All Member's List          =");
+        System.out.println("=                5. Display Review Menu                =");
+        System.out.println("=                9. Back To Main                       =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+        numberInputform();
+    }
+
+
     //InputField
     private void numberInputform()
     {

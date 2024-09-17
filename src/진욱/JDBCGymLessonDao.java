@@ -1,12 +1,12 @@
 package 진욱;
 
+import DataSource.DataSource;
 import 민국.Trainer;
 import 호영.Gym_Member;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import DataSource.DataSource;
 
 public class JDBCGymLessonDao implements Gym_LessonDao {
     @Override

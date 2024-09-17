@@ -6,6 +6,8 @@ import 민국.LoginData;
 import 민국.Trainer;
 import 하성.Admin;
 import 호영.Gym_Member;
+import 호영.Gym_MemberDao;
+import 호영.Gym_MemberMain;
 
 
 public class LoginManager {
@@ -69,10 +71,30 @@ public class LoginManager {
 
     public void tryMemberLogin()
     {
+        ShowManager.getInstance().showMemberLogin();
         System.out.println("아이디를 입력 해주세요");
-        String id = Input.stringScan();
+        String memberId = Input.stringScan();
         System.out.println("비밀번호를 입력 해주세요");
-        String pw = Input.stringScan();
+        String memberPw = Input.stringScan();
+
+        LoginData memberLogin = new LoginData(memberId, memberPw, LoginData.MEMBERTYPE.MEMBER);
+        Gym_Member currentLoginMember = DAOManager.getInstance().getmDao().findByLoginData(memberId);
+
+        if (tryMemberTypeLogin(memberLogin))
+        {
+            System.out.println("회원 로그인 성공");
+            gm = currentLoginMember;
+            isLogin = true;
+            // 로그인 후, 멤버 화면에서 원하는 기능을 선택한다.
+            Gym_MemberMain gMain = new Gym_MemberMain();
+            gMain.execute();
+        }
+        else
+        {
+            System.out.println("회원 로그인 실패");
+            // 로그인이 실패했다면, 아무것도 하지 않고, 처음 화면으로 돌아간다.
+        }
+
     }
 
     public void tryTrainerLogin()
@@ -126,6 +148,23 @@ public class LoginManager {
         {
             System.out.println("로그인 실패");
             result = false;
+        }
+
+        return result;
+    }
+
+    public boolean tryMemberTypeLogin(LoginData memberLogin)
+    {
+        boolean result = false;
+        Gym_MemberDao gmDao = DAOManager.getInstance().getmDao();
+        if (gmDao.tryLogin(memberLogin.getLogin_id(), memberLogin.getLogin_pw()))
+        {
+            System.out.println("멤버 로그인 성공");
+            result = true;
+        }
+        else
+        {
+            System.out.println("멤버 로그인 실패");
         }
 
         return result;
