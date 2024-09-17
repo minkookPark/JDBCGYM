@@ -1,7 +1,10 @@
 package 호영;
 
 import Gym.Logic.Common.Input;
+import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
+import 진욱.ReviewMain;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -9,11 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Gym_MemberMain {
-    	public void execute() {
-            while (true) {
-                ShowManager.getInstance().showMemberMenu();
-                int choice = Input.intScan();
-                switch (choice) {
+    Gym_MemberDao mDao = DAOManager.getInstance().getmDao();
+
+    public void execute() {
+        while (true) {
+            ShowManager.getInstance().showMemberMenu();
+            int choice = Input.intScan();
+            switch (choice) {
                 case 1:
                     insertMember();
                     break;
@@ -24,9 +29,13 @@ public class Gym_MemberMain {
                     deleteMember();
                     break;
                 case 4:
-                	findAll();
-                	break;
+                    findAll();
+                    break;
                 case 5:
+                    ReviewMain rm = new ReviewMain();
+                    rm.reviewExecute();
+                    break;
+                case 9:
                     System.out.println("프로그램을 종료합니다.");
                     return;
                 default:
@@ -36,7 +45,7 @@ public class Gym_MemberMain {
         }
     }
 
-		private void insertMember() {
+    private void insertMember() {
         Gym_Member member = new Gym_Member();
         System.out.println("회원 정보를 입력하세요:");
 
@@ -59,68 +68,59 @@ public class Gym_MemberMain {
         member.setGender(Input.stringScan());
 
         System.out.print("나이: ");
-        member.setAge();
-        scanner.nextLine();  
+        member.setAge(Input.intScan());
 
         System.out.print("이름: ");
-        member.setName(scanner.nextLine());
+        member.setName(Input.stringScan());
 
         System.out.print("트레이너 번호: ");
-        member.setTrainer_num(scanner.nextInt());
-        scanner.nextLine();  
+        member.setTrainer_num(Input.intScan());
 
         System.out.print("회원권 번호: ");
-        member.setCharge_num(scanner.nextInt());
-        scanner.nextLine();  
+        member.setCharge_num(Input.intScan());
 
         if (mDao.insert(member)) {
             System.out.println("회원이 성공적으로 추가되었습니다.");
         } else {
             System.out.println("회원 추가에 실패하였습니다.");
         }
-    }	
+    }
 
-		static JdbcGym_MemberDao dao = new JdbcGym_MemberDao();
-		private void findAll() {
-		List<Gym_Member> mList = dao.findAll();
-		for (Gym_Member gym_Member : mList) {
-			System.out.println(gym_Member);
+    private void findAll() {
+        List<Gym_Member> mList = mDao.findAll();
+        for (Gym_Member gym_Member : mList) {
+            System.out.println(gym_Member);
+        }
+    }
 
-		}
-		
-	}
-    
-		private static void updateMember() {
+    private void updateMember() {
         System.out.print("수정할 회원의 번호를 입력하세요: ");
-        int memberNum = scanner.nextInt();
-        scanner.nextLine();  
+        int memberNum = Input.intScan();
 
-        Gym_Member member = mDao.findByMember_Num(memberNum);
-        if (member == null) {
+        Gym_Member toFindMember = mDao.findByMember_Num(memberNum);
+        if (toFindMember == null) {
             System.out.println("회원을 찾을 수 없습니다.");
             return;
         }
 
-        System.out.println("현재 회원 정보: " + member);
+        System.out.println("현재 회원 정보: " + toFindMember);
 
-        System.out.print("새 PT 횟수 (현재: " + member.getPt_count() + "): ");
-        member.setPt_count(scanner.nextInt());
-        scanner.nextLine(); 
+        System.out.print("새 PT 횟수 (현재: " + toFindMember.getPt_count() + "): ");
+        toFindMember.setPt_count(Input.intScan());
 
-        System.out.print("새 비밀번호 (현재: " + member.getLogin_pw() + "): ");
-        member.setLogin_pw(scanner.nextLine());
+        System.out.print("새 비밀번호 (현재: " + toFindMember.getLogin_pw() + "): ");
+        toFindMember.setLogin_pw(Input.stringScan());
 
-        if (mDao.update(member)) {
+        if (mDao.update(toFindMember)) {
             System.out.println("회원 정보가 성공적으로 업데이트되었습니다.");
         } else {
             System.out.println("회원 정보 업데이트에 실패하였습니다.");
         }
     }
 
-    private static void deleteMember() {
+    private void deleteMember() {
         System.out.print("삭제할 회원의 번호를 입력하세요: ");
-        int memberNum = scanner.nextInt();
-        scanner.nextLine(); 
+        int memberNum = Input.intScan();
 
         if (mDao.deleteByMember_Num(memberNum)) {
             System.out.println("회원이 성공적으로 삭제되었습니다.");

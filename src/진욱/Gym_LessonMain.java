@@ -31,7 +31,6 @@ public class Gym_LessonMain {
                 case 2:
                     findTrainerLesson();
                     break;
-
                 case 3:
                     modifyLessonInfo();
                     break;
@@ -72,10 +71,10 @@ public class Gym_LessonMain {
         System.out.println((glDao.getALesson(number) == null? "수강 정보가 없습니다!" : glDao.getALesson(number)));
         System.out.println("수정할 수강 과목명을 입력해주세요. ex) 다이어트 집중 수업");
         String class_detail = Input.stringScan();
-        for (Trainer t : tDao.findAll()){
+        for (Trainer t : tDao.findAll()){ // 번호 입력 전 트레이너 전체 목록을 출력함.
             System.out.println(t);
         }
-        System.out.println("수정할 담당 트레이너가 누구인지 번호를 입력해주세요. (트레이너 목록 출력)");
+        System.out.println("수정할 담당 트레이너가 누구인지 번호를 입력해주세요.");
         int trainer_num = Input.intScan();
         Trainer modifyTrainer = tDao.findByIndex(trainer_num);
         for (Gym_Member m : gmDao.findAll()){
@@ -93,11 +92,13 @@ public class Gym_LessonMain {
         for (Gym_Lesson gl3: glDao.findAll()){
             System.out.println(gl3);
         }
+
         System.out.println("삭제하고자 하는 강의의 번호를 입력해주세요. (삭제 시 관련 리뷰도 함께 삭제됩니다.");
         int number = Input.intScan();
         int reviewDeleteResult = rDao.deleteReviewByClassNumber(number);
         int classDeleteResult = glDao.deleteLesson(number);
-        System.out.println("해당 강의 정보 및 그 리뷰가 삭제되었습니다.");
+        if (reviewDeleteResult != 0 && classDeleteResult != 0) {
+            System.out.println("해당 강의 정보 및 그 리뷰가 삭제되었습니다.");
+        }
     }
-
 }

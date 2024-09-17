@@ -13,7 +13,6 @@ public class ReviewMain {
 
     ReviewDao reviewDao = DAOManager.getInstance().getrDao();
     Gym_LessonDao gDao = DAOManager.getInstance().getlDao();
-    Gym_MemberDao mDao = DAOManager.getInstance().getmDao();
 
     public void reviewExecute(){
         System.out.println("리뷰 메뉴에서 원하는 기능을 선택해주세요.");
@@ -64,8 +63,8 @@ public class ReviewMain {
     }
 
     public void writeReview(){
-        System.out.println("리뷰 작성을 선택하셨습니다.");
-        for (Gym_Lesson g: gDao.findAll()){
+        System.out.println("리뷰 작성을 선택하셨습니다. 회원님이 등록하신 수업을 출력합니다.");
+        for (Gym_Lesson g: gDao.findByMember_loginId(LoginManager.getInstance().getCurrentMember().getLogin_id())){
             System.out.println(g);
         }
 
@@ -87,7 +86,9 @@ public class ReviewMain {
     public void updateReview(int method){
 
         System.out.println("리뷰 수정을 선택하셨습니다. 회원님이 작성한 리뷰 리스트를 불러옵니다.");
-        List<Review> userReview = reviewDao.searchReview(4, LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
+        for (Review r: reviewDao.searchReview(4, LoginManager.getInstance().getCurrentMember().getLogin_id())){
+            System.out.println(r);
+        }
 
         if (method == 1) { // 1인 경우는 수정, 2인 경우는 삭제함.
             System.out.println("변경할 리뷰의 번호를 입력해주세요.");
