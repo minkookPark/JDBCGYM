@@ -18,7 +18,7 @@ public class Gym_Member {
 	private int charge_num;
 	
 	public Gym_Member() {
-		loginData = new LoginData();
+		loginData = new LoginData(LoginData.MEMBERTYPE.MEMBER);
 	}
 
 	public Gym_Member(int member_num, String name) {
@@ -146,6 +146,7 @@ public class Gym_Member {
 	public void setCharge_num(int charge_num) {
 		this.charge_num = charge_num;
 	}
+
 
 	@Override
 	public String toString() {
