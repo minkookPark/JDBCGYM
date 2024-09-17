@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 public class MainTest {
 	public static void main(String[] args) {
 		
@@ -48,7 +46,7 @@ public class MainTest {
 		
 //		chargeDao.update(chargeList);
 		
-		chargeDao.deleteByCharge_Num(rs.nextInt());
+//		chargeDao.deleteByCharge_Num(rs.nextInt());
 		
 //		for (Charge charge_list2 : chargeDao.findAll()) {
 //			System.out.println(charge_list2);
@@ -57,6 +55,25 @@ public class MainTest {
 //		System.out.println(chargeDao.findByManager_num(7777));
 		
 //		jdbcadmindao.deleteByManager_num(7777);
+		
+		Trainer trainer = new Trainer();
+		
+		Member member = new Member();
+		
+		Daomanager daomanager = new JDBCTrainerDao();
+		
+		MemberDao memberdao = new JDBCMemberDao();
+		
+//		trainer = daomanager.findByLogin_id(rs.next());
+//		daomanager.deleteByLogin_id(trainer.getTrainer_num());
+		
+//		member = memberdao.findByMember_num(rs.nextInt());
+//		
+//		memberdao.updatepasswordGym_member(member.getLogin_id());
+		
+		trainer = daomanager.findByTrainer_num(rs.nextInt());
+		
+		daomanager.updatepasswordGym_trainer(trainer.getLogin_id());
 		
 	}
 }
