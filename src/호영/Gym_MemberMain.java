@@ -3,7 +3,6 @@ package 호영;
 import Gym.Logic.Common.Gym;
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
-import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 import 민국.Trainer;
 import 진욱.ReviewMain;
@@ -11,7 +10,6 @@ import 진욱.ReviewMain;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Scanner;
 
 public class Gym_MemberMain {
     Gym_MemberDao mDao = DAOManager.getInstance().getmDao();

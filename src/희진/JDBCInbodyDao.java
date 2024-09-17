@@ -1,5 +1,7 @@
 package 희진;
 
+import DataSource.DataSource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +19,7 @@ public class JDBCInbodyDao implements InbodyDao {
 				+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = DataSource.getDataSource();
-				PreparedStatement pStatement = connection.prepareStatement(sql)) {
+			 PreparedStatement pStatement = connection.prepareStatement(sql)) {
 
 			pStatement.setTimestamp(1, inbody.getM_date());
 			pStatement.setDouble(2, inbody.getWeight());

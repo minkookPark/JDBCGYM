@@ -1,7 +1,6 @@
 package 민국;
 
 import DataSource.DataSource;
-import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 
 import java.sql.Connection;

@@ -1,5 +1,6 @@
 package 진욱;
 
+import Gym.Logic.Logic.LoginManager;
 import 호영.Gym_MemberMain;
 
 public class test {
@@ -10,7 +11,9 @@ public class test {
         //Gym_LessonMain m = new Gym_LessonMain();
         //m.lessonExecute();
 
-        Gym_MemberMain gmMain = new Gym_MemberMain();
-        gmMain.execute();
+//        Gym_MemberMain gmMain = new Gym_MemberMain();
+//        gmMain.execute();
+
+        LoginManager.getInstance().tryMemberLogin();
     }
 }

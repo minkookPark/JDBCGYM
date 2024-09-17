@@ -4,7 +4,6 @@ import 민국.JDBCTrainerDao;
 import 진욱.JDBCGymLessonDao;
 import 진욱.JDBCReviewDao;
 import 호영.JdbcGym_MemberDao;
-import 희진.JDBCInbodyDao;
 
 public class DAOManager {
     private static DAOManager instance = null;
