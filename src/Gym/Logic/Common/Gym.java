@@ -27,6 +27,7 @@ public class Gym
         {
             case 1:
             {
+                selectLoginPage();
                 break;
             }
             case 2:
@@ -35,7 +36,7 @@ public class Gym
             }
             case 3:
             {
-                selectJoin();
+                selectJoinPage();
                 break;
             }
         }
@@ -43,7 +44,7 @@ public class Gym
 
     //Join---------------------------------------------
 
-    private void selectJoin()
+    private void selectJoinPage()
     {
         ShowManager.getInstance().showJoinMenu();
 
@@ -90,22 +91,49 @@ public class Gym
     private void selectLoginPage()
     {
         ShowManager.getInstance().showLoginMenu();
+        int selectNum = Input.intScan(1,3);
+
+        switch(selectNum)
+        {
+            case 1:
+            {
+                memberLoginPage();
+                break;
+            }
+            case 2:
+            {
+                trainerLoginPage();
+                break;
+            }
+            case 3:
+            {
+                adminLoginPage();
+                break;
+            }
+        }
     }
 
     private void trainerLoginPage()
     {
-
+        ShowManager.getInstance().showTrainerLogin();
     }
 
     private void memberLoginPage()
     {
-
+        ShowManager.getInstance().showMemberLogin();
     }
 
     private void adminLoginPage()
     {
+        ShowManager.getInstance().showAdminLogin();
+    }
+
+    //Charge View
+    private void displayChargePage()
+    {
 
     }
+
 
 
 
