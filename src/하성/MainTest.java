@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
+import oracle.jdbc.proxy.annotation.GetCreator;
+
 public class MainTest {
 	public static void main(String[] args) {
 		
@@ -58,22 +60,20 @@ public class MainTest {
 		
 		Trainer trainer = new Trainer();
 		
-		Member member = new Member();
+		Gym_Member member = new Gym_Member();
 		
 		Daomanager daomanager = new JDBCTrainerDao();
 		
 		MemberDao memberdao = new JDBCMemberDao();
 		
-//		trainer = daomanager.findByLogin_id(rs.next());
-//		daomanager.deleteByLogin_id(trainer.getTrainer_num());
-		
+		trainer = daomanager.findById(rs.next());
+		daomanager.deleteById(trainer.getTrainer_num());
+//		
 //		member = memberdao.findByMember_num(rs.nextInt());
 //		
 //		memberdao.updatepasswordGym_member(member.getLogin_id());
 		
-		trainer = daomanager.findByTrainer_num(rs.nextInt());
-		
-		daomanager.updatepasswordGym_trainer(trainer.getLogin_id());
-		
+//		member = memberdao.findByLoginData(rs.nextInt(), rs.nextInt(), rs.next(), rs.next(), rs.next(), rs.nextInt(), rs.next(), rs.nextInt(), rs.nextInt());
+//		memberdao.updatepasswordGym_member(member.getLogin_id());
 	}
 }

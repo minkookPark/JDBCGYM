@@ -8,12 +8,12 @@ import java.sql.SQLException;
 public class JDBCTrainerDao implements Daomanager {
 	private static final String DEFAULT_PASSWORD = "a1234";
 	
-	public Trainer findByLogin_id(String login_id) {
+	public Trainer findById(String login_id) {
 		
 		Trainer trainer = null;
 		
 		try (Connection connection = DataSource.getDataSource();
-		PreparedStatement pStatement = connection.prepareStatement("SELECT TRAINER_NUM FROM GYM_TRAINER WHERE LOGIN_ID = ?")) {
+		PreparedStatement pStatement = connection.prepareStatement("SELECT * FROM GYM_TRAINER WHERE LOGIN_ID = ?")) {
 		
 		pStatement.setString(1, login_id);	
 		ResultSet rs = pStatement.executeQuery();
@@ -22,6 +22,13 @@ public class JDBCTrainerDao implements Daomanager {
 			trainer = new Trainer();
 				
 			trainer.setTrainer_num(rs.getInt("trainer_num"));
+			trainer.setAward(rs.getString("award"));
+			trainer.setAge(rs.getInt("age"));
+			trainer.setGender(rs.getString("gender"));
+			trainer.setLogin_Id(rs.getString("login_id"));
+			trainer.setLogin_Pw(rs.getString("login_pw"));
+			trainer.setName(rs.getString("name"));
+			
 		}
 		
 		}catch(SQLException e) {
@@ -31,7 +38,7 @@ public class JDBCTrainerDao implements Daomanager {
 	}
 
 	@Override
-	public boolean deleteByLogin_id(int trainer_num) {
+	public boolean deleteById(int trainer_num) {
 		boolean result = false;
 
 		try(Connection connection = DataSource.getDataSource();
@@ -72,27 +79,5 @@ public class JDBCTrainerDao implements Daomanager {
 				e.printStackTrace();
 			}
 			return result;
-	}
-
-	@Override
-	public Trainer findByTrainer_num(int trainer_num) {
-		Trainer trainer = null;
-		
-		try (Connection connection = DataSource.getDataSource();
-		PreparedStatement pStatement = connection.prepareStatement("SELECT LOGIN_ID FROM GYM_TRAINER WHERE TRAINER_NUM = ?")) {
-		
-		pStatement.setInt(1, trainer_num);	
-		ResultSet rs = pStatement.executeQuery();
-		
-		if(rs.next()) {
-			trainer = new Trainer();
-				
-			trainer.setLogin_id(rs.getString("login_id"));
-		}
-		
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return trainer;
 	}
 }

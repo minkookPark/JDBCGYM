@@ -2,6 +2,5 @@ package 하성;
 
 public interface MemberDao {
 	boolean updatepasswordGym_member(String login_id);
-	Member findByLogin_id(String login_id);
-	Member findByMember_num(int member_num);
+	Gym_Member findByLoginData(int member_num, int pt_count, String login_id, String login_pw, String gender, int age, String name, int trainer_num, int charge_num);
 }
