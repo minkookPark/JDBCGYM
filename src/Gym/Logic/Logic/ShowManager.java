@@ -169,6 +169,7 @@ public class ShowManager {
         System.out.println("=------------------------------------------------------=");
         System.out.println("=                                                      =");
         System.out.println("=                4. Delete A Review                    =");
+        System.out.println("=                5. Show my Trainer's Review Score     =");
         System.out.println("=                9. Back To Main                       =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
@@ -197,13 +198,14 @@ public class ShowManager {
     {
         System.out.println("========================================================");
         System.out.println("=                                                      =");
-        System.out.println("=                1. Modify Trainer / PT Info           =");
-        System.out.println("=                2. Withdrawal Member                  =");
+        System.out.println("=                1. ModifyMemberInfo(Trainer,PT,PW)    =");
+        System.out.println("=                2. Display All Member's List          =");
+        System.out.println("=                3. Display Review Menu                =");
         System.out.println("=------------------------------------------------------=");
         System.out.println("=                                                      =");
-        System.out.println("=                3. Display All Member's List          =");
-        System.out.println("=                4. Display Review Menu                =");
-        System.out.println("=                9. Back To Main                       =");
+        System.out.println("=                4. Display My Inbody Data             =");
+        System.out.println("=                5. Withdrawal Member                  =");
+        System.out.println("=                9. LogOut & Back To Main              =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
         numberInputform();

@@ -6,9 +6,13 @@ public interface InbodyDao {
 	// 인바디 인터페이스
 	boolean insert(Inbody inbody); 
 
-	boolean deleteBybodynum(int Inbody_num);
+	boolean deleteByInbodyNum(int inbody_num);
+
+	boolean deleteByMemberNum (int member_num);
 	
 	public List<Inbody> findAll();
 	
-	public Inbody findBybodynum(int Inbody_num);
+	public Inbody findByInbodyNum(int inbody_num);
+
+	public List<Inbody> findByMemberNum(int member_num);
 }

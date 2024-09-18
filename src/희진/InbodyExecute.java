@@ -1,6 +1,6 @@
 package 희진;
 
-public class INbodyExcecute {
+public class InbodyExecute {
 	
 	public static void main(String[] args) {
 		InbodyMain m = new InbodyMain();

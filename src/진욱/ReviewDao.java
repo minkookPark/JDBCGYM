@@ -15,6 +15,8 @@ public interface ReviewDao {
 
     public int deleteReviewByClassNumber(int class_num);
 
+    public int deleteReviewByMemberNum(int member_num);
+
     public Review getReview(int review_num);
 
     public List<Review> searchReview(int method, String query);

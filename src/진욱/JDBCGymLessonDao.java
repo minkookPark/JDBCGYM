@@ -1,6 +1,7 @@
 package 진욱;
 
 import DataSource.DataSource;
+import Gym.Logic.Common.Gym;
 import 민국.Trainer;
 import 호영.Gym_Member;
 
@@ -84,7 +85,13 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, login_id);
             ResultSet rs = pstmt.executeQuery();
-
+            while (rs.next()){
+                membersLessonList.add(new Gym_Lesson(rs.getInt("CLASS_NUM"),
+                        rs.getString("CLASS_DETAIL"),
+                        rs.getTimestamp("PROG_TIME"),
+                        new Trainer(rs.getInt("TRAINER_NUM"), rs.getString("TRAINER_NAME")),
+                        new Gym_Member(rs.getInt("MEMBER_NUM"), rs.getString("MEMBER_NAME"), rs.getString("MEMBER_ID"))));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -171,6 +178,23 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, class_num);
                 result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    @Override
+    public int deleteLessonByMemberNum(int member_num) {
+        int result = 0;
+        String sql = "DELETE FROM CLASS_LIST WHERE MEMBER_NUM = ?";
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, member_num);
+            result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
