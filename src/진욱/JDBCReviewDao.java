@@ -196,6 +196,20 @@ public class JDBCReviewDao implements ReviewDao {
         return result;
     }
 
+    public int deleteReviewByMemberNum(int member_num){
+        int result = 0;
+        String sql = "DELETE FROM REVIEW WHERE CLASS_NUM IN (SELECT CLASS_NUM FROM CLASS_LIST WHERE MEMBER_NUM = ?)";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, member_num);
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
     @Override
     public Review getReview(int review_num) { // 리뷰 번호로 해당 리뷰 데이터를 불러온다. 수정 / 삭제 시 확인용도.
         Review oneReview = null;

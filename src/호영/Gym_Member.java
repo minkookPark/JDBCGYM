@@ -27,6 +27,13 @@ public class Gym_Member {
 		this.member_num = member_num;
 	}
 
+	public Gym_Member(int member_num, String name, String member_id){
+		loginData = new LoginData(LoginData.MEMBERTYPE.MEMBER);
+		loginData.setName(name);
+		loginData.setLogin_id(member_id);
+		this.member_num = member_num;
+	}
+
 	public Gym_Member(int member_num, int pt_count, String login_id, String login_pw, String gender, int age, String name, int trainer_num, int charge_num) {
 		this.member_num = member_num;
 		this.pt_count = pt_count;

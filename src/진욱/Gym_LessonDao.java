@@ -9,5 +9,6 @@ public interface Gym_LessonDao {
     public int insertLesson(Gym_Lesson classList);
     public int updateLesson (Gym_Lesson classList);
     public int deleteLesson (int class_num);
+    public int deleteLessonByMemberNum(int member_num);
     public Gym_Lesson getALesson (int class_num); // 인덱스를 통해 특정 한 수업만 리턴함.
 }

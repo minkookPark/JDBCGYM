@@ -4,7 +4,8 @@ import Gym.Logic.Common.Input;
 import java.util.Scanner;
 
 public class InbodyMain {
-	
+	InbodyMethod iMethod = new InbodyMethod();
+
    public void inbodyExecute() {
 	   System.out.println("메뉴를 선택해주세요");
 	  boolean loop = true;
@@ -19,19 +20,19 @@ public class InbodyMain {
 
          switch (select) {
          case "1":
-            InbodyMethod.insertInbody();
+            iMethod.insertInbody();
             break;
          
          case "2":
-        	 InbodyMethod.findByInbodyNum();
+             iMethod.findByInbodyNum();
             break;
          
          case "3":
-        	 InbodyMethod.findAllInbody();
+             iMethod.findAllInbody();
             break;
          
          case "4":
-        	 InbodyMethod.deleteInbody();
+             iMethod.deleteInbody();
              break;
          
          case "5":
@@ -41,7 +42,8 @@ public class InbodyMain {
 
          default:
             System.out.println("올바른 선택이 아닙니다. 다시 선택해 주세요.");
-      }
+            break;
+        }
 	  }
    }
 }
