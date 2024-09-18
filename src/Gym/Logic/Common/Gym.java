@@ -108,6 +108,7 @@ public class Gym
     private void memberJoinPage()
     {
         ShowManager.getInstance().showMemberJoin();
+
     }
 
     private void adminJoinPage()

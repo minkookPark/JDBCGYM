@@ -26,21 +26,17 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
         boolean result = false;
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pStatement = conn.prepareStatement(
-                     "INSERT INTO GYM_MEMBER (PT_COUNT, REG_DATE, EXP_DATE, LOGIN_ID, LOGIN_PW, GENDER, AGE, TRAINER_NUM, CHARGE_NUM, NAME) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-        
+                     "INSERT INTO GYM_MEMBER (PT_COUNT, REG_DATE, LOGIN_ID, LOGIN_PW, GENDER, AGE, TRAINER_NUM, CHARGE_NUM, NAME) " +
+                     "VALUES (?, SYSTIMESTAMP, ?, ?, ?, ?, ?, ?, ?)")) {
 
             pStatement.setInt(1, member.getPt_count());
-            pStatement.setTimestamp(2, member.getReg_date());
-            pStatement.setDate(3, member.getExp_date());
-            pStatement.setString(4, member.getLogin_id());
-            pStatement.setString(5, member.getLogin_pw());
-            pStatement.setString(6, member.getGender());
-            pStatement.setInt(7, member.getAge());
-            pStatement.setInt(8, member.getTrainer_num());
-            pStatement.setInt(9, member.getCharge_num());
-            pStatement.setString(10, member.getName());
-           
+            pStatement.setString(2, member.getLogin_id());
+            pStatement.setString(3, member.getLogin_pw());
+            pStatement.setString(4, member.getGender());
+            pStatement.setInt(5, member.getAge());
+            pStatement.setInt(6, member.getTrainer_num());
+            pStatement.setInt(7, member.getCharge_num());
+            pStatement.setString(8, member.getName());
 
             int rows = pStatement.executeUpdate();
 
