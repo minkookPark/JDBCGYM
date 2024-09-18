@@ -1,7 +1,11 @@
 package Gym.Logic.Common;
 
+import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.JoinManager;
 import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
+import 하성.Charge;
+import 호영.Gym_MemberMain;
 
 public class Gym
 {
@@ -36,6 +40,7 @@ public class Gym
                     case 1:
                     {
                         //멤버 로그인 성공시
+                        memberMainPage();
                         break;
                     }
 
@@ -56,8 +61,9 @@ public class Gym
             }
             case 2:
             {
-
-                //openCharge List
+                for (Charge c : DAOManager.getInstance().getcDao().findAll()){
+                    System.out.println(c);
+                }
                 break;
             }
             case 3:
@@ -84,6 +90,7 @@ public class Gym
             case 1:
             {
                 memberJoinPage();
+                boolean isJoined = JoinManager.getInstance().memberJoin();
                 break;
             }
             case 2:
@@ -179,7 +186,8 @@ public class Gym
     //Page that arrives upon successful login of Member
     private void memberMainPage()
     {
-
+        Gym_MemberMain gMain = new Gym_MemberMain();
+        gMain.execute(); // 멤버 Main 프로그램 실행으로 이동.
     }
 
     //Page that arrives upon successful login of Admin

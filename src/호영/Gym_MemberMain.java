@@ -42,7 +42,7 @@ public class Gym_MemberMain {
                     break;
                 case 4:
                     List<Inbody> memberInbodyData = iDao.findByMemberNum(LoginManager.getInstance().getCurrentMember().getMember_num());
-                    System.out.println("회원님의 인바디 데이터를 출력합니다.");
+                    System.out.println(LoginManager.getInstance().getCurrentMember().getName() + " 회원님의 인바디 데이터를 출력합니다.");
                     for (Inbody iData : memberInbodyData){
                         System.out.println(iData);
                     }

@@ -223,7 +223,7 @@ public class ShowManager {
         System.out.println("이름을 입력 해주세요 : ");
     }
 
-    public void numberInputForm() { System.out.println("번호를 입력해 주세요 :"); }
+    public void numberInputForm() { System.out.println("담당 트레이너 번호를 입력해 주세요 :"); }
 
     public void ptCountInputForm() { System.out.println("PT 횟수를 입력해 주세요 :"); }
 
