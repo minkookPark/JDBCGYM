@@ -7,7 +7,6 @@ public class gymMain {
     public static void main(String[] args)
     {
         Gym g = new Gym();
-
         g.run();
     }
 }

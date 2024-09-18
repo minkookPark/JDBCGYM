@@ -109,12 +109,10 @@ public class LoginManager {
         }
 
         return result;
-
     }
 
     public boolean tryTrainerLogin()
     {
-
         boolean isSuccess = false;
 
         ShowManager.getInstance().showTrainerLogin();
@@ -124,21 +122,21 @@ public class LoginManager {
         System.out.println("비밀번호를 입력 해주세요");
         String pw = Input.stringScan();
 
-        //이 부분 trainer 객체로 바꿔야 함.
+        //입력받은 로그인 id, pw 를 기준으로 트레이너 타입의 객체 생성.
         LoginData login = new LoginData(id,pw, LoginData.MEMBERTYPE.TRAINER);
-        Trainer curLoginTrainer = DAOManager.getInstance().gettDao().findByLoginData(id);
-
-        if(tryLogin(login))
-        {
-            System.out.println("로그인 성공");
-            tr = curLoginTrainer;
-            isLogin = true;
-            isSuccess = true;
-        }
-        else
-        {
-            System.out.println("로그인 실패");
-        }
+        //Trainer curLoginTrainer
+        tr = DAOManager.getInstance().gettDao().findByLoginData(id);
+//        if(tryLogin(login))
+//        {
+//            System.out.println("로그인 성공");
+//            tr = curLoginTrainer;
+//            isLogin = true;
+//            isSuccess = true;
+//        }
+//        else
+//        {
+//            System.out.println("로그인 실패");
+//        }
 
         return isSuccess;
     }
@@ -153,26 +151,48 @@ public class LoginManager {
 
     public void tryLogin(LoginData.MEMBERTYPE type, String login_Id, String login_pw)
     {
+        switch(type)
+        {
+            case MEMBER: {
+                break;
+            }
+            case TRAINER: {
+                JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
 
+                if (tDao.tryLogin(login_Id, login_pw))
+                {
+                    System.out.println("로그인 성공");
+
+
+                }
+                else
+                {
+                    System.out.println("로그인 실패");
+                }
+
+
+                break;
+            }
+        }
     }
 
-    public boolean tryLogin(LoginData loginData)
-    {
-        boolean result = false;
-        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
-        if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
-        {
-            System.out.println("로그인 성공");
-            result = true;
-        }
-        else
-        {
-            System.out.println("로그인 실패");
-            result = false;
-        }
-
-        return result;
-    }
+//    public boolean tryLogin(LoginData loginData)
+//    {
+//        boolean result = false;
+//        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
+//        if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
+//        {
+//            System.out.println("로그인 성공");
+//            result = true;
+//        }
+//        else
+//        {
+//            System.out.println("로그인 실패");
+//            result = false;
+//        }
+//
+//        return result;
+//    }
 
     public boolean tryMemberTypeLogin(LoginData memberLogin)
     {

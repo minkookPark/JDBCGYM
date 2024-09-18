@@ -348,6 +348,7 @@ public class JDBCTrainerDao implements TrainerDao {
     {
         boolean isSuccess = false;
 
+        //nullpointer exception 발생
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?"))
         {
@@ -395,7 +396,8 @@ public class JDBCTrainerDao implements TrainerDao {
         boolean result = false;
 
         try (Connection conn = DataSource.getDataSource();
-             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?")) {
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?"))
+        {
             pStatement.setString(1, loginData.getLogin_id());
             ResultSet rs = pStatement.executeQuery();
 
@@ -409,13 +411,16 @@ public class JDBCTrainerDao implements TrainerDao {
                 //insertTrianerJoin();
             }
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
 
         return result;
     }
+
 
 
     //update 기능을 이용하여 트레이너의 정보를 추가 기입 가능하도록 해야함.

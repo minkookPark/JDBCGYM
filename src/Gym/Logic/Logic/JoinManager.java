@@ -112,9 +112,10 @@ public class JoinManager {
         return result;
     }
 
-    public boolean adminJoin()
+    public Trainer createTrainer()
     {
-        return false;
+
+        return null;
     }
 
 }
