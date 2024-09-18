@@ -66,6 +66,18 @@ public class Gym_Member {
 		loginData.setName(name);
 	}
 
+	public Gym_Member(int pt_count, String member_id, String member_pw, String gender, int age, String member_name, int trainer_num, int charge_num) {
+		this.pt_count = pt_count;
+		this.trainer_num = trainer_num;
+		this.charge_num = charge_num;
+		loginData = new LoginData(LoginData.MEMBERTYPE.MEMBER);
+		loginData.setLogin_id(member_id);
+		loginData.setLogin_pw(member_pw);
+		loginData.setName(member_name);
+		loginData.setAge(age);
+		loginData.setGender(gender);
+	}
+
 	public int getMember_num() {
 		return member_num;
 	}

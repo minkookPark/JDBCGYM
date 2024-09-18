@@ -3,6 +3,7 @@ package Gym.Logic.Logic;
 import 민국.JDBCTrainerDao;
 import 진욱.JDBCGymLessonDao;
 import 진욱.JDBCReviewDao;
+import 하성.JDBCChargeDao;
 import 호영.JdbcGym_MemberDao;
 import 희진.JDBCInbodyDao;
 
@@ -25,6 +26,7 @@ public class DAOManager {
     private JDBCReviewDao rDao;
     private JdbcGym_MemberDao mDao;
     private JDBCInbodyDao iDao;
+    private JDBCChargeDao cDao;
 
     private void init()
     {
@@ -33,6 +35,7 @@ public class DAOManager {
         rDao = new JDBCReviewDao();
         mDao = new JdbcGym_MemberDao();
         iDao = new JDBCInbodyDao();
+        cDao = new JDBCChargeDao();
     }
 
     public JDBCTrainerDao gettDao() {
@@ -54,4 +57,8 @@ public class DAOManager {
     public JDBCInbodyDao getiDao() {
         return iDao;
     }
+
+    public JDBCChargeDao getcDao() { return cDao; }
+
 }
+
