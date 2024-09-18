@@ -269,7 +269,11 @@ public class ShowManager {
     }
     public void failedUpdate()
     {
-        System.out.println("변경 실패");
-        
+        System.out.println("변경 실패");        
+    }
+    
+    public void error()
+    {
+        System.out.println("잘못된 입력");
     }
 }

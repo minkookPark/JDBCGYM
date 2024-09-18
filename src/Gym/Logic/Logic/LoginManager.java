@@ -40,24 +40,29 @@ public class LoginManager {
         isLogin = false;
     }
 
-
-    public void selectLogin()
+    //멤버 로그인 성공시 1
+    //트레이너 로그인 성공시 2
+    //관리자 로그인 성공시 3을 반환한다.
+    public int selectLogin()
     {
+
+        int result = 0;
         ShowManager.getInstance().showLoginMenu();
 
         int selectNum = Input.intScan(1,3);
-        if (selectNum != 0)
-        {
+
             switch(selectNum)
             {
                 case 1:
                 {
-                    tryMemberLogin();
+                    if(tryMemberLogin())
+                        result = 1;
                     break;
                 }
                 case 2:
                 {
-                    tryTrainerLogin();
+                    if(tryTrainerLogin())
+                        result = 2;
                     break;
                 }
                 case 3:
@@ -65,12 +70,19 @@ public class LoginManager {
                     tryManagerLogin();
                     break;
                 }
+                default:
+                {
+                    ShowManager.getInstance().error();
+                    assert(false);
+                }
             }
-        }
+        return result;
     }
 
-    public void tryMemberLogin()
+    public boolean tryMemberLogin()
     {
+        boolean result = false;
+
         ShowManager.getInstance().showMemberLogin();
         System.out.println("아이디를 입력 해주세요");
         String memberId = Input.stringScan();
@@ -87,17 +99,24 @@ public class LoginManager {
             // 로그인 후, 멤버 화면에서 원하는 기능을 선택한다.
             Gym_MemberMain gMain = new Gym_MemberMain();
             gMain.execute();
+            result = true;
         }
         else
         {
             System.out.println("회원 로그인 실패");
+
             // 로그인이 실패했다면, 아무것도 하지 않고, 처음 화면으로 돌아간다.
         }
 
+        return result;
+
     }
 
-    public void tryTrainerLogin()
+    public boolean tryTrainerLogin()
     {
+
+        boolean isSuccess = false;
+
         ShowManager.getInstance().showTrainerLogin();
 
         System.out.println("아이디를 입력 해주세요");
@@ -114,11 +133,14 @@ public class LoginManager {
             System.out.println("로그인 성공");
             tr = curLoginTrainer;
             isLogin = true;
+            isSuccess = true;
         }
         else
         {
             System.out.println("로그인 실패");
         }
+
+        return isSuccess;
     }
 
     public void tryManagerLogin()
