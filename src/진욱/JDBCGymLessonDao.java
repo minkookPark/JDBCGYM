@@ -151,6 +151,27 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return result;
     }
 
+    public void createLesson(Gym_Lesson gl)
+    {
+        String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM) \n" +
+                "VALUES (?, ?, ?)";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, gl.getClass_detail());
+            pstmt.setTimestamp(2,gl.getProgress_time());
+            pstmt.setInt(3, gl.getTrainer().getTrainer_num());
+            int result = pstmt.executeUpdate();
+            if(result > 0)
+            {
+                System.out.println("레슨이 성공적으로 등록되었습니다.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     @Override
     public int updateLesson(Gym_Lesson classList) { // 수업 내용의 상세 / 회원 / 트레이너 정보를 변경 가능.
         int result = 0;

@@ -245,7 +245,7 @@ public class Gym
 
         Timestamp ts = Input.inputTimestamp();
 
-        DAOManager.getInstance().getlDao().insertLesson(
+        DAOManager.getInstance().getlDao().createLesson(
                 new Gym_Lesson(inputDetail,
                         ts, LoginManager.getInstance().getCurrentTrainer()));
 
