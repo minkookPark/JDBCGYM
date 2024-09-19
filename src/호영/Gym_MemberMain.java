@@ -51,7 +51,7 @@ public class Gym_MemberMain {
                     deleteMember();
                     break;
                 case 9:
-                    System.out.println("로그아웃 후 프로그램을 종료합니다.");
+                    System.out.println("로그아웃 후 초기 화면으로 돌아갑니다..");
                     LoginManager.getInstance().logOut();
                     Gym gym = new Gym();
                     gym.run();
