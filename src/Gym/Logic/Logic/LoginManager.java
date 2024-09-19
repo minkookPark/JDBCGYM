@@ -126,17 +126,17 @@ public class LoginManager {
         LoginData login = new LoginData(id,pw, LoginData.MEMBERTYPE.TRAINER);
         //Trainer curLoginTrainer
         tr = DAOManager.getInstance().gettDao().findByLoginData(id);
-//        if(tryLogin(login))
-//        {
-//            System.out.println("로그인 성공");
+        if(tryLogin(login))
+        {
+            System.out.println("로그인 성공");
 //            tr = curLoginTrainer;
-//            isLogin = true;
-//            isSuccess = true;
-//        }
-//        else
-//        {
-//            System.out.println("로그인 실패");
-//        }
+            isLogin = true;
+            isSuccess = true;
+        }
+        else
+        {
+            System.out.println("로그인 실패");
+        }
 
         return isSuccess;
     }
@@ -176,23 +176,23 @@ public class LoginManager {
         }
     }
 
-//    public boolean tryLogin(LoginData loginData)
-//    {
-//        boolean result = false;
-//        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
-//        if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
-//        {
-//            System.out.println("로그인 성공");
-//            result = true;
-//        }
-//        else
-//        {
-//            System.out.println("로그인 실패");
-//            result = false;
-//        }
-//
-//        return result;
-//    }
+    public boolean tryLogin(LoginData loginData)
+    {
+        boolean result = false;
+        JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
+        if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
+        {
+            System.out.println("로그인 성공");
+            result = true;
+        }
+        else
+        {
+            System.out.println("로그인 실패");
+            result = false;
+        }
+
+        return result;
+    }
 
     public boolean tryMemberTypeLogin(LoginData memberLogin)
     {
