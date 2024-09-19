@@ -203,9 +203,22 @@ public class ShowManager {
         System.out.println("=                3. Display Review Menu                =");
         System.out.println("=------------------------------------------------------=");
         System.out.println("=                                                      =");
-        System.out.println("=                4. Display My Inbody Data             =");
+        System.out.println("=                4. Display Inbody Menu                =");
         System.out.println("=                5. Withdrawal Member                  =");
         System.out.println("=                9. LogOut & Back To Main              =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+        numberInputform();
+    }
+
+    public void showInbodyMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                1. Show My Inbody List                =");
+        System.out.println("=                2. Insert New Inbody Data             =");
+        System.out.println("=------------------------------------------------------=");
+        System.out.println("=                                                      =");
+        System.out.println("=                9. Back                               =");
         System.out.println("=                                                      =");
         System.out.println("========================================================");
         numberInputform();
@@ -215,7 +228,7 @@ public class ShowManager {
     //InputField
     private void numberInputform()
     {
-        System.out.println("메뉴 번호를 입력 해주세요 : ");
+        System.out.print("메뉴 번호를 입력 해주세요 : ");
     }
 
     public void nameInputform()

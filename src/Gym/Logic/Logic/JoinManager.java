@@ -88,16 +88,14 @@ public class JoinManager {
 
         ShowManager.getInstance().numberInputForm();
         int inputTrainerNumber = Input.intScan();
-        //Trainer inputTrainer = DAOManager.getInstance().gettDao().findByIndex(inputTrainerNumber);
 
-        ShowManager.getInstance().ptCountInputForm();
-        int inputPtCount = Input.intScan();
-
+        // PT 횟수 가져올것.
         for (Charge c : DAOManager.getInstance().getcDao().findAll()){
             System.out.println(c);
         }
         System.out.println("구매하신 요금제 번호를 입력해주세요. ");
         int inputChargeNumber = Input.intScan();
+        int inputPtCount = DAOManager.getInstance().getcDao().findByCharge_num(inputChargeNumber).getPt_count();
 
         // 새로 가입할 멤버의 Gym_Member 객체 생성.
         Gym_Member toJoinMember = new Gym_Member(inputPtCount, inputId, inputPw, inputGender, inputAge, inputName, inputTrainerNumber, inputChargeNumber);
