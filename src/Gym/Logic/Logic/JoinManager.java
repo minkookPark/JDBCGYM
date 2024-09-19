@@ -107,6 +107,7 @@ public class JoinManager {
         result = DAOManager.getInstance().getmDao().insert(toJoinMember);
         if (result){
             ShowManager.getInstance().successJoin();
+            System.out.println("로그인 페이지로 이동합니다.");
             LoginManager.getInstance().tryMemberLogin();
             // 성공했다면 성공 메시지 출력 후, 로그인 시도 페이지로 이동한다. 아이디와 비밀번호를 재차 입력하고 멤버 페이지로 이동 가능하다.
         }
