@@ -96,19 +96,20 @@ public class JoinManager {
         for (Charge c : DAOManager.getInstance().getcDao().findAll()){
             System.out.println(c);
         }
-
+        System.out.println("구매하신 요금제 번호를 입력해주세요. ");
         int inputChargeNumber = Input.intScan();
 
         // 새로 가입할 멤버의 Gym_Member 객체 생성.
         Gym_Member toJoinMember = new Gym_Member(inputPtCount, inputId, inputPw, inputGender, inputAge, inputName, inputTrainerNumber, inputChargeNumber);
-        //새로 가입할 멤버의 LoginData 생성.
+        // 새로 가입할 멤버의 LoginData 생성.
         // LoginData memberNewLoginData = new LoginData(inputName, inputId, inputPw, inputGender,inputAge, LoginData.MEMBERTYPE.MEMBER);
 
         result = DAOManager.getInstance().getmDao().insert(toJoinMember);
         if (result){
             ShowManager.getInstance().successJoin();
+            LoginManager.getInstance().tryMemberLogin();
+            // 성공했다면 성공 메시지 출력 후, 로그인 시도 페이지로 이동한다. 아이디와 비밀번호를 재차 입력하고 멤버 페이지로 이동 가능하다.
         }
-
         return result;
     }
 

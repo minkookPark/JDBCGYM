@@ -42,7 +42,7 @@ public class JDBCChargeDao implements ChargeDao {
 		List<Charge> charge = new ArrayList<Charge>();
 		
 		try (Connection connection = DataSource.getDataSource();
-		PreparedStatement pStatement = connection.prepareStatement("SELECT * FROM CHARGE ORDER BY CHARGE_NUM DESC FETCH FIRST 2 ROWS ONLY");
+		PreparedStatement pStatement = connection.prepareStatement("SELECT * FROM CHARGE ORDER BY CHARGE_NUM DESC");
 		ResultSet rs = pStatement.executeQuery()) {
 		
 		while(rs.next()) {
