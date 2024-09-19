@@ -133,6 +133,23 @@ public class ShowManager {
         numberInputform();
     }
 
+
+    public void showTrainerLessonMenu()
+    {
+        System.out.println("========================================================");
+        System.out.println("=                                                      =");
+        System.out.println("=                1. Create New Lesson                  =");
+        System.out.println("=                2. Display My Lesson                  =");
+        System.out.println("=                3. Close Lesson                       =");
+        System.out.println("=                                                      =");
+        System.out.println("=------------------------------------------------------=");
+        System.out.println("=                                                      =");
+        System.out.println("=                9. Back To Main                       =");
+        System.out.println("=                                                      =");
+        System.out.println("========================================================");
+        numberInputform();
+    }
+
     //Member First Menu
     public void showManagerMenu()
     {
@@ -192,6 +209,9 @@ public class ShowManager {
         System.out.println("========================================================");
         numberInputform();
     }
+
+
+
 
 
     public void showMemberMenu()

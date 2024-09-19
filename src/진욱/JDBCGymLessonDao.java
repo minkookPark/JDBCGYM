@@ -3,7 +3,6 @@ package 진욱;
 import DataSource.DataSource;
 import Gym.Logic.Common.Gym;
 import Gym.Logic.Logic.LoginManager;
-import oracle.jdbc.proxy.annotation.Pre;
 import 민국.Trainer;
 import 호영.Gym_Member;
 
