@@ -168,13 +168,6 @@ public class ShowManager {
         numberInputform();
     }
 
-
-    //Display Charge
-    public void showChargeList()
-    {
-
-    }
-
     //Review Menu
     public void showReviewMenu()
     {
@@ -194,7 +187,7 @@ public class ShowManager {
     }
 
     //Lesson Menu
-    public void showLessonMenu()
+    public void showMemberLessonMenu()
     {
         System.out.println("========================================================");
         System.out.println("=                                                      =");
@@ -209,10 +202,6 @@ public class ShowManager {
         System.out.println("========================================================");
         numberInputform();
     }
-
-
-
-
 
     public void showMemberMenu()
     {
@@ -257,8 +246,6 @@ public class ShowManager {
     }
 
     public void numberInputForm() { System.out.println("담당 트레이너 번호를 입력해 주세요 :"); }
-
-    public void ptCountInputForm() { System.out.println("PT 횟수를 입력해 주세요 :"); }
 
     public void genderInputform() 
     {
