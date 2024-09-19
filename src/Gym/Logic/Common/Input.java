@@ -1,5 +1,6 @@
 package Gym.Logic.Common;
 
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 public class Input {
@@ -48,6 +49,76 @@ public class Input {
         }
         return result;
     }
+
+
+    public static Timestamp inputTimestamp()
+    {
+        int releaseDateYear;
+        int releaseDateMonth;
+        int releaseDateDay;
+        int timeH;
+        while (true)
+        {
+            System.out.println("개강 연도 : ");
+            String year = scan.nextLine();
+            int releaseYear = Integer.parseInt(year);
+            if (releaseYear >= 1900 && releaseYear <= 2024)
+            {
+                releaseDateYear = releaseYear;
+                break;
+            }
+            else
+                System.out.println("올바른 정보를 입력해주세요 (1900 ~ 2024)");
+        }
+
+        while (true)
+        {
+            System.out.println("개강 월 : ");
+            String month = scan.nextLine();
+            int releaseMonth = Integer.parseInt(month);
+            if (releaseMonth >= 1 && releaseMonth <= 12)
+            {
+                releaseDateMonth = releaseMonth;
+                break;
+            }
+            else
+                System.out.println("올바른 정보를 입력해주세요 (1 ~ 12)");
+        }
+
+        while (true)
+        {
+            System.out.println("개강 일 : ");
+            String day = scan.nextLine();
+            int releaseDay = Integer.parseInt(day);
+            if (releaseDay >= 1 && releaseDay <= 31)
+            {
+                releaseDateDay = releaseDay;
+                break;
+            }
+            else
+                System.out.println("올바른 정보를 입력해주세요 (1 ~ 31)");
+        }
+
+        while (true)
+        {
+            System.out.println("개강 시간을 입력 해주세요");
+            timeH = Input.intScan();
+            if (timeH >= 0 && timeH <= 24)
+            {
+                break;
+            }
+            else
+                System.out.println("올바른 정보를 입력해주세요 (0~24)");
+        }
+
+        String time = releaseDateYear + "-" + releaseDateMonth + "-" + releaseDateDay + " " +
+                timeH + ":00:00";
+
+        Timestamp date = Timestamp.valueOf(time);
+
+        return date;
+    }
+
 
 
 }

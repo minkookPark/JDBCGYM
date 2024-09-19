@@ -32,6 +32,12 @@ public class Gym_Lesson {
 
     }
 
+    public Gym_Lesson(String class_detail, Timestamp progress_time, Trainer trainer) {
+        this.class_detail = class_detail;
+        this.progress_time = progress_time;
+        this.trainer = trainer;
+    }
+
     public Gym_Lesson(int class_num, String class_detail, Trainer trainer, Gym_Member member) {
         this.class_num = class_num;
         this.class_detail = class_detail;
