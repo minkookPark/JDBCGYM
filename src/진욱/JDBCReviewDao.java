@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JDBCReviewDao implements ReviewDao {
     @Override
-    public List<Review> allReviewList() { // 전체 리뷰 리스트를 출력한다.
+    public List<Review> allReviewList() { // 전체 리뷰 리스트를 출력한다. (테스트 완료)
         List<Review> allList = new ArrayList<Review>();
 
         String sql = "SELECT A.*, B.class_detail, C.name \n" +
@@ -29,7 +29,8 @@ public class JDBCReviewDao implements ReviewDao {
                     String class_detail = rs.getString("class_detail");
                     String name = rs.getString("name");
 
-                    allList.add(new Review(review_num, score, title, content, write_date, class_num, class_detail, name));
+                    allList.add(new Review(review_num, score, title, content,
+                            write_date, class_num, class_detail, name));
                 }
 
         } catch (SQLException e) {
@@ -58,7 +59,8 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> searchReview(int method, String query) { // 검색 방법에 따라 다른 검색 결과를 출력한다.
+    // 검색 방법에 따라 다른 검색 결과를 출력한다.
+    public List<Review> searchReview(int method, String query) {
         List<Review> searchList = new ArrayList<Review>();
         String sql = "";
         Connection conn = DataSource.getDataSource();
@@ -109,7 +111,8 @@ public class JDBCReviewDao implements ReviewDao {
                         String name = rs.getString("name");
                         String login_id = rs.getString("login_id");
 
-                        searchList.add(new Review(review_num, score, title, content, write_date, class_num, class_detail, name, login_id));
+                        searchList.add(new Review(review_num, score, title,
+                                content, write_date, class_num, class_detail, name, login_id));
                     }
 
                 } catch (SQLException e) {

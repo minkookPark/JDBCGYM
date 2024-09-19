@@ -81,7 +81,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
                 "                JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
                 "                JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM   \n" +
                 "                WHERE C.LOGIN_ID = ? \n" +
-                "                ORDER BY A.CLASS_NUM;";
+                "                ORDER BY A.CLASS_NUM";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

@@ -40,7 +40,7 @@ public class ReviewMain {
 
                 case 5:
                     showMyTrainerScore();
-
+                    break;
                 case 9:
                     System.out.println("리뷰 관련 메뉴 출력을 종료합니다.");
                     loop = false;
@@ -77,7 +77,7 @@ public class ReviewMain {
             int number = Input.intScan();
             Gym_Lesson toReviewLesson = gDao.getALesson(number);
             System.out.println("수업 평점을 선택해주세요! (1~5점 사이 정수입력)");
-            int score = Input.intScan();
+            int score = Input.intScan(1,5);
             System.out.println("리뷰 제목을 입력해주세요.");
             String title = Input.stringScan();
             System.out.println("리뷰 내용을 입력해주세요.");
