@@ -87,7 +87,7 @@ public class JoinManager {
         ShowManager.getInstance().nameInputform();
         String inputName = Input.stringScan();
 
-        // Lesson 받게 될 정보를 동시에 입력. (Gym에 회원가입하는 회원은 보통 Lesson을 받기 위한 가입일 것이므로)
+        // Lesson 받게 될 정보를 입력받음. (Gym에 회원가입하는 회원은 보통 Lesson을 받기 위한 가입일 것이므로)
         for (Trainer t : DAOManager.getInstance().gettDao().findAll()){
             System.out.println(t.getTrainer_num() + "번: \t" + t.getName());
         }
@@ -95,7 +95,7 @@ public class JoinManager {
         ShowManager.getInstance().numberInputForm();
         int inputTrainerNumber = Input.intScan();
 
-        // PT 횟수 가져올것.
+        // 모든 요금제 정보를 출력한다.
         for (Charge c : DAOManager.getInstance().getcDao().findAll()){
             System.out.println(c);
         }
@@ -105,8 +105,6 @@ public class JoinManager {
 
         // 새로 가입할 멤버의 Gym_Member 객체 생성.
         Gym_Member toJoinMember = new Gym_Member(inputPtCount, inputId, inputPw, inputGender, inputAge, inputName, inputTrainerNumber, inputChargeNumber);
-        // 새로 가입할 멤버의 LoginData 생성.
-        // LoginData memberNewLoginData = new LoginData(inputName, inputId, inputPw, inputGender,inputAge, LoginData.MEMBERTYPE.MEMBER);
 
         result = DAOManager.getInstance().getmDao().insert(toJoinMember);
         if (result){

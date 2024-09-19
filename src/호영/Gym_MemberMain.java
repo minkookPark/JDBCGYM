@@ -34,7 +34,6 @@ public class Gym_MemberMain {
             switch (choice) {
                 case 1:
                     updateMember();
-                    loop = false;
                     break;
                 case 2:
                     findAll();
@@ -49,7 +48,6 @@ public class Gym_MemberMain {
                     break;
                 case 5:
                     deleteMember();
-                    loop = false;
                     break;
                 case 9:
                     System.out.println("로그아웃 후 초기 화면으로 돌아갑니다.");
@@ -66,9 +64,7 @@ public class Gym_MemberMain {
     private void findAll() {
         System.out.println("현재 등록된 전체 멤버 목록을 출력합니다.");
         List<Gym_Member> mList = mDao.findAll();
-        for (Gym_Member gym_Member : mList) {
-            System.out.println(gym_Member);
-        }
+        mList.stream().forEach(x -> System.out.println(x));
         System.out.println("현재 Gym 총 인원수: " + mList.size() + "명");
 
     }
@@ -128,6 +124,12 @@ public class Gym_MemberMain {
                 } else {
                     System.out.println("회원 삭제에 실패하였습니다.");
                 }
+
+                break;
+
+            default:
+                System.out.println("잘못된 입력입니다. 다시 입력해 주세요.");
+                break;
         }
     }
 }

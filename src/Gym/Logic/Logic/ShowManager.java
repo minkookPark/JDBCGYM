@@ -237,7 +237,7 @@ public class ShowManager {
     //InputField
     private void numberInputform()
     {
-        System.out.print("메뉴 번호를 입력 해주세요 : ");
+        System.out.println("메뉴 번호를 입력 해주세요 : ");
     }
 
     public void nameInputform()

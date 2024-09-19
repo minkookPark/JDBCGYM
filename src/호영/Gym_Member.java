@@ -169,9 +169,9 @@ public class Gym_Member {
 
 	@Override
 	public String toString() {
-		return "Member [member_num=" + member_num + ", pt_count=" + pt_count + ", reg_date=" + reg_date + ", exp_date="
-				+ exp_date + ", login_id=" + loginData.getLogin_id() + ", login_pw=" + loginData.getLogin_pw() + ", gender=" + loginData.getGender() + ", age=" + loginData.getAge()
-				+ ", name=" + loginData.getName() + ", trainer_num=" + trainer_num + ", charge_num=" + charge_num + "]";
+		return "[멤버 번호=" + member_num + ", PT 횟수=" + pt_count + ", 등록일=" + reg_date + ", 만료일="
+				+ exp_date + ", login_id=" + loginData.getLogin_id() + ", login_pw=" + loginData.getLogin_pw() + ", 성별=" + loginData.getGender() + ", 연령=" + loginData.getAge()
+				+ ", 성함=" + loginData.getName() + ", trainer_num=" + trainer_num + ", charge_num=" + charge_num + "]";
 	}
 	
 }

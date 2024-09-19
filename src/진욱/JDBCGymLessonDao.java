@@ -81,7 +81,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
                 "                JOIN GYM_TRAINER B ON A.TRAINER_NUM = B.TRAINER_NUM\n" +
                 "                JOIN GYM_MEMBER C ON A.MEMBER_NUM = C.MEMBER_NUM   \n" +
                 "                WHERE C.LOGIN_ID = ? \n" +
-                "                ORDER BY A.CLASS_NUM;";
+                "                ORDER BY A.CLASS_NUM";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -101,7 +101,8 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return membersLessonList;
     }
 
-    public Gym_Lesson getALesson(int lessonNumber){ // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
+    // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
+    public Gym_Lesson getALesson(int lessonNumber){
         Gym_Lesson lesson = null;
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
                 "       FROM CLASS_LIST A\n" +
@@ -135,12 +136,12 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     @Override
     public int insertLesson(Gym_Lesson classList) {
         int result = 0;
-        String sql = "INSERT INTO CLASS_LIST (CLASS_NUM, CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
-                "VALUES (?, ?, SYSTIMESTAMP, ?, ?)";
+        String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
+                "VALUES (?, ?, ?, ?)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, classList.getClass_num());
-                pstmt.setString(2, classList.getClass_detail());
+                pstmt.setString(1, classList.getClass_detail());
+                pstmt.setTimestamp(2, classList.getProgress_time());
                 pstmt.setInt(3, classList.getTrainer().getTrainer_num());
                 pstmt.setInt(4, classList.getMember().getMember_num());
                 result = pstmt.executeUpdate();
@@ -210,20 +211,17 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     }
 
     @Override
-    public int deleteLessonByMemberNum(int member_num) {
-        int result = 0;
+    public void deleteLessonByMemberNum(int member_num) {
         String sql = "DELETE FROM CLASS_LIST WHERE MEMBER_NUM = ?";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, member_num);
-            result = pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return result;
     }
     // 종료된 수업으로 수업명을 변경함.
     public int nameToExpiredClass(int class_num){
