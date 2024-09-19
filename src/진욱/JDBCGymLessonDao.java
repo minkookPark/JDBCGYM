@@ -154,7 +154,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     public void createLesson(Gym_Lesson gl)
     {
         String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM) \n" +
-                "VALUES (?, ?, ?)";
+                "VALUES (?, ?, ?, NULL)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

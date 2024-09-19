@@ -105,15 +105,6 @@ public class ShowManager {
         System.out.println("========================================================");
     }
 
-    public void showAdminLogin(){
-        System.out.println("========================================================");
-        System.out.println("=                                                      =");
-        System.out.println("=                                                      =");
-        System.out.println("=                Admin Login                           =");
-        System.out.println("=                                                      =");
-        System.out.println("=                                                      =");
-        System.out.println("========================================================");
-    }
 
     ///////////////////////////////////////////////////
 
