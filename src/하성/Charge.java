@@ -52,7 +52,8 @@ public class Charge {
 
     @Override
     public String toString() {
-        return "Charge [charge_num=" + charge_num + ", period_date=" + period_date + ", pt_count=" + pt_count + ", name =" + name + "]";
+        return "요금표를 출력합니다. \n" +
+                "[요금제번호=" + charge_num + ", 개월수=" + period_date + ", PT 횟수=" + pt_count + ", 요금제명 =" + name + "]";
     }
 
 

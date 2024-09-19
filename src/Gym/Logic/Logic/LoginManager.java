@@ -91,7 +91,7 @@ public class LoginManager {
 
         LoginData memberLogin = new LoginData(memberId, memberPw, LoginData.MEMBERTYPE.MEMBER);
         Gym_Member currentLoginMember = DAOManager.getInstance().getmDao().findByLoginData(memberLogin);
-        //currentLoginMember.
+
         if (tryMemberTypeLogin(memberLogin))
         {
             gm = currentLoginMember;
