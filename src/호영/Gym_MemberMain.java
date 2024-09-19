@@ -128,6 +128,7 @@ public class Gym_MemberMain {
                 } else {
                     System.out.println("회원 삭제에 실패하였습니다.");
                 }
+            break;
         }
     }
 }

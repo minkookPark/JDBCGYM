@@ -101,7 +101,8 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return membersLessonList;
     }
 
-    public Gym_Lesson getALesson(int lessonNumber){ // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
+    // Review에서 숫자를 입력했을 때, 해당하는 Lesson 객체를 반환함.
+    public Gym_Lesson getALesson(int lessonNumber){
         Gym_Lesson lesson = null;
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
                 "       FROM CLASS_LIST A\n" +
