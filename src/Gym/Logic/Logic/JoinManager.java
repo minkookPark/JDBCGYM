@@ -40,12 +40,20 @@ public class JoinManager {
         ShowManager.getInstance().nameInputform();
         String inputName = Input.stringScan();
 
+        //수상경력 입력
+        ShowManager.getInstance().awardInputform();
+        String inputAward = Input.stringScan();
+
         //새로 가입할 트레이너의 LoginData 생성.
         LoginData newLoginData = new LoginData(inputName, inputId, inputPw, inputGender,inputAge, LoginData.MEMBERTYPE.TRAINER);
+        //Trainer(String login_Id, String login_Pw, String gender, String award, int age)
+        Trainer joinTrainer = new Trainer(inputId, inputPw, inputGender,inputAward, inputAge);
 
         //Trainer Dao 를 이용하여 쿼리문 삽입. 동시에 1차적 검사.
         if(DAOManager.getInstance().gettDao().insertTrianerJoin(newLoginData))
         {
+            int trNum = DAOManager.getInstance().gettDao().getTrainerNum(inputId);
+            DAOManager.getInstance().gettDao().updateAward(trNum,inputAward);
             ShowManager.getInstance().successJoin();
             result = true;
         }
@@ -54,8 +62,6 @@ public class JoinManager {
             ShowManager.getInstance().failedJoin();
             result = false;
         }
-
-        //대표 수상경력 입력 유무 확인 해야 함.
 
         return result;
     }

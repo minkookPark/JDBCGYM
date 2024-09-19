@@ -48,6 +48,9 @@ public class Gym
                     {
                         //트레이너 로그인 성공시
                         trainerMainPage();
+
+
+
                         break;
                     }
 
@@ -110,6 +113,7 @@ public class Gym
     private void trainerJoinPage()
     {
         ShowManager.getInstance().showTrainerJoin();
+        JoinManager.getInstance().tryTraninerJoin();
     }
 
     private void memberJoinPage()
@@ -149,7 +153,6 @@ public class Gym
 //            }
 //        }
 //    }
-
 //    private void trainerLoginPage()
 //    {
 //        ShowManager.getInstance().showTrainerLogin();
@@ -180,7 +183,88 @@ public class Gym
     {
         System.out.println("트레이너 로그인 성공");
 
-        String a = Input.stringScan();
+
+        ShowManager.getInstance().showTrainerMenu();
+
+        int selectNum = Input.intScan();
+        switch(selectNum)
+        {
+            //lesson
+            case 1:
+            {
+                break;
+            }
+
+            //award
+            case 2:
+            {
+                break;
+            }
+
+            //change password
+            case 7:
+            {
+                break;
+            }
+
+            //logout
+            case 8:
+            {
+                break;
+            }
+
+            //with out
+            case 9:
+            {
+                break;
+            }
+
+            default :
+            {
+                System.out.println("잘못된 입력입니다.");
+                break;
+            }
+        }
+
+    }
+
+    private void trainerLessonMenu()
+    {
+        ShowManager.getInstance().showTrainerLessonMenu();
+
+        int selectNum = Input.intScan();
+        switch (selectNum)
+        {
+            //create new lesson
+            case 1:
+            {
+                break;
+            }
+
+            //display my lesson
+            case 2:
+            {
+                break;
+            }
+
+            //close my lesson
+            case 3:
+            {
+                break;
+            }
+
+            //back to menu
+            case 9:
+            {
+                break;
+            }
+
+            default:
+            {
+                System.out.println("잘못된 입력");
+                break;
+            }
+        }
     }
 
     //Page that arrives upon successful login of Member
@@ -190,11 +274,6 @@ public class Gym
         gMain.execute(); // 멤버 Main 프로그램 실행으로 이동.
     }
 
-    //Page that arrives upon successful login of Admin
-    private void adminMainPage()
-    {
-
-    }
 
 
 
