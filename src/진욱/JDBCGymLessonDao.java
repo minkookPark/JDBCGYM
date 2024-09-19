@@ -135,14 +135,13 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     @Override
     public int insertLesson(Gym_Lesson classList) {
         int result = 0;
-        String sql = "INSERT INTO CLASS_LIST (CLASS_NUM, CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
-                "VALUES (?, ?, SYSTIMESTAMP, ?, ?)";
+        String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
+                "VALUES (?, SYSTIMESTAMP, ?, ?)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, classList.getClass_num());
-                pstmt.setString(2, classList.getClass_detail());
-                pstmt.setInt(3, classList.getTrainer().getTrainer_num());
-                pstmt.setInt(4, classList.getMember().getMember_num());
+                pstmt.setString(1, classList.getClass_detail());
+                pstmt.setInt(2, classList.getTrainer().getTrainer_num());
+                pstmt.setInt(3, classList.getMember().getMember_num());
                 result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -189,20 +188,17 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     }
 
     @Override
-    public int deleteLessonByMemberNum(int member_num) {
-        int result = 0;
+    public void deleteLessonByMemberNum(int member_num) {
         String sql = "DELETE FROM CLASS_LIST WHERE MEMBER_NUM = ?";
 
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, member_num);
-            result = pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return result;
     }
     // 종료된 수업으로 수업명을 변경함.
     public int nameToExpiredClass(int class_num){

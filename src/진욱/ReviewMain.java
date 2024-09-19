@@ -51,9 +51,7 @@ public class ReviewMain {
                     break;
             }
         }
-
     }
-
 
     public void showAllReview(){
         System.out.println("전체 리뷰를 출력합니다.");
@@ -140,10 +138,10 @@ public class ReviewMain {
     public void showMyTrainerScore(){
         List<Trainer> trainerList = tDao.findAll();
         for (Trainer t : trainerList){
-            System.out.println(t.getName());
+            System.out.println(t.getTrainer_num() + "번:\t" + t.getName());
         }
-        System.out.println("담당 트레이너의 이름을 입력하세요.");
-        String name = Input.stringScan();
-        reviewDao.displayTrainerReviewScore(name);
+        System.out.println("담당 트레이너의 번호를 입력하세요.");
+        int select = Input.intScan();
+        reviewDao.displayTrainerReviewScore(select);
     }
 }
