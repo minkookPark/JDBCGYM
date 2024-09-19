@@ -64,6 +64,7 @@ public class Gym
             //요금표 열람.
             case 2:
             {
+                System.out.println("===== GYM 요금표 =====");
                 for (Charge c : DAOManager.getInstance().getcDao().findAll()){
                     System.out.println(c);
                 }

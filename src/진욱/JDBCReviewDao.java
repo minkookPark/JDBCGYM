@@ -1,6 +1,7 @@
 package 진욱;
 
 import DataSource.DataSource;
+import Gym.Logic.Logic.DAOManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class JDBCReviewDao implements ReviewDao {
     @Override
-    public List<Review> allReviewList() { // 전체 리뷰 리스트를 출력한다.
+    public List<Review> allReviewList() { // 전체 리뷰 리스트를 출력한다. (테스트 완료)
         List<Review> allList = new ArrayList<Review>();
 
         String sql = "SELECT A.*, B.class_detail, C.name \n" +
@@ -28,7 +29,8 @@ public class JDBCReviewDao implements ReviewDao {
                     String class_detail = rs.getString("class_detail");
                     String name = rs.getString("name");
 
-                    allList.add(new Review(review_num, score, title, content, write_date, class_num, class_detail, name));
+                    allList.add(new Review(review_num, score, title, content,
+                            write_date, class_num, class_detail, name));
                 }
 
         } catch (SQLException e) {
@@ -57,7 +59,8 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> searchReview(int method, String query) { // 검색 방법에 따라 다른 검색 결과를 출력한다.
+    // 검색 방법에 따라 다른 검색 결과를 출력한다.
+    public List<Review> searchReview(int method, String query) {
         List<Review> searchList = new ArrayList<Review>();
         String sql = "";
         Connection conn = DataSource.getDataSource();
@@ -108,7 +111,8 @@ public class JDBCReviewDao implements ReviewDao {
                         String name = rs.getString("name");
                         String login_id = rs.getString("login_id");
 
-                        searchList.add(new Review(review_num, score, title, content, write_date, class_num, class_detail, name, login_id));
+                        searchList.add(new Review(review_num, score, title,
+                                content, write_date, class_num, class_detail, name, login_id));
                     }
 
                 } catch (SQLException e) {
@@ -196,18 +200,16 @@ public class JDBCReviewDao implements ReviewDao {
         return result;
     }
 
-    public int deleteReviewByMemberNum(int member_num){
-        int result = 0;
+    public void deleteReviewByMemberNum(int member_num){
         String sql = "DELETE FROM REVIEW WHERE CLASS_NUM IN (SELECT CLASS_NUM FROM CLASS_LIST WHERE MEMBER_NUM = ?)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, member_num);
-            result = pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return result;
     }
 
     @Override
@@ -230,7 +232,7 @@ public class JDBCReviewDao implements ReviewDao {
         return oneReview;
     }
 
-    public void displayTrainerReviewScore(String name){
+    public void displayTrainerReviewScore(int select){
         String sql = "SELECT \n" +
                 "        COUNT(A.SCORE) AS TOTAL, \n" +
                 "        AVG(A.SCORE) AS AVERAGES \n" +
@@ -239,13 +241,13 @@ public class JDBCReviewDao implements ReviewDao {
                 "        JOIN CLASS_LIST B ON A.CLASS_NUM = B.CLASS_NUM \n" +
                 "        JOIN GYM_TRAINER C ON B.TRAINER_NUM = C.TRAINER_NUM \n" +
                 "    WHERE\n" +
-                "        C.NAME = ?";
+                "        C.TRAINER_NUM = ?";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-             pstmt.setString(1, name);
+             pstmt.setInt(1, select);
              ResultSet rs = pstmt.executeQuery();
              if (rs.next()){
-                 System.out.println("검색하신 " + name + " 트레이너의 평균 점수: " + rs.getDouble("AVERAGES") + "점, 총 평가인원 : " + rs.getInt("TOTAL") + "명");
+                 System.out.println("검색하신 " + DAOManager.getInstance().gettDao().findByIndex(select).getName() + " 트레이너의 평균 점수: " + rs.getDouble("AVERAGES") + "점, 총 평가인원 : " + rs.getInt("TOTAL") + "명");
              }
         } catch (SQLException e) {
             throw new RuntimeException(e);

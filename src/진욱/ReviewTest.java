@@ -30,6 +30,6 @@ public class ReviewTest {
         //System.out.println(reviewDao.deleteReview(4) + "행이 삭제되었습니다.");
 
         System.out.println("특정 트레이너의 평가인원과 평균평점을 확인");
-        reviewDao.displayTrainerReviewScore("박민국");
+        reviewDao.displayTrainerReviewScore(1);
     }
 }

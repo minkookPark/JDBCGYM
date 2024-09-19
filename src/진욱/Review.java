@@ -52,6 +52,7 @@ public class Review {
         this.content = content;
         this.write_date = writeDate;
         this.class_num = classNum;
+        this.score = score;
     }
 
 
