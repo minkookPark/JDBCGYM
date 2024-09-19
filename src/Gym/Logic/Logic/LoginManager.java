@@ -254,5 +254,16 @@ public class LoginManager {
         }
     }
 
+    public Trainer getCurrentTrainer()
+    {
+        if (tr != null)
+            return this.tr;
+        else
+        {
+            System.out.println("트레이너 로그인 상태가 아닙니다.");
+            return null;
+        }
+    }
+
 
 }

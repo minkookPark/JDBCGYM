@@ -4,8 +4,14 @@ import Gym.Logic.Logic.DAOManager;
 import Gym.Logic.Logic.JoinManager;
 import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
+import 민국.Trainer;
+import 진욱.Gym_Lesson;
 import 하성.Charge;
+import 호영.Gym_Member;
 import 호영.Gym_MemberMain;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Gym
 {
@@ -27,7 +33,7 @@ public class Gym
 
         int selectNum = Input.intScan(1,3);
 
-        int loginResult = 0;
+        int loginResult;
         //System.out.println(loginResult);
         switch (selectNum)
         {
@@ -86,14 +92,16 @@ public class Gym
 
         int selectNum = Input.intScan(1,3);
 
-        int joinResult = 0;
 
         switch(selectNum)
         {
             case 1:
             {
                 memberJoinPage();
-                boolean isJoined = JoinManager.getInstance().memberJoin();
+                if(JoinManager.getInstance().memberJoin())
+                {
+                    System.out.println("가입 성공");
+                }
                 break;
             }
             case 2:
@@ -129,53 +137,9 @@ public class Gym
 
     //로그인 ------------------------------------------------
 
-//    private void selectLoginPage()
-//    {
-//        ShowManager.getInstance().showLoginMenu();
-//        int selectNum = Input.intScan(1,3);
-//
-//        switch(selectNum)
-//        {
-//            case 1:
-//            {
-//                memberLoginPage();
-//                break;
-//            }
-//            case 2:
-//            {
-//                trainerLoginPage();
-//                break;
-//            }
-//            case 3:
-//            {
-//                adminLoginPage();
-//                break;
-//            }
-//        }
-//    }
-//    private void trainerLoginPage()
-//    {
-//        ShowManager.getInstance().showTrainerLogin();
-//        LoginManager.getInstance().tryTrainerLogin();
-//    }
-
-    private void memberLoginPage()
-    {
-        ShowManager.getInstance().showMemberLogin();
-    }
-
-    private void adminLoginPage()
-    {
-        ShowManager.getInstance().showAdminLogin();
-    }
 
 
 
-    //Charge View
-    private void displayChargePage()
-    {
-
-    }
 
 
     //Page that arrives upon successful login of Trainer
@@ -192,6 +156,7 @@ public class Gym
             //lesson
             case 1:
             {
+                trainerLessonMenu();
                 break;
             }
 
@@ -213,7 +178,7 @@ public class Gym
                 break;
             }
 
-            //with out
+            //without
             case 9:
             {
                 break;
@@ -225,7 +190,6 @@ public class Gym
                 break;
             }
         }
-
     }
 
     private void trainerLessonMenu()
@@ -238,6 +202,8 @@ public class Gym
             //create new lesson
             case 1:
             {
+                CreateLesson();
+
                 break;
             }
 
@@ -266,6 +232,28 @@ public class Gym
             }
         }
     }
+
+    private void CreateLesson()
+    {
+        System.out.println("새로운 클래스를 등록 합니다.");
+        System.out.println("클래스의 내용을 입력 해주세요 : ");
+
+        String inputDetail = Input.stringScan();
+
+        System.out.println("날짜를 입력해주세요");
+
+
+        Timestamp ts = Input.inputTimestamp();
+
+        DAOManager.getInstance().getlDao().insertLesson(
+                new Gym_Lesson(inputDetail,
+                        ts, LoginManager.getInstance().getCurrentTrainer()));
+
+        //(String class_detail, Timestamp progress_time, Trainer trainer)
+
+
+    }
+
 
     //Page that arrives upon successful login of Member
     private void memberMainPage()
