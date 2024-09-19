@@ -26,8 +26,8 @@ public class JdbcGym_MemberDao implements Gym_MemberDao {
         boolean result = false;
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pStatement = conn.prepareStatement(
-                     "INSERT INTO GYM_MEMBER (PT_COUNT, REG_DATE, LOGIN_ID, LOGIN_PW, GENDER, AGE, TRAINER_NUM, CHARGE_NUM, NAME) " +
-                     "VALUES (?, SYSTIMESTAMP, ?, ?, ?, ?, ?, ?, ?)")) {
+                     "INSERT INTO GYM_MEMBER (PT_COUNT, REG_DATE, EXP_DATE, LOGIN_ID, LOGIN_PW, GENDER, AGE, TRAINER_NUM, CHARGE_NUM, NAME) " +
+                     "VALUES (?, SYSTIMESTAMP, ADD_MONTHS(SYSDATE, 3), ?, ?, ?, ?, ?, ?, ?)")) {
 
             pStatement.setInt(1, member.getPt_count());
             pStatement.setString(2, member.getLogin_id());

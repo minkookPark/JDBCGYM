@@ -2,6 +2,7 @@ package 희진;
 
 import Gym.Logic.Common.Input;
 import Gym.Logic.Logic.DAOManager;
+import Gym.Logic.Logic.LoginManager;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,11 +15,8 @@ public class InbodyMethod {
 	void insertInbody() {
 		Inbody inbody = new Inbody();
 		System.out.println("인바디 정보를 입력해주세요.");
-		
 		Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 		inbody.setM_date(currentTimestamp);
-		System.out.println(currentTimestamp);
-
 		System.out.println("몸무게를 입력하세요");
 		double weight = Input.doubleScan();
 		inbody.setWeight(weight);
@@ -43,8 +41,7 @@ public class InbodyMethod {
 		int body_score = Input.intScan();
 		inbody.setBody_score(body_score);
 
-		System.out.println("회원번호를 입력하세요");
-		int member_num = Input.intScan();
+		int member_num = LoginManager.getInstance().getCurrentMember().getMember_num();
 		inbody.setMember_num(member_num);
 
 		if (iDao.insert(inbody)) {

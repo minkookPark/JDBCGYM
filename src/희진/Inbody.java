@@ -103,8 +103,8 @@ public class Inbody {
 
 	@Override
 	public String toString() {
-		return "Inbody [inbody_Num=" + inbody_Num + ", m_date=" + m_date + ", weight=" + weight + ", height=" + height
-				+ ", fat=" + fat + ", muscle=" + muscle + ", body_age=" + body_age + ", body_score=" + body_score
-				+ ", member_num=" + member_num + "]";
+		return "인바디 데이터 [inbody_Num=" + inbody_Num + "\n 측정일=" + m_date + "\n 몸무게=" + weight + "\n 신장=" + height
+				+ "\n 지방량=" + fat + "\n 근골격량=" + muscle + "\n 신체연령=" + body_age + "살\n body_score=" + body_score
+				+ "점\n 회원번호=" + member_num + "]";
 	}
 }	

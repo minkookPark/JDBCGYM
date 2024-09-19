@@ -12,6 +12,7 @@ import 진욱.ReviewDao;
 import 진욱.ReviewMain;
 import 희진.Inbody;
 import 희진.InbodyDao;
+import 희진.InbodyMain;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -41,11 +42,8 @@ public class Gym_MemberMain {
                     rm.reviewExecute();
                     break;
                 case 4:
-                    List<Inbody> memberInbodyData = iDao.findByMemberNum(LoginManager.getInstance().getCurrentMember().getMember_num());
-                    System.out.println(LoginManager.getInstance().getCurrentMember().getName() + " 회원님의 인바디 데이터를 출력합니다.");
-                    for (Inbody iData : memberInbodyData){
-                        System.out.println(iData);
-                    }
+                    InbodyMain im = new InbodyMain();
+                    im.inbodyExecute();
                     break;
                 case 5:
                     deleteMember();
@@ -59,47 +57,6 @@ public class Gym_MemberMain {
                     System.out.println("올바른 선택이 아닙니다.");
                     break;
             }
-        }
-    }
-
-    private void insertMember() { // Trainer 등이 회원을 추가할 때 사용할 메소드.
-        Gym_Member member = new Gym_Member();
-        System.out.println("회원 정보를 입력하세요:");
-
-        System.out.print("PT 횟수: ");
-        member.setPt_count(Input.intScan());
-
-        System.out.print("등록일은 (yyyy-MM-dd HH:mm:ss) 형식으로 입력: ");
-        member.setReg_date(Timestamp.valueOf(Input.stringScan()));
-
-        System.out.print("만료일 (yyyy-MM-dd) 형식으로 입력: ");
-        member.setExp_date(Date.valueOf(Input.stringScan()));
-
-        System.out.print("로그인 ID: ");
-        member.setLogin_id(Input.stringScan());
-
-        System.out.print("로그인 비밀번호: ");
-        member.setLogin_pw(Input.stringScan());
-
-        System.out.print("성별: ");
-        member.setGender(Input.stringScan());
-
-        System.out.print("나이: ");
-        member.setAge(Input.intScan());
-
-        System.out.print("이름: ");
-        member.setName(Input.stringScan());
-
-        System.out.print("트레이너 번호: ");
-        member.setTrainer_num(Input.intScan());
-
-        System.out.print("회원권 번호: ");
-        member.setCharge_num(Input.intScan());
-
-        if (mDao.insert(member)) {
-            System.out.println("회원이 성공적으로 추가되었습니다.");
-        } else {
-            System.out.println("회원 추가에 실패하였습니다.");
         }
     }
 
