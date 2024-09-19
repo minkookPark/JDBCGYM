@@ -5,6 +5,7 @@ import Gym.Logic.Logic.DAOManager;
 import Gym.Logic.Logic.LoginManager;
 import Gym.Logic.Logic.ShowManager;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InbodyMain {
@@ -18,11 +19,15 @@ public class InbodyMain {
             switch (select) {
                 case 1:
                     System.out.println(LoginManager.getInstance().getCurrentMember().getName() + "님의 인바디 데이터를 출력합니다.");
-                    for (Inbody i : DAOManager.getInstance().getiDao().findByMemberNum(LoginManager.getInstance().getCurrentMember().getMember_num())){
-                        System.out.println(i);
+                    List<Inbody> myInbodyList = DAOManager.getInstance().getiDao().findByMemberNum(LoginManager.getInstance().getCurrentMember().getMember_num());
+                    if (myInbodyList.isEmpty()){
+                        System.out.println("현재 등록된 인바디 데이터가 없습니다.");
+                    } else {
+                        for (Inbody i : myInbodyList){
+                            System.out.println(i);
+                        }
                     }
                     break;
-
                 case 2:
                     iMethod.insertInbody();
                     break;
