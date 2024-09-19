@@ -136,12 +136,13 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
     public int insertLesson(Gym_Lesson classList) {
         int result = 0;
         String sql = "INSERT INTO CLASS_LIST (CLASS_DETAIL, PROG_TIME, TRAINER_NUM, MEMBER_NUM) \n" +
-                "VALUES (?, SYSTIMESTAMP, ?, ?)";
+                "VALUES (?, ?, ?, ?)";
         try (Connection conn = DataSource.getDataSource();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, classList.getClass_detail());
-                pstmt.setInt(2, classList.getTrainer().getTrainer_num());
-                pstmt.setInt(3, classList.getMember().getMember_num());
+                pstmt.setTimestamp(2, classList.getProgress_time());
+                pstmt.setInt(3, classList.getTrainer().getTrainer_num());
+                pstmt.setInt(4, classList.getMember().getMember_num());
                 result = pstmt.executeUpdate();
 
         } catch (SQLException e) {
