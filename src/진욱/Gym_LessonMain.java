@@ -20,7 +20,7 @@ public class Gym_LessonMain {
 
         boolean loop = true;
         while (loop){
-            ShowManager.getInstance().showLessonMenu();
+            ShowManager.getInstance().showMemberLessonMenu();
             int select = Input.intScan();
             switch (select){
                 case 1:
