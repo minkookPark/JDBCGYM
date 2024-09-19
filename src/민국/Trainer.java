@@ -125,6 +125,12 @@ public class Trainer {
         this.logindata = logindata;
     }
 
+
+    public void setMemberType()
+    {
+        this.logindata.setMemberType(LoginData.MEMBERTYPE.TRAINER);
+    }
+
     @Override
     public String toString() {
         return "Trainer{" +

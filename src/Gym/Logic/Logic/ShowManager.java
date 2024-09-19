@@ -280,4 +280,9 @@ public class ShowManager {
     {
         System.out.println("잘못된 입력");
     }
+
+    public void awardInputform()
+    {
+        System.out.println("대표 수상경력을 입력 해주세요.");
+    }
 }

@@ -219,6 +219,31 @@ public class JDBCTrainerDao implements TrainerDao {
         return false;
     }
 
+    public int getTrainerNum(String login_id)
+    {
+        int result = 0;
+
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement = conn.prepareStatement("select * from GYM_TRAINER where LOGIN_ID = ?"))
+        {
+            pStatement.setString(1,login_id);
+            ResultSet rs = pStatement.executeQuery();
+            if (rs.next())
+            {
+                result =  rs.getInt("TRAINER_NUM");
+            }
+            else
+                System.out.println("존재하지 않는 트레이너 입니다.");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return result;
+    }
+
     //아이디 중복검사 mk2 이름 헷갈려서 만듦
     public boolean checkOverlabId(String login_id)
     {
@@ -362,15 +387,16 @@ public class JDBCTrainerDao implements TrainerDao {
 
                 if(resultPw.equals(login_pw)) {
                     isSuccess = true;
-                    LoginData curLoginUser = new LoginData();
+                    Trainer loginTrainer = new Trainer();
+                    loginTrainer.setTrainer_num(rs.getInt("TRAINER_NUM"));
+                    loginTrainer.setLogin_Id(rs.getString("LOGIN_ID"));
+                    loginTrainer.setLogin_Pw(rs.getString("LOGIN_PW"));
+                    loginTrainer.setName(rs.getString("NAME"));
+                    loginTrainer.setAge(rs.getInt("AGE"));
+                    loginTrainer.setAward(rs.getString("AWARD"));
+                    loginTrainer.setMemberType();
 
-                    curLoginUser.setLogin_id(rs.getString("LOGIN_ID"));
-                    curLoginUser.setLogin_pw(rs.getString("LOGIN_PW"));
-                    curLoginUser.setName(rs.getString("NAME"));
-                    curLoginUser.setAge(rs.getInt("AGE"));
-                    curLoginUser.setMemberType(LoginData.MEMBERTYPE.TRAINER);
-
-                    LoginManager.getInstance().setCurrentLoginUser(curLoginUser);
+                    LoginManager.getInstance().setCurTrainer(loginTrainer);
 
                     System.out.println("로그인 성공, 현재 유저 : " + LoginManager.getInstance().getCurrentLoginUser().getLogin_id());
                     isSuccess = true;

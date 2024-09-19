@@ -45,7 +45,6 @@ public class LoginManager {
     //관리자 로그인 성공시 3을 반환한다.
     public int selectLogin()
     {
-
         int result = 0;
         ShowManager.getInstance().showLoginMenu();
 
@@ -128,7 +127,7 @@ public class LoginManager {
         tr = DAOManager.getInstance().gettDao().findByLoginData(id);
         if(tryLogin(login))
         {
-            System.out.println("로그인 성공");
+            //System.out.println("로그인 성공");
 //            tr = curLoginTrainer;
             isLogin = true;
             isSuccess = true;
@@ -162,8 +161,6 @@ public class LoginManager {
                 if (tDao.tryLogin(login_Id, login_pw))
                 {
                     System.out.println("로그인 성공");
-
-
                 }
                 else
                 {
@@ -182,7 +179,7 @@ public class LoginManager {
         JDBCTrainerDao tDao = DAOManager.getInstance().gettDao();
         if(tDao.tryLogin(loginData.getLogin_id(), loginData.getLogin_pw()))
         {
-            System.out.println("로그인 성공");
+            //System.out.println("로그인 성공");
             result = true;
         }
         else
@@ -213,13 +210,20 @@ public class LoginManager {
 
     public void setCurrentLoginUser(LoginData loginData)
     {
-        currentLoginUser = loginData;
+        if(loginData != null) {
+            currentLoginUser = loginData;
+        }
     }
 
-    public void setCurrentLoginUser(LoginData.MEMBERTYPE type, String login_Id, String Login_Pw)
+    public void setCurTrainer(Trainer tr)
     {
-
+        if(tr != null) {
+            this.tr = tr;
+            isLogin = true;
+            this.currentLoginUser = tr.getLoginData();
+        }
     }
+
 
     public LoginData getCurrentLoginUser()
     {
@@ -240,21 +244,6 @@ public class LoginManager {
         init();
     }
 
-
-
-    public Trainer getCurrentTrainer()
-    {
-        if (tr != null)
-        {
-            return tr;
-        }
-        else {
-
-            System.out.println("트레이너 로그인 상태가 아닙니다.");
-            return null;
-        }
-    }
-
     public Gym_Member getCurrentMember()
     {
         if(gm != null)
@@ -264,21 +253,6 @@ public class LoginManager {
         else
         {
             System.out.println("멤버 로그인 상태가 아닙니다.");
-            return null;
-        }
-    }
-
-    //int a=0;
-
-    public Admin getCurrentAdmin()
-    {
-        if(admin != null)
-        {
-            return admin;
-        }
-        else
-        {
-            System.out.println("관리자 로그인 상태가 아닙니다.");
             return null;
         }
     }

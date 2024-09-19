@@ -48,6 +48,9 @@ public class Gym
                     {
                         //트레이너 로그인 성공시
                         trainerMainPage();
+
+
+
                         break;
                     }
 
@@ -110,6 +113,7 @@ public class Gym
     private void trainerJoinPage()
     {
         ShowManager.getInstance().showTrainerJoin();
+        JoinManager.getInstance().tryTraninerJoin();
     }
 
     private void memberJoinPage()
@@ -180,7 +184,9 @@ public class Gym
     {
         System.out.println("트레이너 로그인 성공");
 
-        String a = Input.stringScan();
+
+        ShowManager.getInstance().showTrainerMenu();
+
     }
 
     //Page that arrives upon successful login of Member
