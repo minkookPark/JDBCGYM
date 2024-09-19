@@ -2,6 +2,8 @@ package 진욱;
 
 import DataSource.DataSource;
 import Gym.Logic.Common.Gym;
+import Gym.Logic.Logic.LoginManager;
+import oracle.jdbc.proxy.annotation.Pre;
 import 민국.Trainer;
 import 호영.Gym_Member;
 
@@ -40,6 +42,7 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
         return allList;
     }
 
+    // trainer_num을 사용하여 강좌 리스트를 검색한다.
     public List<Gym_Lesson> findByTrainer(int number){
         List<Gym_Lesson> trainerLesson = new ArrayList<Gym_Lesson>();
         String sql = "SELECT A.*, B.NAME trainer_name, C.NAME member_name\n" +
@@ -200,6 +203,21 @@ public class JDBCGymLessonDao implements Gym_LessonDao {
             throw new RuntimeException(e);
         }
 
+        return result;
+    }
+    // 종료된 수업으로 수업명을 변경함.
+    public int nameToExpiredClass(int class_num){
+        int result = 0;
+        String sql = "UPDATE CLASS_LIST SET CLASS_DETAIL = '종료된 수업'\n" +
+                "WHERE CLASS_NUM = ?";
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, class_num);
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return result;
     }
 }

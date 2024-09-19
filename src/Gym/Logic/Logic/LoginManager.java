@@ -96,8 +96,8 @@ public class LoginManager {
             gm = currentLoginMember;
             isLogin = true;
             // 로그인 후, 멤버 화면에서 원하는 기능을 선택한다.
-            Gym_MemberMain gMain = new Gym_MemberMain();
-            gMain.execute();
+            //Gym_MemberMain gMain = new Gym_MemberMain();
+            // gMain.execute();
             result = true;
         }
         else

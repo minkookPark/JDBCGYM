@@ -27,12 +27,14 @@ public class Gym_MemberMain {
 
 
     public void execute() {
-        while (true) {
+        boolean loop = true;
+        while (loop) {
             ShowManager.getInstance().showMemberMenu();
             int choice = Input.intScan();
             switch (choice) {
                 case 1:
                     updateMember();
+                    loop = false;
                     break;
                 case 2:
                     findAll();
@@ -47,12 +49,13 @@ public class Gym_MemberMain {
                     break;
                 case 5:
                     deleteMember();
+                    loop = false;
                     break;
                 case 9:
-                    System.out.println("로그아웃 후 초기 화면으로 돌아갑니다..");
+                    System.out.println("로그아웃 후 초기 화면으로 돌아갑니다.");
                     LoginManager.getInstance().logOut();
-                    Gym gym = new Gym();
-                    gym.run();
+                    loop = false;
+                    break;
                 default:
                     System.out.println("올바른 선택이 아닙니다.");
                     break;
@@ -75,8 +78,6 @@ public class Gym_MemberMain {
         Gym_Member toFindMember = LoginManager.getInstance().getCurrentMember();
         if (toFindMember == null){
             System.out.println("로그인 상태가 아닙니다. 다시 시도해 주세요!");
-            Gym gym = new Gym();
-            gym.run();
         } else {
             System.out.println("수정하고 싶은 정보를 선택해주세요. 1. 담당 트레이너 변경 / 2. PT 횟수 변경 / 3. 비밀번호 변경");
             int method = Input.intScan();
@@ -110,8 +111,8 @@ public class Gym_MemberMain {
     }
 
     private void deleteMember() {
-        System.out.print("정말 탈퇴하시겠습니까? 1을 누르면 탈퇴를 진행합니다. 다른 버튼을 누르면 회원탈퇴가 취소됩니다.");
-        int select = Input.intScan(); // 1
+        System.out.print("정말 탈퇴하시겠습니까?\n1을 누르면 탈퇴를 진행합니다. 다른 버튼을 누르면 회원탈퇴가 취소됩니다. ");
+        int select = Input.intScan();
         switch (select){
             case 1:
                 // 현재 로그인한 사람의 정보를 가져옴.
@@ -122,10 +123,8 @@ public class Gym_MemberMain {
                 glDao.deleteLessonByMemberNum(memberNum);
 
                 if (mDao.deleteByMember_Num(memberNum)) {
-                    System.out.println("회원이 성공적으로 삭제되었습니다.");
+                    System.out.println("회원이 성공적으로 삭제되었습니다. 로그아웃 후 메인 화면으로 이동합니다.");
                     LoginManager.getInstance().logOut();
-                    Gym gym = new Gym();
-                    gym.run();
                 } else {
                     System.out.println("회원 삭제에 실패하였습니다.");
                 }
