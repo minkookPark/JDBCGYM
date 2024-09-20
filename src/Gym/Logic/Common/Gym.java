@@ -12,11 +12,11 @@ import 호영.Gym_MemberMain;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Gym
 {
     boolean loop = true;
-
 
     public void run()
     {
@@ -25,7 +25,6 @@ public class Gym
             mainPage();
         }
     }
-
 
     private void mainPage()
     {
@@ -37,6 +36,7 @@ public class Gym
         //System.out.println(loginResult);
         switch (selectNum)
         {
+            //login
             case 1:
             {
                 loginResult = LoginManager.getInstance().selectLogin();
@@ -55,19 +55,13 @@ public class Gym
                         //트레이너 로그인 성공시
                         trainerMainPage();
 
-
-
-                        break;
-                    }
-
-                    case 3:
-                    {
                         break;
                     }
                 }
 
                 break;
             }
+            //요금표 열람.
             case 2:
             {
                 System.out.println("===== GYM 요금표 =====");
@@ -76,6 +70,7 @@ public class Gym
                 }
                 break;
             }
+            //회원 가입.
             case 3:
             {
                 //Join
@@ -139,101 +134,99 @@ public class Gym
     //로그인 ------------------------------------------------
 
 
-
-
-
-
     //Page that arrives upon successful login of Trainer
     private void trainerMainPage()
     {
         System.out.println("트레이너 로그인 성공");
 
+        boolean loop = true;
 
-        ShowManager.getInstance().showTrainerMenu();
+        while(loop) {
 
-        int selectNum = Input.intScan();
-        switch(selectNum)
-        {
-            //lesson
-            case 1:
-            {
-                trainerLessonMenu();
-                break;
-            }
+            ShowManager.getInstance().showTrainerMenu();
 
-            //award
-            case 2:
-            {
-                break;
-            }
+            int selectNum = Input.intScan();
+            switch (selectNum) {
+                //lesson
+                case 1: {
+                    trainerLessonMenu();
+                    break;
+                }
 
-            //change password
-            case 7:
-            {
-                break;
-            }
+                //award
+                case 2: {
+                    displayMyAward();
+                    break;
+                }
 
-            //logout
-            case 8:
-            {
-                break;
-            }
+                //change password
+                case 7: {
+                    changeTrainerPw();
+                    break;
+                }
 
-            //without
-            case 9:
-            {
-                break;
-            }
+                //logout
+                case 8: {
+                    LoginManager.getInstance().logOut();
+                    loop = false;
+                    break;
+                }
 
-            default :
-            {
-                System.out.println("잘못된 입력입니다.");
-                break;
+                //without
+                case 9: {
+                    int deleteId = LoginManager.getInstance().getCurrentTrainer().getTrainer_num();
+                    LoginManager.getInstance().logOut();
+                    DAOManager.getInstance().gettDao().deleteById(deleteId);
+
+                    loop = false;
+                    break;
+                }
+
+                default: {
+                    System.out.println("잘못된 입력입니다.");
+                    break;
+                }
             }
         }
     }
 
     private void trainerLessonMenu()
     {
-        ShowManager.getInstance().showTrainerLessonMenu();
+        boolean loop = true;
+        while(loop) {
+            ShowManager.getInstance().showTrainerLessonMenu();
 
-        int selectNum = Input.intScan();
-        switch (selectNum)
-        {
-            //create new lesson
-            case 1:
-            {
-                CreateLesson();
-
-                break;
-            }
-
-            //display my lesson
-            case 2:
-            {
-                break;
-            }
-
-            //close my lesson
-            case 3:
-            {
-                break;
-            }
-
-            //back to menu
-            case 9:
-            {
-                break;
-            }
-
-            default:
-            {
-                System.out.println("잘못된 입력");
-                break;
+            int selectNum = Input.intScan();
+            switch (selectNum) {
+                //create new lesson
+                case 1: {
+                    CreateLesson();
+                    break;
+                }
+                //display my lesson
+                case 2: {
+                    displayMyLesson();
+                    break;
+                }
+                //close my lesson
+                case 3: {
+                    closeLesson();
+                    break;
+                }
+                //back to menu
+                case 9: {
+                    loop = false;
+                    break;
+                }
+                default: {
+                    System.out.println("잘못된 입력");
+                    break;
+                }
             }
         }
     }
 
+    //테스트 완료
     private void CreateLesson()
     {
         System.out.println("새로운 클래스를 등록 합니다.");
@@ -246,13 +239,51 @@ public class Gym
 
         Timestamp ts = Input.inputTimestamp();
 
-        DAOManager.getInstance().getlDao().createLesson(
-                new Gym_Lesson(inputDetail,
-                        ts, LoginManager.getInstance().getCurrentTrainer()));
+        Gym_Lesson newLesson = new Gym_Lesson(inputDetail,
+                ts, LoginManager.getInstance().getCurrentTrainer());
 
-        //(String class_detail, Timestamp progress_time, Trainer trainer)
+        DAOManager.getInstance().getlDao().createLesson(newLesson);
+    }
 
+    private void displayMyLesson()
+    {
+        List<Gym_Lesson> lLst = DAOManager.getInstance().getlDao().findByTrainer
+                (LoginManager.getInstance().getCurrentTrainer().getTrainer_num()) ;
 
+        lLst.stream().forEach(x-> System.out.println(x.toString()));
+    }
+
+    private void closeLesson()
+    {
+        displayMyLesson();
+
+        System.out.println("종료할 수업의 번호를 입력해주세요.");
+        System.out.println("주의) 다른 트레이너의 수업을 닫을 수도 있습니다. 본인의 수업만 종료해주세요.");
+
+        int selectNum = Input.intScan();
+
+        DAOManager.getInstance().getlDao().nameToExpiredClass(selectNum);
+    }
+
+    private void displayMyAward()
+    {
+        String award = DAOManager.getInstance().gettDao().findByIndex(
+                LoginManager.getInstance().getCurrentTrainer().getTrainer_num()
+        ).getAward();
+
+        System.out.println(award);
+    }
+
+    private void changeTrainerPw()
+    {
+        System.out.println("변경할 비밀번호를 입력 해주세요");
+        String newPw = Input.stringScan();
+
+        if(DAOManager.getInstance().gettDao().updatePasswoard(
+                LoginManager.getInstance().getCurrentTrainer().getTrainer_num(), newPw))
+        {
+            System.out.println("비밀번호 변경 성공");
+        }
     }
 
 

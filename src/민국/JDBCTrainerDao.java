@@ -130,6 +130,39 @@ public class JDBCTrainerDao implements TrainerDao {
         return result;
     }
 
+    public boolean updatePasswoard(int trainerNum, String changePw)
+    {
+        boolean isSuccess = false;
+        try (Connection conn = DataSource.getDataSource();
+             PreparedStatement pStatement =
+                     conn.prepareStatement("update GYM_TRAINER set " +
+                             "LOGIN_PW = ? where TRAINER_NUM = ?"))
+        {
+            pStatement.setString(1,changePw);
+            pStatement.setInt(2,trainerNum);
+
+            int rows = pStatement.executeUpdate();
+            if (rows > 0)
+            {
+                ShowManager.getInstance().successUpdate();
+                isSuccess = true;
+            }
+            else
+            {
+                ShowManager.getInstance().failedUpdate();
+                isSuccess = false;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ShowManager.getInstance().failedUpdate();
+            isSuccess = false;
+        }
+
+        return isSuccess;
+    }
+
     //테스트 완료
     @Override
     public List<Trainer> findAll() {
