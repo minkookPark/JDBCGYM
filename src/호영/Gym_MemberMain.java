@@ -48,7 +48,7 @@ public class Gym_MemberMain {
                     break;
                 case 5:
                     deleteMember();
-                    break;
+                    // 회원 삭제 후 case 9로 이동하여 로그아웃 처리 및 메인으로 이동. break 없음.
                 case 9:
                     System.out.println("로그아웃 후 초기 화면으로 돌아갑니다.");
                     LoginManager.getInstance().logOut();
@@ -119,7 +119,7 @@ public class Gym_MemberMain {
                 glDao.deleteLessonByMemberNum(memberNum);
 
                 if (mDao.deleteByMember_Num(memberNum)) {
-                    System.out.println("회원이 성공적으로 삭제되었습니다. 로그아웃 후 메인 화면으로 이동합니다.");
+                    System.out.println("회원이 성공적으로 삭제되었습니다.");
                     LoginManager.getInstance().logOut();
                 } else {
                     System.out.println("회원 삭제에 실패하였습니다.");
